@@ -1,24 +1,35 @@
 CC = gcc
 CFLAGS = -g 
+LDLIBS = -lm -lpthread -lrt
+LIBPATH = -L . -l 
 
 TARGET1 = oss
 OBJ1 = oss.o
 
-TARGET2 = user
+TARGET2 = user_proc
 OBJ2 = user.o
 
-HEADERS = headers.h shared.h oss.h user.h
+TARGETLIB = libsharedFunc.a
+LIBOBJ = sharedFunc.o
+LIBC = sharedFunc.c
+
+HEADERS = headers.h shared.h oss.h user.h sharedFunc.h
 
 .SUFFIXES: .c .o
 
-ALL: $(TARGET1) $(TARGET2)
+ALL: $(TARGETLIB) $(TARGET1) $(TARGET2)
 
-$(TARGET1): $(OBJ1) $(HEADERS)
-	$(CC) $(CFLAGS) -o $(TARGET1) $(OBJ1) 
+$(TARGET1): $(OBJ1)
+	$(CC) $(CFLAGS) -o $(TARGET1) $(OBJ1) $(TARGETLIB) $(LDLIBS)
 
 $(TARGET2): $(OBJ2) 
-	$(CC) $(CFLAGS) -o $(TARGET2) $(OBJ2)
+	$(CC) $(CFLAGS) -o $(TARGET2) $(OBJ2) $(TARGETLIB) $(LIDLIBS)
 
+$(TARGETLIB): $(LIBOBJ) $(HEADERS)
+	ar rs $@ $^
+
+$(LIBOBJ): $(LIBC)
+	$(CC) -c $(LIBC)
 
 clean: 
 	rm -f $(TARGET1) $(TARGET2) *.o

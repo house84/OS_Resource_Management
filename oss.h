@@ -8,6 +8,7 @@
 #define OSS_H
 
 #define procMax 18
+#define maxLine 10000
 #define maxTimeBetweenNewProcNS 1000000000 
 #define maxTimeBetweenNewProcSecs 2
 #include "headers.h"
@@ -69,6 +70,7 @@ key_t keyMsg;                          //Shm Key for Message 1
 key_t keyMsg2;                         //Shm key for Message 2
 key_t keyMsg3;                         //Shm key for Message 3
 pid_t pidArray[100];                   //Variable for Process PID's
+bool verbose;                          //Indicate verbose logfile
 bool sigFlag;                          //Variable to pause termination
 bool spawnFlag;                        //Varialbe to signal forking process
 bool stopProdTimer;                    //Produce or not Bool

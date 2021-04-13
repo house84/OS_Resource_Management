@@ -6,12 +6,15 @@
  */
 
 #include "oss.h"
+#include "sharedFunc.h"
 
 int main(int argc, char * argv[]){
 	
+
 	//Set Bool
 	sigFlag = false; 
-	spawnFlag = false; 
+	spawnFlag = false;
+	verbose = false; 
 	
 	//Initialize Signal Handling
 	signal(SIGINT, signalHandler); 
@@ -19,31 +22,22 @@ int main(int argc, char * argv[]){
 	//Set Initial Parameters
 	memset(logfile, '\0', sizeof(logfile)); 
 	strcpy(logfile, "logfile"); 
-	myTimer = 100; 
 	totalProc = 0;  
 	srand(time(NULL)); 
+
+	int logfileLength = 50; 
 	
 	//Parse input Args
 	int c = 0; 
 	
-	while(( c = getopt(argc, argv, "hs:l:")) != -1){
+	while(( c = getopt(argc, argv, "hv")) != -1){
 
 	  switch(c){
 				case 'h':	help(argv[0]); 
 							exit(EXIT_SUCCESS); 
 
-				case 's': 	//Set Time
-							myTimer = atoi(optarg); 
-							break; 
-
-				case 'l':	//Set logfile Name
-							memset(logfile, '\0', sizeof(logfile));
-							strcpy(logfile, optarg); 
-							break; 
-
-				case ':':	//Print Missing Arg Message
-							fprintf(stderr, "Arguments Required, see usage [-h]\n"); 
-							exit(EXIT_FAILURE); 
+				case 'v': 	//Set Time
+							verbose = true; 
 							break; 
 
 				default:	//Defalut Failure Exit
@@ -53,17 +47,7 @@ int main(int argc, char * argv[]){
 
 	}
 
-
-	//Check Timer > 0
-	if(myTimer < 1){
-
-	  	fprintf(stderr, "Time -s must be greater than zero\n"); 
-	 	exit(EXIT_FAILURE); 
-	}
 	
-	//Set timer
-	setTimer(myTimer); 
-
 	//Create Shared Memory
 	createSharedMemory(); 
 	
@@ -100,8 +84,7 @@ int main(int argc, char * argv[]){
 	
 	//Set 3 Second Timer
 	stopProdTimer = false; 
-
-//	setTimer2(3); 
+ 
 	time_t now; 
 	struct tm *tm; 
 	now = time(0); 
@@ -139,7 +122,6 @@ int main(int argc, char * argv[]){
 				spawn(index); 
 				++totalProc; 
 				++concProc;
-			//	++sysTimePtr->stats.totalProc; 
 
 				//Allow User to initialize
 				if(msgrcv(shmidMsg3, &buf3, sizeof(buf3.mtext), index+1, 0) == -1){
@@ -262,10 +244,9 @@ void signalHandler(int sig){
 static void help(char *program){
 
   	printf("\n//=== %s Usage Page ===//\n", program);  
-	printf("\n%s [-h][-s t][-l f]\n", program); 
+	printf("\n%s [-h][-v]\n", program); 
 	printf("%s -h      This Usage Page\n", program); 
-	printf("%s -s t    Time in seconds before program terminates\n", program); 
-	printf("%s -l f    Specifies the name for generated logfile\n\n", program); 
+	printf("%s -v      Turn Verbose Mode On\n", program); 
 
 }
 
@@ -493,7 +474,7 @@ static void spawn(int idx){
 		sprintf(buffer_msgId3, "%d", shmidMsg3); 
 
 		//Call user file with child process
-		if(execl("./user", "user", buffer_idx, buffer_sysTime, buffer_msgId,buffer_msgId2, buffer_msgId3, (char*) NULL)){
+		if(execl("./user_proc", "user_proc", buffer_idx, buffer_sysTime, buffer_msgId,buffer_msgId2, buffer_msgId3, (char*) NULL)){
 
 			perror("oss: ERROR: Failed to execl() child process "); 
 			exit(EXIT_FAILURE); 

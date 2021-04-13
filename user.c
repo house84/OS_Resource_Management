@@ -5,6 +5,7 @@
  */ 
 
 #include "user.h"
+#include "sharedFunc.h"
 
 int main(int argc, char * argv[]){
 

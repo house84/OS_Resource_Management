@@ -32,4 +32,4 @@ $(LIBOBJ): $(LIBC)
 	$(CC) -c $(LIBC)
 
 clean: 
-	rm -f $(TARGET1) $(TARGET2) *.o
+	rm -f $(TARGET1) $(TARGET2) $(TARGETLIB) *.o

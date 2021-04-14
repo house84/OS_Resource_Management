@@ -7,6 +7,16 @@
 #include "user.h"
 #include "sharedFunc.h"
 
+struct localPCB{
+
+	pid_t pid; 
+	int fakePID;
+
+	int maximum[maxResources]; 
+	int allocated[maxResources]; 
+}; 
+
+
 int main(int argc, char * argv[]){
 
 	srand(time(NULL) ^ (getpid()<<16)); 
@@ -16,6 +26,7 @@ int main(int argc, char * argv[]){
 	shmidMsg = atoi(argv[3]);
 	shmidMsg2 = atoi(argv[4]); 
 	shmidMsg3 = atoi(argv[5]); 
+	shmidSem = atoi(argv[6]); 
 
 	//Set index
 	int idx = atoi(argv[1]); 
@@ -69,13 +80,15 @@ static float getRandTime(){
 
 }
 
-//Message_t ready = 0 , blocked = 1, terminated = 3
+//Message_t ready = 0 , blocked = 1, terminated = 2
 static void sendMessage(int msgid, int idx){
 
 	bufS.mtype = idx; 
 
 	//Get Type of message
-	int messageT = getMessageType(idx); 
+	//int messageT = getMessageType(idx); 
+
+	int messageT = terminated; 
 
 	if(messageT != ready){
 		
@@ -107,7 +120,7 @@ static void sendMessage(int msgid, int idx){
 
 		//Display Process Stats	
 		updateGlobal(idx); 
-	 	printStats(idx); 
+	 //	printStats(idx); 
 	}
 
 	if((msgsnd(msgid, &bufS, sizeof(bufS.mtext), SA_RESTART)) == -1){

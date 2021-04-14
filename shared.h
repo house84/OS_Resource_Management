@@ -8,6 +8,7 @@
 #define SHARED_H
 
 #include "headers.h"
+#define maxResources 20
 
 //For usability: ready = 0, blocked = 1, running = 2, terminated = 3
 enum state{ready, blocked, terminated}; 
@@ -61,6 +62,12 @@ int shmidMsg2;              //Msg id for User->OSS
 int shmidMsg3;              //Msg id for User initialize
 int shmidSysTime;           //Shared Memory Id
 
+struct SysResources{
+
+	int resource[maxResources]; 
+	int sharedResources[maxResources]; 
+}; 
+
 //System Time
 struct system_Time{
 
@@ -68,6 +75,7 @@ struct system_Time{
 	int nanoSeconds;
 	struct PCB pcbTable[18]; 
 	struct STAT stats; 
+	struct SysResources SysR; 
 };
  
 #endif

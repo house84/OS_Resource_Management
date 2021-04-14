@@ -61,7 +61,14 @@ int main(int argc, char * argv[]){
 	GQue = initQueue(); 
 
 	//Initilize BQ
-	initBlockedQ(); 
+	initBlockedQ();
+
+	//Initialize Resource Array
+	initResourceArr(sysTimePtr); 
+	
+	printArr(sysTimePtr->SysR.sharedResources); 
+	
+	sleep(10); 
 
 	//Initialize STAT
 	sysTimePtr->stats.totalProc = 0; 
@@ -267,32 +274,6 @@ static void setTimer(int t){
 		exit(EXIT_FAILURE);
 	}
 }
-
-
-//Start Stop Produce Timer
-//static void setTimer2(int t){
-
-//	signal(SIGALRM, stopTimeHandler); 
-
-//	timer.it_value.tv_sec = t; 
-//	timer.it_value.tv_usec = 0; 
-//	timer.it_interval.tv_sec = 0; 
-//	timer.it_interval.tv_usec = 0; 
-
-//	if(setitimer(ITIMER_REAL, &timer, NULL) == -1){
-
-//		perror("oss: ERROR: Failed to set timer setitimer() ");
-//		exit(EXIT_FAILURE);
-//	}
-//}
-
-
-//Handler for Stopping Process Creation
-//static void stopTimeHandler(){
-//
-//	fprintf(stderr, "3 Second Timer \n"); 
-//	stopProdTimer = true;
-//}
 
 
 //Create Shared Memory

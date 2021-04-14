@@ -1,8 +1,6 @@
 #include "headers.h"
 #include "shared.h"
 #include "sharedFunc.h"
-//#include <sys/ipc.h>
-//#include <sys/sem.h>
 
 //=== Sem Vars ===//
 struct sembuf sops;  
@@ -33,3 +31,71 @@ void semSignal(int sem){
 		exit(EXIT_FAILURE); 
 	}
 }
+
+void initResourceArr( struct system_Time * st){
+
+	int i; 
+	//initialize System Resources
+	for( i = 0; i < maxResources; ++i ){
+
+		st->SysR.resource[i] = getRand(1,10); 
+		fprintf(stdout, "%d ", st->SysR.resource[i]); 
+
+	}
+	
+	fprintf(stdout, "\n"); 
+
+	//Set Shared Resources
+	
+	for( i = 0; i < maxResources; ++i){
+		
+		st->SysR.sharedResources[i] = 0; 
+	}
+
+	int numShared = 2 + getRand(1,3); 
+	int numArr[numShared]; 
+	int j; 
+
+	for( i = 0; i < numShared; ++i){
+		
+		int r = getRand(0, 19);
+
+		for(j = 0; j < i; ++j){
+
+			while(numArr[j] == r){
+
+				r = getRand(0,19); 
+			}	
+		}
+	
+		numArr[i] = r; 
+
+		st->SysR.sharedResources[r] = 1; 
+	}
+}
+
+
+void printArr(int arr[]){
+
+	int i; 
+	for(i = 0; i < maxResources; ++i){
+
+		fprintf(stdout, "%d ", arr[i]); 
+	}
+	
+	fprintf(stdout, "\n"); 
+
+}
+
+
+int getRand(int l, int u){
+
+	if( l == 0 ){
+
+		return rand() % (u+1); 
+	}
+	
+	return ( rand() % u ) + 1; 
+}
+
+

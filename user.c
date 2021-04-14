@@ -62,26 +62,24 @@ int main(int argc, char * argv[]){
 	freeSHM(); 
 	
 	exit(EXIT_SUCCESS); 
-
 }
 
-
 //Decide to block run or Terminate
-static int getMessageType(int idx){
+int getMessageType(int idx){
 
 	return ((rand()+idx) % 3) ; 
 
 }
 
 //Decide how long to spend in quantum 10ms
-static float getRandTime(){
+float getRandTime(){
 
 	return (rand()% 8800001) + 200000; 
 
 }
 
 //Message_t ready = 0 , blocked = 1, terminated = 2
-static void sendMessage(int msgid, int idx){
+void sendMessage(int msgid, int idx){
 
 	bufS.mtype = idx; 
 
@@ -132,7 +130,7 @@ static void sendMessage(int msgid, int idx){
 
 
 //Wait while user blocked while User Blocked
-static void blockedWait(int idx){
+void blockedWait(int idx){
 
 	float nanoWait = rand()%100000001; 
 	float secWait = rand()%6; 
@@ -146,7 +144,7 @@ static void blockedWait(int idx){
 
 
 //Get time 
-static float getTime(){
+float getTime(){
 	
 	float decimal = sysTimePtr->nanoSeconds;
 	decimal = decimal/1000000000;
@@ -160,7 +158,7 @@ static float getTime(){
 
 
 //Initialize Shared Memory for System Time
-static void initSysTime(){
+void initSysTime(){
 
 	sysTimePtr = (struct system_Time *) shmat(shmidSysTime, NULL, 0); 
 
@@ -168,7 +166,7 @@ static void initSysTime(){
 
 
 //Free Shared Memory PTR
-static void freeSHM(){
+void freeSHM(){
 
 	if(shmdt(sysTimePtr) == -1){
 
@@ -179,7 +177,7 @@ static void freeSHM(){
 
 
 //Initialize PCB Values
-static void initPCB(int idx){
+void initPCB(int idx){
 
 	sysTimePtr->pcbTable[idx].time_Started = getTime();
 	sysTimePtr->pcbTable[idx].proc_id = getpid(); 
@@ -195,7 +193,7 @@ static void initPCB(int idx){
 
 
 //Update Global Stats
-static void updateGlobal(int idx){
+void updateGlobal(int idx){
 
 	sysTimePtr->stats.cpu_Time += sysTimePtr->pcbTable[idx].cpu_Time; 
 	sysTimePtr->stats.system_Time += sysTimePtr->pcbTable[idx].system_Time; 
@@ -205,7 +203,7 @@ static void updateGlobal(int idx){
 
 
 //Display stats upon Termination
-static void printStats(int idx){
+void printStats(int idx){
 
 	float currTime = getTime(); 
 	float cpu = sysTimePtr->pcbTable[idx].cpu_Time; 

@@ -3,7 +3,8 @@
 
 void semWait();  
 void semSignal();
-
+void initResourcArr(); 
+void printArr(); 
 int shmidSem; 
 
 #endif

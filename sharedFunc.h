@@ -4,4 +4,6 @@
 void semWait();  
 void semSignal();
 
+int shmidSem; 
+
 #endif

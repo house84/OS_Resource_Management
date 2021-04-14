@@ -1,11 +1,11 @@
 #include "headers.h"
-#include <sys/ipc.h>
-#include <sys/sem.h>
+#include "shared.h"
+#include "sharedFunc.h"
+//#include <sys/ipc.h>
+//#include <sys/sem.h>
 
 //=== Sem Vars ===//
-struct sembuf sops; 
-int shmidSem;  
-
+struct sembuf sops;  
 
 void semWait(int sem){
 

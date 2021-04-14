@@ -270,29 +270,29 @@ static void setTimer(int t){
 
 
 //Start Stop Produce Timer
-static void setTimer2(int t){
+//static void setTimer2(int t){
 
-	signal(SIGALRM, stopTimeHandler); 
+//	signal(SIGALRM, stopTimeHandler); 
 
-	timer.it_value.tv_sec = t; 
-	timer.it_value.tv_usec = 0; 
-	timer.it_interval.tv_sec = 0; 
-	timer.it_interval.tv_usec = 0; 
+//	timer.it_value.tv_sec = t; 
+//	timer.it_value.tv_usec = 0; 
+//	timer.it_interval.tv_sec = 0; 
+//	timer.it_interval.tv_usec = 0; 
 
-	if(setitimer(ITIMER_REAL, &timer, NULL) == -1){
+//	if(setitimer(ITIMER_REAL, &timer, NULL) == -1){
 
-		perror("oss: ERROR: Failed to set timer setitimer() ");
-		exit(EXIT_FAILURE);
-	}
-}
+//		perror("oss: ERROR: Failed to set timer setitimer() ");
+//		exit(EXIT_FAILURE);
+//	}
+//}
 
 
 //Handler for Stopping Process Creation
-static void stopTimeHandler(){
-
-	fprintf(stderr, "3 Second Timer \n"); 
-	stopProdTimer = true;
-}
+//static void stopTimeHandler(){
+//
+//	fprintf(stderr, "3 Second Timer \n"); 
+//	stopProdTimer = true;
+//}
 
 
 //Create Shared Memory
@@ -354,6 +354,23 @@ static void createSharedMemory(){
 		exit(EXIT_FAILURE); 
 	}
 
+	//=== Set Mutex Sem
+	if((keySem = ftok("sharedFunc.c", 'a')) == -1){
+
+		perror("OSS: ERROR: Failed to generate semKey, ftok() "); 
+		exit(EXIT_FAILURE); 
+	}
+
+	if((shmidSem = semget(keySem, 1, IPC_CREAT | IPC_EXCL | S_IRUSR | S_IWUSR )) == -1){
+		perror("OSS: ERROR: Failed to generate shmidSem, semget() ");
+		exit(EXIT_FAILURE); 
+	}
+
+	if((semctl(shmidSem, mutex, SETVAL, 1)) == -1){
+
+		perror("OSS: ERROR: Failed to create Mutex Sem semctl() "); 
+		exit(EXIT_FAILURE); 
+	}
 }
 
 
@@ -391,6 +408,12 @@ static void freeSharedMemory(){
 	if(msgctl(shmidMsg3, IPC_RMID, NULL) == -1){
 
 		perror("oss: ERROR: Failed to Destroy shmidMsg3, msgctl() "); 
+		exit(EXIT_FAILURE); 
+	}
+
+	if((semctl(shmidSem, 0, IPC_RMID)) == -1 ){
+
+		perror("OSS: ERROR: Failed to release sem Memory semctl() ");
 		exit(EXIT_FAILURE); 
 	}
 }
@@ -473,8 +496,12 @@ static void spawn(int idx){
 		char buffer_msgId3[50];
 		sprintf(buffer_msgId3, "%d", shmidMsg3); 
 
+		//shmidSem
+		char buffer_shmidSem[50];
+		sprintf(buffer_shmidSem, "%d", shmidSem); 
+
 		//Call user file with child process
-		if(execl("./user_proc", "user_proc", buffer_idx, buffer_sysTime, buffer_msgId,buffer_msgId2, buffer_msgId3, (char*) NULL)){
+		if(execl("./user_proc", "user_proc", buffer_idx, buffer_sysTime, buffer_msgId,buffer_msgId2, buffer_msgId3, buffer_shmidSem, (char*) NULL)){
 
 			perror("oss: ERROR: Failed to execl() child process "); 
 			exit(EXIT_FAILURE); 

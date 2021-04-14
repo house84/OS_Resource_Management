@@ -69,6 +69,7 @@ key_t keySysTime;                      //Shm Key
 key_t keyMsg;                          //Shm Key for Message 1
 key_t keyMsg2;                         //Shm key for Message 2
 key_t keyMsg3;                         //Shm key for Message 3
+key_t keySem;                          //Shm Key for Sem
 pid_t pidArray[100];                   //Variable for Process PID's
 bool verbose;                          //Indicate verbose logfile
 bool sigFlag;                          //Variable to pause termination

@@ -11,6 +11,7 @@
 
 //For usability: ready = 0, blocked = 1, running = 2, terminated = 3
 enum state{ready, blocked, terminated}; 
+enum sems{mutex}; 
 
 //Process Control Block 
 struct PCB{

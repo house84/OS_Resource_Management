@@ -1,6 +1,7 @@
 #ifndef SHAREDFUNC_H
 #define SHAREDFUNC_H
 
-void test();  
+void semWait();  
+void semSignal();
 
 #endif

@@ -1,6 +1,6 @@
 /* 
  * Author: Nick House
- * Project: Process Scheduling
+ * Project: Resource Management
  * File Name: shared.h
  */
  
@@ -32,7 +32,7 @@ struct PCB{
 	
 	
 
-}pcb; 
+}; 
 
 //Hold Stats 
 struct STAT{
@@ -64,7 +64,8 @@ int shmidSysTime;           //Shared Memory Id
 
 struct SysResources{
 
-	int resource[maxResources]; 
+	int resources[maxResources]; 
+	int availableResources[maxResources]; 
 	int sharedResources[maxResources]; 
 }; 
 

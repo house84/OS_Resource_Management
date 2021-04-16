@@ -1,21 +1,25 @@
 /*
  * Author: Nick House
- * Program: user.c
- * Project: Process Scheduling
+ * Project: Resource Management
+ * File Name: user.c
  */ 
 
 #include "user.h"
 #include "sharedFunc.h"
 
+
+//Local PCB for User proc
 struct localPCB{
 
 	pid_t pid; 
-	int fakePID;
+	int index;
 
 	int maximum[maxResources]; 
 	int allocated[maxResources]; 
-}; 
+}pcb; 
 
+
+// ============ Main Section of Code ============ //
 
 int main(int argc, char * argv[]){
 
@@ -38,7 +42,9 @@ int main(int argc, char * argv[]){
 
 	//Initialize PCB Values
 	initPCB(idx); 
-	
+	initLocalPCB(idx, getpid()); 
+
+
 	//Used to Calculate Wait Time
 	float waitLocal1;
 	float waitLocal2; 
@@ -63,6 +69,33 @@ int main(int argc, char * argv[]){
 	
 	exit(EXIT_SUCCESS); 
 }
+
+
+
+
+// ============ User Functions Begin ============= //
+
+
+//Initiate local PCB P5
+void initLocalPCB(int idx, pid_t proc_id){
+
+	pcb.pid = proc_id; 
+	pcb.index = idx; 
+
+	int i; 
+	int r; 
+	for(i = 0; i < maxResources; ++i){
+		
+		r = getRand(0, sysTimePtr->SysR.resources[i]); 
+		pcb.maximum[i] = r; 
+		
+		//pcb.allocated[i]
+	}
+
+}
+
+
+
 
 //Decide to block run or Terminate
 int getMessageType(int idx){

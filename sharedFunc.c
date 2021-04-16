@@ -1,3 +1,9 @@
+/*
+ * Author: Nick House
+ * Project: Resource Management
+ * File Name: sharedFunc.c
+ */
+
 #include "headers.h"
 #include "shared.h"
 #include "sharedFunc.h"
@@ -35,11 +41,14 @@ void semSignal(int sem){
 void initResourceArr( struct system_Time * st){
 
 	int i; 
+	int r; 
 	//initialize System Resources
 	for( i = 0; i < maxResources; ++i ){
 
-		st->SysR.resource[i] = getRand(1,10); 
-		fprintf(stdout, "%d ", st->SysR.resource[i]); 
+		r = getRand(1,10); 
+		st->SysR.resources[i] = r; 
+		st->SysR.availableResources[i] = r; 
+	//	fprintf(stdout, "%d ", st->SysR.resource[i]); 
 
 	}
 	
@@ -58,7 +67,7 @@ void initResourceArr( struct system_Time * st){
 
 	for( i = 0; i < numShared; ++i){
 		
-		int r = getRand(0, 19);
+		r = getRand(0, 19);
 
 		for(j = 0; j < i; ++j){
 

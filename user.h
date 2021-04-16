@@ -1,6 +1,6 @@
 /*
  * Author: Nick House
- * Project: Process Scheduling
+ * Project: Resource Management
  * File Name: user.h
  */
  
@@ -10,7 +10,7 @@
 #include "headers.h"
 
 bool run;                         //Continue Process
-struct PCB pcb;                   //PCB struct 
+//struct PCB pcb;                   //PCB struct 
 float timeLocal;                  //System Time for Blocked
 struct PCB *pcbPtr;               //Pointer for PCB
 float getTime();                  //Get time for blocked
@@ -24,5 +24,6 @@ float getRandTime();              //Return Time spent in CPU
 void updateGlobal();              //Update Global Stats
 int getMessageType();             //Return if Ready, blocked or Terminate
 struct system_Time *sysTimePtr;   //Pointer to System Time
+void initLocalPCB();              //Initialize Local PCB P5
 
 #endif

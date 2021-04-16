@@ -1,3 +1,9 @@
+/*
+ * Author: Nick House
+ * Project: Resource Management
+ * File Name: sharedFunc.h
+ */
+
 #ifndef SHAREDFUNC_H
 #define SHAREDFUNC_H
 

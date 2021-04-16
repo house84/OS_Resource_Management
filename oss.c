@@ -52,7 +52,7 @@ int main(int argc, char * argv[]){
 	createSharedMemory(); 
 	
 	//Set System Time
-	setSysTime(); 
+//	setSysTime(); 
 
 	//Open logfile
 	openLogfile(); 
@@ -66,9 +66,13 @@ int main(int argc, char * argv[]){
 	//Initialize Resource Array
 	initResourceArr(sysTimePtr); 
 	
-	printArr(sysTimePtr->SysR.sharedResources); 
+	//Testing
+	printArr(sysTimePtr->SysR.sharedResources, "Shared"); 
+	printArr(sysTimePtr->SysR.resources, "System"); 
+	printArr(sysTimePtr->SysR.availableResources, "Available"); 
 	
-	sleep(10); 
+	//Testing 
+	sleep(5); 
 
 	//Initialize STAT
 	sysTimePtr->stats.totalProc = 0; 
@@ -108,7 +112,7 @@ int main(int argc, char * argv[]){
 			tm = localtime(&now); 
 			int stopSeconds = tm->tm_sec; 
 
-			if((stopSeconds - startSeconds) >= 3){
+			if((stopSeconds - startSeconds) >= 5){
 				stopProdTimer = true; 
 			} 
 		}

@@ -99,10 +99,7 @@ void initLocalPCB(int idx, pid_t proc_id){
 			}
 		}
 	}
-
 }
-
-
 
 
 //Decide to block run or Terminate
@@ -112,12 +109,14 @@ int getMessageType(int idx){
 
 }
 
+
 //Decide how long to spend in quantum 10ms
 float getRandTime(){
 
 	return (rand()% 8800001) + 200000; 
 
 }
+
 
 //Message_t ready = 0 , blocked = 1, terminated = 2
 void sendMessage(int msgid, int idx){

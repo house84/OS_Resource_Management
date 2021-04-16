@@ -67,8 +67,13 @@ int main(int argc, char * argv[]){
 	initResourceArr(sysTimePtr); 
 	
 	//Testing
+	printArrHead(); 
 	printArr(sysTimePtr->SysR.sharedResources, "Shared"); 
+	
+//	printArrHead(); 
 	printArr(sysTimePtr->SysR.resources, "System"); 
+	
+//	printArrHead(); 
 	printArr(sysTimePtr->SysR.availableResources, "Available"); 
 	
 	//Testing 

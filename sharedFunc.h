@@ -9,7 +9,8 @@
 
 void semWait();  
 void semSignal();
-void initResourcArr(); 
+void initResourcArr();
+void printArrHead(); 
 void printArr(); 
 int shmidSem; 
 

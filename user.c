@@ -9,14 +9,14 @@
 
 
 //Local PCB for User proc
-struct localPCB{
+//struct localPCB{
 
-	pid_t pid; 
-	int index;
+//	pid_t pid; 
+//	int index;
 
-	int maximum[maxResources]; 
-	int allocated[maxResources]; 
-}pcb; 
+//	int maximum[maxResources]; 
+//	int allocated[maxResources]; 
+//}pcb; 
 
 
 // ============ Main Section of Code ============ //
@@ -79,23 +79,20 @@ int main(int argc, char * argv[]){
 //Initiate local PCB P5
 void initLocalPCB(int idx, pid_t proc_id){
 
-	pcb.pid = proc_id; 
-	pcb.index = idx; 
-
 	int i; 
 	int r; 
 	for(i = 0; i < maxResources; ++i){
 		
 		r = getRand(0, sysTimePtr->SysR.resources[i]); 
-		pcb.maximum[i] = r; 
+		sysTimePtr->pcbTable[idx].maximum[i] = r; 
 		
-		if(pcb.maximum[i] > 0){
+		if( r > 0 ){
 
 			if(sysTimePtr->SysR.availableResources[i] > 0){
 
 				r = getRand(0,sysTimePtr->SysR.availableResources[i]); 
 				sysTimePtr->SysR.availableResources[i] = sysTimePtr->SysR.availableResources[i] - r;
-				pcb.allocated[i] = r; 
+				sysTimePtr->pcbTable[idx].allocated[i] += r; 
 			}
 		}
 	}
@@ -128,7 +125,7 @@ void sendMessage(int msgid, int idx){
 
 	int messageT = terminated; 
 
-	if(messageT != ready){
+	if(messageT != release){
 		
 		float rand = getRandTime(); 
 		sysTimePtr->pcbTable[idx].sprint_Time = rand; 
@@ -140,13 +137,13 @@ void sendMessage(int msgid, int idx){
 		sysTimePtr->pcbTable[idx].cpu_Time += .010000000; 
 	}
 	
-	if(messageT == ready){
+	if(messageT == request){
 
-		strcpy(bufS.mtext, "ready");
+		strcpy(bufS.mtext, "release");
 	}
-	else if( messageT == blocked ){
+	else if( messageT == release ){
 
-		strcpy(bufS.mtext, "blocked"); 
+		strcpy(bufS.mtext, "request"); 
 		blockedWait(idx); 
 	}
 	else {
@@ -220,8 +217,8 @@ void freeSHM(){
 void initPCB(int idx){
 
 	sysTimePtr->pcbTable[idx].time_Started = getTime();
-	sysTimePtr->pcbTable[idx].proc_id = getpid(); 
-	sysTimePtr->pcbTable[idx].proc_id_Sim = idx; 
+	sysTimePtr->pcbTable[idx].pid = getpid(); 
+	sysTimePtr->pcbTable[idx].index = idx; 
 	sysTimePtr->pcbTable[idx].cpu_Time = 0; 
 	sysTimePtr->pcbTable[idx].system_Time = 0; 
 	sysTimePtr->pcbTable[idx].waited_Time = 0; 
@@ -261,7 +258,6 @@ void printStats(int idx){
 	fprintf(stderr, "Total System Time (seconds): %f\n", sysTimePtr->pcbTable[idx].system_Time); 
 	fprintf(stderr, "Total CPU Time (seconds): %f\n", sysTimePtr->pcbTable[idx].cpu_Time); 
 	fprintf(stderr, "Total Waited Time (seconds): %f\n", sysTimePtr->pcbTable[idx].waited_Time); 
-//	fprintf(stderr, "Total Waited Time (seconds): %f\n", wait); 
 	fprintf(stderr, "Total blocked Time (seconds): %f\n", sysTimePtr->pcbTable[idx].blocked_Time); 
 	fprintf(stderr, "//////////// |||||||||||||||||| ////////////\n\n");
 }

@@ -764,25 +764,25 @@ static void allocateCPU(){
 		unsetBitVectorVal(idx); 
 		
 		//Print Update for Ready
-		fprintf(stderr, "OSS: Time: %s PID: %d\t|||| Terminated\n", getSysTime(), idx); 
-		fprintf(logfilePtr, "OSS: Time: %s PID: %d\t|||| Terminated\n", getSysTime(), idx); 
+	//	fprintf(stderr, "OSS: Time: %s PID: %d\t|||| Terminated\n", getSysTime(), idx); 
+	//	fprintf(logfilePtr, "OSS: Time: %s PID: %d\t|||| Terminated\n", getSysTime(), idx); 
 
 		
 		return; 
 	}
 
-	if( strcmp(bufR.mtext, "blocked") == 0){
+	if( strcmp(bufR.mtext, "request") == 0){
 		
 		blockedQ[idx] = 1; 
 
 		//Print Update
-		fprintf(stderr, "OSS: Time: %s PID: %d\t|||| Added to Blocked Queue\n", getSysTime(), idx);
-		fprintf(logfilePtr, "OSS: Time: %s PID: %d\t|||| Added to Blocked Queue\n", getSysTime(), idx);
+	//	fprintf(stderr, "OSS: Time: %s PID: %d\t|||| Added to Blocked Queue\n", getSysTime(), idx);
+	//	fprintf(logfilePtr, "OSS: Time: %s PID: %d\t|||| Added to Blocked Queue\n", getSysTime(), idx);
 
 		return; 
 	}
 
-	if(strcmp(bufR.mtext, "ready") == 0){
+	if(strcmp(bufR.mtext, "release") == 0){
 
 		//Add Process Back to Queue
 		enqueue(idx); 

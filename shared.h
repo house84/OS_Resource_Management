@@ -11,7 +11,7 @@
 #define maxResources 20
 
 //For usability: ready = 0, blocked = 1, running = 2, terminated = 3
-enum state{ready, blocked, terminated}; 
+enum state{release, request, terminated}; 
 enum sems{mutex}; 
 
 //Process Control Block 
@@ -22,10 +22,14 @@ struct PCB{
   	float cpu_Time;            //Time spent on CPU 
   	float system_Time;         //Time spent in System
   	float waited_Time;         //Time spent waiting
-  	float blocked_Time;        //Time spent Blocked
-  	int proc_id_Sim;           //Simulated PID         
-	pid_t proc_id;             //Process Id
-  	int msgID;                 //Message Id
+  	float blocked_Time;        //Time spent Blocked        
+	pid_t pid;                 //Process Id
+	int msgID;                 //Message ID
+  	int index;                 //Index
+	
+	int maximum[maxResources];  
+	int allocated[maxResources];
+	int requested[maxResources]; 
 
   	int sprint_Time;           //Recent Run time in CPU
 	float wake_Up;             //Time to wake up

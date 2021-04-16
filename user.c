@@ -89,7 +89,15 @@ void initLocalPCB(int idx, pid_t proc_id){
 		r = getRand(0, sysTimePtr->SysR.resources[i]); 
 		pcb.maximum[i] = r; 
 		
-		//pcb.allocated[i]
+		if(pcb.maximum[i] > 0){
+
+			if(sysTimePtr->SysR.availableResources[i] > 0){
+
+				r = getRand(0,sysTimePtr->SysR.availableResources[i]); 
+				sysTimePtr->SysR.availableResources[i] = sysTimePtr->SysR.availableResources[i] - r;
+				pcb.allocated[i] = r; 
+			}
+		}
 	}
 
 }

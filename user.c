@@ -85,7 +85,8 @@ void initLocalPCB(int idx, pid_t proc_id){
 		
 		r = getRand(0, sysTimePtr->SysR.resources[i]); 
 		sysTimePtr->pcbTable[idx].maximum[i] = r; 
-		
+		sysTimePtr->pcbTable[idx].requested[i] = 0; 
+
 		if( r > 0 ){
 
 			if(sysTimePtr->SysR.availableResources[i] > 0){
@@ -120,9 +121,15 @@ void sendMessage(int msgid, int idx){
 
 	bufS.mtype = idx; 
 
+	if(requestBool == true){
+	
+		allocate(idx); 
+	}
+
 	//Get Type of message
 	//int messageT = getMessageType(idx); 
 
+	//Testing
 	int messageT = terminated; 
 
 	if(messageT != release){
@@ -144,7 +151,7 @@ void sendMessage(int msgid, int idx){
 	else if( messageT == release ){
 
 		strcpy(bufS.mtext, "request"); 
-		blockedWait(idx); 
+		requested(idx); 
 	}
 	else {
 
@@ -167,7 +174,7 @@ void sendMessage(int msgid, int idx){
 
 
 //Wait while user blocked while User Blocked
-void blockedWait(int idx){
+void requested(int idx){
 
 	float nanoWait = rand()%100000001; 
 	float secWait = rand()%6; 
@@ -177,7 +184,52 @@ void blockedWait(int idx){
 	
 	float unblocked = timeLocal + bWait; 
 	sysTimePtr->pcbTable[idx].wake_Up = unblocked; 
+
+
+	int r; 
+	r = getRand(0, 19);
+	while(sysTimePtr->pcbTable[idx].maximum[r] == 0){
+
+		r = getRand(0,19); 
+	}
+
+	sysTimePtr->pcbTable[idx].requested[r] = sysTimePtr->pcbTable[idx].maximum[r] - sysTimePtr->pcbTable[idx].allocated[r]; 
+
+	requestBool = true; 
 }
+
+
+
+//Allocate Approved Resources
+void allocate(int idx){
+
+	int i; 
+	int t; 
+	for(i = 0; i < maxResources; ++i){
+
+		if(i > 0){
+
+			t = sysTimePtr->pcbTable[idx].requested[i]; 
+			sysTimePtr->pcbTable[idx].allocated[i] += t; 
+			
+			if(sysTimePtr->SysR.sharedResources[i] == 0){
+
+				sysTimePtr->SysR.availableResources[i] = sysTimePtr->SysR.availableResources[i] - t; 
+			}
+			
+			requestBool = false;
+
+			printArrHead(); 
+			printArr(sysTimePtr->SysR.availableResources, "Available"); 
+
+			printArrHead(); 
+			printArr(sysTimePtr->pcbTable[idx].allocated, "P%d", idx); 
+
+			return; 
+		}
+	}
+}
+
 
 
 //Get time 

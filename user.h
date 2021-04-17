@@ -10,6 +10,7 @@
 #include "headers.h"
 
 bool run;                         //Continue Process
+bool requestBool;                 //Track if resources have been requested
 //struct PCB pcb;                   //PCB struct 
 float timeLocal;                  //System Time for Blocked
 struct PCB *pcbPtr;               //Pointer for PCB
@@ -19,11 +20,12 @@ void initPCB();                   //Set up Initial PCB Values
 void printStats();                //Display User Stats
 void initSysTime();               //Set Shared Mem
 void sendMessage();               //Send Message
-void blockedWait();               //Wait while Blocked
+void requested();                 //Randomly select resources to request
 float getRandTime();              //Return Time spent in CPU
 void updateGlobal();              //Update Global Stats
 int getMessageType();             //Return if Ready, blocked or Terminate
 struct system_Time *sysTimePtr;   //Pointer to System Time
 void initLocalPCB();              //Initialize Local PCB P5
+void allocate();                  //Allocate requested resources
 
 #endif

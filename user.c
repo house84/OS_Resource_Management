@@ -116,15 +116,20 @@ float getRandTime(){
 }
 
 
-//Message_t ready = 0 , blocked = 1, terminated = 2
+//Message_t release = 0 , request = 1, terminated = 2
 void sendMessage(int msgid, int idx){
 
 	bufS.mtype = idx; 
-
-	if(requestBool == true){
 	
-		allocate(idx); 
-	}
+	//Error checking
+	int checked = 0; 
+	requestBool = false; 
+	releaseBool = false; 
+
+//	if(requestBool == true){
+	
+//		allocate(idx); 
+//	}
 
 	//Get Type of message
 	//int messageT = getMessageType(idx); 
@@ -144,18 +149,54 @@ void sendMessage(int msgid, int idx){
 		sysTimePtr->pcbTable[idx].cpu_Time += .010000000; 
 	}
 	
-	if(messageT == request){
+	if(messageT == release){
 
 		strcpy(bufS.mtext, "release");
+		releaseRes(idx); 
+		
+		if(releaseBool == false){
+			
+			++checked; 
+			
+			if(checked >= 2){
+				
+				strcpy(bufS.mtext, "terminated"); 
+				releaseAll(idx); 
+			}
+			else{
+
+				strcpy(bufS.mtext, "request"); 
+				requested(idx); 
+			}
+		}	
 	}
-	else if( messageT == release ){
+	else if( messageT == request ){
 
 		strcpy(bufS.mtext, "request"); 
 		requested(idx); 
+
+		if( requestBool == false ){
+
+			++checked; 
+
+			if(checked >= 2){
+
+				strcpy(bufS.mtext, "terminated");
+				releaseAll(idx); 
+			}
+			else{
+
+				strcpy(bufS.mtext, "release"); 
+				releaseRes(idx); 
+			}
+		}
+
+
 	}
 	else {
 
 		strcpy(bufS.mtext, "terminated");
+		releaseAll(idx); 
 		sysTimePtr->pcbTable[idx].system_Time = getTime()-sysTimePtr->pcbTable[idx].time_Started;
 		run = false; 
 		
@@ -188,16 +229,82 @@ void requested(int idx){
 
 	int r; 
 	r = getRand(0, 19);
-	while(sysTimePtr->pcbTable[idx].maximum[r] == 0){
+	int count = 0; 
 
-		r = getRand(0,19); 
+	//Check Maximum number and request resource not to exceed maximum allowable
+	while(sysTimePtr->pcbTable[idx].maximum[r] == 0 || ((sysTimePtr->pcbTable[idx].maximum[r] - sysTimePtr->pcbTable[idx].allocated[r]) <= 0) ){
+
+		r = (r+1)%20; //getRand(0,19); 
+		
+		//Give adequate attempts to find index for request
+		if(count > 20 ){
+
+			requestBool = false; 
+			return; 
+		}
+		
+		++count; 
 	}
-
-	sysTimePtr->pcbTable[idx].requested[r] = sysTimePtr->pcbTable[idx].maximum[r] - sysTimePtr->pcbTable[idx].allocated[r]; 
+	
+	//add request to requested resource array
+	sysTimePtr->pcbTable[idx].requested[r] += 1; //sysTimePtr->pcbTable[idx].maximum[r] - sysTimePtr->pcbTable[idx].allocated[r]; 
 
 	requestBool = true; 
 }
 
+
+//Release random resource
+void releaseRes(int idx){
+
+	//Add loop to release a random resource
+	
+	int r = getRand(0,19); 
+	int count = 0; 
+	while(sysTimePtr->pcbTable[idx].allocated[r] <= 0){
+
+		r = (r+1)%20; 
+		
+		if(count > 20){
+		
+			releaseBool = false; 
+			return;
+		}
+
+		++count; 
+	}
+	
+	int temp; 
+	temp  = sysTimePtr->pcbTable[idx].allocated[r]; 
+	sysTimePtr->pcbTable[idx].allocated[r] = 0; 
+	
+	if(sysTimePtr->SysR.sharedResources[r] == 0 ){
+
+		sysTimePtr->SysR.availableResources[r] += temp; 
+	}
+
+	releaseBool = true; 
+
+}
+
+
+//Release All resources
+void releaseAll(int idx){
+
+	//Release all resources
+	int i;
+	int temp = 0; 
+
+	for(i = 0; i < maxResources; ++i){
+
+		temp = sysTimePtr->pcbTable[idx].allocated[i]; 
+		sysTimePtr->pcbTable[idx].allocated[i] = 0; 
+		
+		if(sysTimePtr->SysR.sharedResources[i] == 0){
+
+			sysTimePtr->SysR.availableResources[i] += temp; 
+		}
+	}
+}
 
 
 //Allocate Approved Resources

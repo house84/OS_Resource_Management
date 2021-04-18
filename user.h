@@ -11,6 +11,7 @@
 
 bool run;                         //Continue Process
 bool requestBool;                 //Track if resources have been requested
+bool releaseBool;                 //Track if resources where released; 
 //struct PCB pcb;                   //PCB struct 
 float timeLocal;                  //System Time for Blocked
 struct PCB *pcbPtr;               //Pointer for PCB
@@ -20,6 +21,8 @@ void initPCB();                   //Set up Initial PCB Values
 void printStats();                //Display User Stats
 void initSysTime();               //Set Shared Mem
 void sendMessage();               //Send Message
+void releaseRes();                //release resource
+void releaseAll();                //reslease all Resources
 void requested();                 //Randomly select resources to request
 float getRandTime();              //Return Time spent in CPU
 void updateGlobal();              //Update Global Stats

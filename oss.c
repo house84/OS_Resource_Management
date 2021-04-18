@@ -773,7 +773,10 @@ static void allocateCPU(){
 
 	if( strcmp(bufR.mtext, "request") == 0){
 		
-		blockedQ[idx] = 1; 
+	//	blockedQ[idx] = 1; 
+	
+	//request resources
+	requesting(idx); 
 
 		//Print Update
 	//	fprintf(stderr, "OSS: Time: %s PID: %d\t|||| Added to Blocked Queue\n", getSysTime(), idx);
@@ -801,6 +804,18 @@ static void dispatchTime(int idx){
 	fprintf(logfilePtr, "OSS: Time: %s PID: %d\t|||| Time in Dispatch %d nanoseconds\n", getSysTime(), idx, disTime);
 
 }
+
+
+static void requesting(int idx){
+
+
+	//Check what is requested and if there is available resource to give
+
+	//if No resources add to blocked
+	blockedQ[idx] = 1; 
+
+}
+
 
 //Initialize BlockedQ
 static void initBlockedQ(){

@@ -42,6 +42,7 @@ static void initStats();               //Initiate Stats
 void unsetBitVectorVal();              //Clear Bitvector from idx
 static void setSysTime();              //Set the System Time
 const char *getSysTime();              //Return formatted System Time
+static void requesting();              //Requesting Resource Handler
 struct p_Node * dequeue();             //Remove Head
 static void showSysTime();             //Display System Time
 static void allocateCPU();             //Try to Put Process in CPU

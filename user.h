@@ -29,6 +29,6 @@ void updateGlobal();              //Update Global Stats
 int getMessageType();             //Return if Ready, blocked or Terminate
 struct system_Time *sysTimePtr;   //Pointer to System Time
 void initLocalPCB();              //Initialize Local PCB P5
-void allocate();                  //Allocate requested resources
+//void allocate();                  //Allocate requested resources
 
 #endif

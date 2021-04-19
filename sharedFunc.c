@@ -94,7 +94,7 @@ void printArrHead(){
 
 }
 
-void printArr(int arr[], char * name[]){
+void printArr(int arr[], char name[]){
 	
 
 	fprintf(stdout, "%10s:", name); 
@@ -121,3 +121,54 @@ int getRand(int l, int u){
 }
 
 
+
+//Allocate Resources
+void allocate(int idx, struct system_Time *st){
+
+	int i; 
+	int t; 
+
+	for(i = 0; i<maxResources; ++i){
+
+		if(i>0){
+
+			t = st->pcbTable[idx].requested[i];
+			st->pcbTable[idx].allocated[i] += t; 
+
+			if(st->SysR.sharedResources[i] == 0){
+
+				st->SysR.availableResources[i] = st->SysR.availableResources[i]-t; 
+			}
+
+			st->pcbTable[idx].requestBool = false; 
+			st->pcbTable[idx].allocateBool = true; 
+
+			printArrHead(); 
+			//printArr(st->SysR.availableResources, "Available"); 
+			fmt(st->SysR.availableResources, "Available"); 
+
+			printArrHead(); 
+			//printArr(st->pcbTable[idx].allocated, "P%d",idx); 
+			fmt(st->pcbTable[idx].allocated, "P%d", idx); 
+			
+			return; 
+			
+		}
+	}
+}
+
+
+
+//Format string for func calls
+void fmt(int arr[], char* fmt, ...){
+
+	char buf[100];
+
+	va_list vl; 
+	va_start(vl, fmt); 
+
+	vsnprintf(buf, sizeof(buf), fmt, vl); 
+	va_end(vl); 
+
+	printArr(arr, buf); 
+}

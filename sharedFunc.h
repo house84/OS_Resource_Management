@@ -10,8 +10,10 @@
 void semWait();  
 void semSignal();
 void initResourcArr();
+void allocate(); 
 void printArrHead(); 
 void printArr(); 
+void fmt(int arr[], char*fmt, ...); 
 int shmidSem; 
 
 #endif

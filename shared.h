@@ -18,6 +18,9 @@ enum sems{mutex};
 struct PCB{
                              
   	//Simulated Time Values
+	bool requestBool;          //Flag to check if resources requested
+	bool releaseBool;          //Flag if Resources where released
+	bool allocateBool;         //Flag if resources where allcoated
 	float time_Started;        //Time User Created
   	float cpu_Time;            //Time spent on CPU 
   	float system_Time;         //Time spent in System

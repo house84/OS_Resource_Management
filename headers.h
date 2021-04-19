@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <limits.h>
+#include <stdarg.h>
 #include <errno.h>
 #include <math.h>
 #include <stdbool.h>

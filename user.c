@@ -308,34 +308,34 @@ void releaseAll(int idx){
 
 
 //Allocate Approved Resources
-void allocate(int idx){
+//void allocate(int idx){
 
-	int i; 
-	int t; 
-	for(i = 0; i < maxResources; ++i){
+//	int i; 
+//	int t; 
+//	for(i = 0; i < maxResources; ++i){
 
-		if(i > 0){
+//		if(i > 0){
 
-			t = sysTimePtr->pcbTable[idx].requested[i]; 
-			sysTimePtr->pcbTable[idx].allocated[i] += t; 
+//			t = sysTimePtr->pcbTable[idx].requested[i]; 
+//			sysTimePtr->pcbTable[idx].allocated[i] += t; 
 			
-			if(sysTimePtr->SysR.sharedResources[i] == 0){
+//			if(sysTimePtr->SysR.sharedResources[i] == 0){
 
-				sysTimePtr->SysR.availableResources[i] = sysTimePtr->SysR.availableResources[i] - t; 
-			}
-			
-			requestBool = false;
+//				sysTimePtr->SysR.availableResources[i] = sysTimePtr->SysR.availableResources[i] - t; 
+//			}
+//			
+//			requestBool = false;
 
-			printArrHead(); 
-			printArr(sysTimePtr->SysR.availableResources, "Available"); 
+//			printArrHead(); 
+//			printArr(sysTimePtr->SysR.availableResources, "Available"); 
+//
+//			printArrHead(); 
+//			printArr(sysTimePtr->pcbTable[idx].allocated, "P%d", idx); 
 
-			printArrHead(); 
-			printArr(sysTimePtr->pcbTable[idx].allocated, "P%d", idx); 
-
-			return; 
-		}
-	}
-}
+//			return; 
+//		}
+//	}
+//}
 
 
 

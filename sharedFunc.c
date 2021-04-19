@@ -52,7 +52,7 @@ void initResourceArr( struct system_Time * st){
 
 	}
 	
-	fprintf(stdout, "\n"); 
+//	fprintf(stdout, "\n"); 
 
 	//Set Shared Resources
 	
@@ -71,7 +71,7 @@ void initResourceArr( struct system_Time * st){
 
 		for(j = 0; j < i; ++j){
 
-			while(numArr[j] == r){
+			while(numArr[j] == r || st->SysR.resources[j] <= 0){
 
 				r = getRand(0,19); 
 			}	
@@ -130,23 +130,40 @@ void allocate(int idx, struct system_Time *st){
 
 	for(i = 0; i<maxResources; ++i){
 
-		if(i>0){
+		if(st->pcbTable[idx].requested[i] > 0){
 
+			
+			fprintf(stderr, "Allocating RESOURCE -> P%d:R%d\n", idx, i); 
+			
 			t = st->pcbTable[idx].requested[i];
 			st->pcbTable[idx].allocated[i] += t; 
 
+			//Check if resource is shared
 			if(st->SysR.sharedResources[i] == 0){
+				
+				fprintf(stderr, "Non - Shared RESOURCE\n"); 
 
+				//Decrement System Resources
 				st->SysR.availableResources[i] = st->SysR.availableResources[i]-t; 
 			}
 
+			fprintf(stderr, "Shared RESOURCE\n"); 
+			
+			//Add Resource to User 
+			st->pcbTable[idx].allocated[i] += t; 
+
+			//Turn Request Flag false
 			st->pcbTable[idx].requestBool = false; 
+			//Set Allocated Flag True
 			st->pcbTable[idx].allocateBool = true; 
 
+			//Set Corresponding Request to 0
+			st->pcbTable[idx].requested[i] = 0; 
+			
 			printArrHead(); 
 			//printArr(st->SysR.availableResources, "Available"); 
 			fmt(st->SysR.availableResources, "Available"); 
-
+			fmt(st->SysR.sharedResources, "Shared"); 
 			printArrHead(); 
 			//printArr(st->pcbTable[idx].allocated, "P%d",idx); 
 			fmt(st->pcbTable[idx].allocated, "P%d", idx); 

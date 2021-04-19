@@ -130,7 +130,7 @@ int main(int argc, char * argv[]){
 		checkBlockedQ(); 
 		
 		//Spawn Child Process //Set to 20 for testing
-		if( concProc < 18 && totalProc < 100 && stopProdTimer == false && (newUser < getTime())){
+		if( concProc < 17 && totalProc < 40 && stopProdTimer == false && (newUser < getTime())){
 
 			index = getBitVectorPos(); 
 			if(index != -1) { 
@@ -186,7 +186,14 @@ int main(int argc, char * argv[]){
 
 	//Allow Processes to finish
 	while(wait(NULL) > 0){} 
+
 	
+	//TESTING
+	printArrHead();
+	printArr(sysTimePtr->SysR.resources, "Resources"); 
+	printArr(sysTimePtr->SysR.availableResources, "Available"); 
+	printArr(sysTimePtr->SysR.sharedResources, "Shared"); 
+
 	//Clean up Resources
 	signalHandler(3126);
 
@@ -710,7 +717,11 @@ const char * getSysTime(){
 
 //Put Ready Process into CPU
 static void allocateCPU(){
-	
+
+	//TESTING
+//	printArrHead();
+//	printArr(sysTimePtr->SysR.sharedResources, "Shared"); 
+
 	//Check for runnable Processes
 	if(GQue->currSize == 0){ return; }
 	

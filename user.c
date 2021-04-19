@@ -92,11 +92,21 @@ void initLocalPCB(int idx, pid_t proc_id){
 			if(sysTimePtr->SysR.availableResources[i] > 0){
 
 				r = getRand(0,sysTimePtr->SysR.availableResources[i]); 
-				sysTimePtr->SysR.availableResources[i] = sysTimePtr->SysR.availableResources[i] - r;
 				sysTimePtr->pcbTable[idx].allocated[i] += r; 
+			
+				if(sysTimePtr->SysR.sharedResources[i] == 0){
+
+					sysTimePtr->SysR.availableResources[i] = sysTimePtr->SysR.availableResources[i] - r;
+				}
 			}
 		}
+
 	}
+		
+	printArrHead(); 
+	fmt(sysTimePtr->SysR.availableResources, "Available"); 
+	fmt(sysTimePtr->SysR.sharedResources, "Shared");
+	fmt(sysTimePtr->pcbTable[idx].allocated, "P%d", idx); 
 }
 
 
@@ -162,6 +172,9 @@ void sendMessage(int msgid, int idx){
 				
 				strcpy(bufS.mtext, "terminated"); 
 				releaseAll(idx); 
+				sysTimePtr->pcbTable[idx].system_Time = getTime()-sysTimePtr->pcbTable[idx].time_Started;
+				run = false; 
+				updateGlobal(idx); 
 			}
 			else{
 
@@ -183,6 +196,9 @@ void sendMessage(int msgid, int idx){
 
 				strcpy(bufS.mtext, "terminated");
 				releaseAll(idx); 
+				sysTimePtr->pcbTable[idx].system_Time = getTime()-sysTimePtr->pcbTable[idx].time_Started;
+				run = false; 
+				updateGlobal(idx); 
 			}
 			else{
 
@@ -232,7 +248,7 @@ void requested(int idx){
 	int count = 0; 
 
 	//Check Maximum number and request resource not to exceed maximum allowable
-	while(sysTimePtr->pcbTable[idx].maximum[r] == 0 || ((sysTimePtr->pcbTable[idx].maximum[r] - sysTimePtr->pcbTable[idx].allocated[r]) <= 0) ){
+	while(sysTimePtr->pcbTable[idx].maximum[r] == 0 || (sysTimePtr->pcbTable[idx].maximum[r] <= sysTimePtr->pcbTable[idx].allocated[r])){
 
 		r = (r+1)%20; //getRand(0,19); 
 		
@@ -248,6 +264,9 @@ void requested(int idx){
 	
 	//add request to requested resource array
 	sysTimePtr->pcbTable[idx].requested[r] += 1; //sysTimePtr->pcbTable[idx].maximum[r] - sysTimePtr->pcbTable[idx].allocated[r]; 
+	
+	//Print Request
+	fprintf(stderr, "Resource Requested P%d -> R%d\n", idx, r); 
 
 	requestBool = true; 
 }
@@ -283,6 +302,17 @@ void releaseRes(int idx){
 	}
 
 	releaseBool = true; 
+	
+	//Print
+	fprintf(stderr, "Releasing Resources P%d -> R%d\n", idx, r); 
+	
+	printArrHead(); 
+	fmt(sysTimePtr->SysR.availableResources, "Available");
+	fmt(sysTimePtr->SysR.sharedResources, "Shared");
+	
+	printArrHead(); 
+	fmt(sysTimePtr->pcbTable[idx].allocated, "P%d", idx);
+
 
 }
 
@@ -304,7 +334,18 @@ void releaseAll(int idx){
 			sysTimePtr->SysR.availableResources[i] += temp; 
 		}
 	}
+	
+	//Print
+	fprintf(stderr, "Releasing All Resources P%d\n", idx); 
+	
+	printArrHead(); 
+	fmt(sysTimePtr->SysR.availableResources, "Available");
+	fmt(sysTimePtr->SysR.sharedResources, "Shared");
+	
+	printArrHead(); 
+	fmt(sysTimePtr->pcbTable[idx].allocated, "P%d", idx); 
 }
+
 
 
 //Allocate Approved Resources

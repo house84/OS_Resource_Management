@@ -813,6 +813,7 @@ static void requesting(int idx){
 
 	//if No resources add to blocked
 	blockedQ[idx] = 1; 
+	allocate(idx, sysTimePtr); 
 
 }
 

@@ -132,10 +132,10 @@ void sendMessage(int msgid, int idx){
 //	}
 
 	//Get Type of message
-	//int messageT = getMessageType(idx); 
+	int messageT = getMessageType(idx); 
 
 	//Testing
-	int messageT = terminated; 
+	//int messageT = terminated; 
 
 	if(messageT != release){
 		

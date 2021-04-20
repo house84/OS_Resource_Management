@@ -13,7 +13,13 @@ void initResourcArr();
 void allocate(); 
 void printArrHead(); 
 void printArr(); 
-void fmt(int arr[], char*fmt, ...); 
+void fmt(int arr[], char*fmt, ...);
+void logPrint(bool printArr, int arr[], char * fmt, ...); 
 int shmidSem; 
+
+
+//Deadlock
+static bool req_lt_avail(); 								
+bool deadlock();                       //Stuct sysTime and number of current processes
 
 #endif

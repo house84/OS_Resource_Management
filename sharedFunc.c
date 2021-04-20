@@ -189,3 +189,93 @@ void fmt(int arr[], char* fmt, ...){
 
 	printArr(arr, buf); 
 }
+
+
+
+//Format string for func calls
+void logPrint(bool printBool, int arr[], char* fmt, ...){
+
+	char buf[100];
+
+	va_list vl; 
+	va_start(vl, fmt); 
+
+	vsnprintf(buf, sizeof(buf), fmt, vl); 
+	va_end(vl); 
+
+	fprintf(stderr, "%s", buf); 
+
+	if(printBool == true){
+
+		printArr(arr, buf); 
+	}
+}
+
+
+//void allocate(int idx, struct system_Time *st){
+//bool req_lt_avail( const int * req, const int * avail, const int pnum, const int num_res ){
+static bool req_lt_avail( struct system_Time *st, const int idx){
+
+	int i; 
+	for(i = 0; i < maxResources; ++i){
+
+		if (st->pcbTable[idx].requested[i] > st->SysR.availableResources[i]){
+
+			break; 
+		}
+	}
+
+	return (i == maxResources);
+}
+
+
+//Number of current processes
+bool deadlock(struct system_Time *st, const int n){
+
+	int work[maxResources]; 
+	bool finish[n];                   //n = number of processes
+
+	int i ;
+	for(i = 0; i < maxResources; ++i){
+
+		work[i] = st->SysR.availableResources[i]; 
+	}
+
+	for(i = 0; i < n; ++i){
+
+		finish[i] = false; 
+	}
+
+	int p; 
+
+	for(p = 0; p < n; ++p){
+
+		if( finish[p] ) { continue; }
+		
+		if( req_lt_avail(st, p)){
+	
+			finish[p] = true; 
+			
+			for( i = 0; i < maxResources; ++i ){
+
+				work[i] += st->pcbTable[p].allocated[i]; 
+			}
+
+			p = -1; 
+		}
+	}
+
+	for(p = 0; p < maxResources; ++p){
+
+		if( ! finish[p] ){
+
+			break; 
+		}
+	}
+
+	return ( p != n );
+}
+
+
+
+

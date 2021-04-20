@@ -232,6 +232,8 @@ static bool req_lt_avail( struct system_Time *st, const int idx){
 //Number of current processes
 bool deadlock(struct system_Time *st, const int n){
 
+	fprintf(stderr, "Deadlock Algo num Proc: %d\n", n); 
+	
 	int work[maxResources]; 
 	bool finish[n];                   //n = number of processes
 

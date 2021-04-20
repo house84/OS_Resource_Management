@@ -51,6 +51,7 @@ static void closeLogfile();            //Close Logfile
 static void displayStats();            //Display Stats
 static void initBlockedQ();            //Initialize Blocked Q -> 0
 static void dispatchTime();            //Increment Sys Time for Dispatching
+static void terminateProc();                  //Terminate Process if deadlock
 static void signalHandler();           //Handle Signal timer/ctrl+c
 static void checkBlockedQ();           //Search Blocked Que for Freed Proc
 static float  newUserTime();           //Get time to offset new User spawn

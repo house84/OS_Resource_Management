@@ -59,13 +59,45 @@ int main(int argc, char * argv[]){
 
 		//Recienve Message to Run from CPU
 		msgrcv(shmidMsg, &bufS, sizeof(bufS.mtext), mID, 0);
+
+		int cmp = strcmp(bufS.mtext, "terminate"); 
+		//fprintf(stderr, "User Process %d terminate: %d\n", idx, cmp); 
+
+		if( cmp == 0 ){
 		
+			fprintf(stderr, "TERMINATE: Message: %s\n", bufS.mtext); 
+
+			releaseAll(idx); 
+			sysTimePtr->pcbTable[idx].system_Time = getTime()-sysTimePtr->pcbTable[idx].time_Started;
+			run = false; 
+		
+			//Display Process Stats	
+			updateGlobal(idx); 
+			
+			bufS.mtype = idx;
+			strcpy(bufS.mtext, "terminated"); 
+
+			if((msgsnd(shmidMsg2, &bufS, sizeof(bufS.mtext), IPC_NOWAIT)) == -1){
+
+				perror("user: ERROR: Failed to msgsnd() ");
+				exit(EXIT_FAILURE);
+			}
+			
+			fprintf(stderr, "EXITING P%d\n", idx); 
+			
+			break; 
+		}
+
 		//Send Message Back to OSS
 		sendMessage(shmidMsg2, mID); 
 	}
 
+	fprintf(stderr, "Post RUN\n"); 
+
 	//Free Memory
 	freeSHM(); 
+	
+	fprintf(stderr, "Post FREESHM\n"); 
 	
 	exit(EXIT_SUCCESS); 
 }

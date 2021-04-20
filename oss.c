@@ -172,7 +172,7 @@ int main(int argc, char * argv[]){
 		}
 
 		//Break Loop clean up memory
-		if((totalProc == 100 || stopProdTimer == true) && concProc == 0){
+		if((totalProc == 40 || stopProdTimer == true) && concProc == 0){
 		
 			sysTimePtr->stats.end_Time = getTime(); 
 			break; 
@@ -637,7 +637,6 @@ static void enqueue(int idx){
 
 	newNode->fakePID = idx; 
 	newNode->next = NULL; 
-
 	++GQue->currSize; 
 
 	//Test Print
@@ -823,9 +822,18 @@ static void requesting(int idx){
 	//Check what is requested and if there is available resource to give
 
 	//if No resources add to blocked
-	blockedQ[idx] = 1; 
-	allocate(idx, sysTimePtr); 
+	bool DL = deadlock(sysTimePtr, concProc); 
+	fprintf(stderr, "Deadlock %d\n", DL); 
 
+	if(DL == true){
+
+		blockedQ[idx] = 1; 
+	}
+
+	else{
+
+		allocate(idx, sysTimePtr); 
+	}
 }
 
 
@@ -845,6 +853,14 @@ static void initBlockedQ(){
 //Check Blocked Que for Ready Proc
 static void checkBlockedQ(){
 
+	//Check deadlock
+	if( deadlock(sysTimePtr, concProc) == true){
+
+		fprintf(stderr, "TERMINATE CheckBLockQ\n"); 
+		terminateProc(); 
+		return;
+	}
+
 	int i;
 	float localT = getTime(); 
 
@@ -860,6 +876,154 @@ static void checkBlockedQ(){
 
 	}
 }
+
+
+static void terminateProc(){
+
+	//while(deadlock(sysTimePtr, concProc) == true){
+
+	int i;
+	int j; 
+	int status; 
+//	int mID = CPU_Node->fakePID+1; 
+	
+	pid_t lpid; 
+
+	fprintf(stderr, "TerminateProc\n"); 
+
+	for(i = 0; i < 18; ++i){
+		
+		fprintf(stderr, "TerminateProc %d\n", i); 
+		
+		if( deadlock(sysTimePtr, concProc) == false){
+
+			fprintf(stderr, "Deadlock Cleared\n"); 
+
+			return; 
+		}
+		
+		if(blockedQ[i] == 1){
+		
+			fprintf(stderr, "TerminateProc P%d\n", i); 
+			
+			//pid_t lpid = getpid(sysTimePtr->pcbTable[i]);
+			lpid = sysTimePtr->pcbTable[i].pid;
+
+			for(j = 0; j < maxResources; ++j){
+
+				if(sysTimePtr->SysR.sharedResources[j] != 1){
+
+					sysTimePtr->SysR.availableResources[j] += sysTimePtr->pcbTable[i].allocated[j]; 
+				}
+			}
+
+			fprintf(stderr,"Killing P%d and freeing Resouces\n", i); 
+
+			printArrHead(); 
+			printArr(sysTimePtr->SysR.availableResources, "Available"); 
+			fmt(sysTimePtr->pcbTable[i].allocated, "P%d", i); 
+
+			
+			bufS.mtype = i+1; 
+			strcpy(bufS.mtext, "terminate"); 
+		
+			//strcpy(bufS.mtext, "Run"); 
+
+			if((msgsnd(shmidMsg, &bufS, sizeof(bufS.mtext), 0)) == -1 ){
+
+				fprintf(stderr, "OSS: FAILED::: mID: %d\n", i+1);  
+				perror("oss: ERROR: Failed to Send Msg to User msgsnd() "); 
+					exit(EXIT_FAILURE); 
+			}
+
+			fprintf(stderr, "Post EXIT\n"); 
+
+			//Wait for message from User to simulate end CPU 
+			msgrcv(shmidMsg2, &bufR, sizeof(bufR.mtext), i+1, IPC_NOWAIT);
+
+			fprintf(stderr, "Post MsgRcv\n"); 
+			
+			//kill(lpid, SIGKILL); 
+			//waitpid(lpid, &status, 0); 
+			blockedQ[i] = 0; 
+			unsetBitVectorVal(i); 
+		//	--concProc; 
+			
+			pid_t user_id = waitpid(-1, &status, WNOHANG); 
+
+			if(user_id > 0 ){
+ 			
+				//fprintf(stderr,"waitPid user_id: %d\n", user_id); 
+				--concProc;
+			}
+		}
+	}
+	
+	while( deadlock(sysTimePtr, concProc) == true){
+
+		//Check for runnable Processes
+		if(GQue->currSize == 0){ return; }
+	
+		//Dequeue Process
+		CPU_Node = dequeue(); 
+	
+		//Check Node
+		if(CPU_Node == NULL){
+
+			fprintf(stderr,"Que Head Empty\n"); 
+			return; 
+		}
+
+
+		int idx = CPU_Node->fakePID; 
+			
+		//pid_t lpid = getpid(sysTimePtr->pcbTable[i]);
+		lpid = sysTimePtr->pcbTable[idx].pid;
+ 	
+		for(j = 0; j < maxResources; ++j){
+
+			sysTimePtr->SysR.availableResources[j] += sysTimePtr->pcbTable[idx].allocated[j]; 
+		}
+
+		fprintf(stderr,"Killing P%d and freeing Resouces\n", idx); 
+
+		printArrHead(); 
+		printArr(sysTimePtr->SysR.availableResources, "Available"); 
+		fmt(sysTimePtr->pcbTable[idx].allocated, "P%d", idx); 
+		
+		bufS.mtype = idx+1; 
+		strcpy(bufS.mtext, "terminate"); 
+	
+		//strcpy(bufS.mtext, "Run"); 
+
+		if((msgsnd(shmidMsg, &bufS, sizeof(bufS.mtext), IPC_NOWAIT)) == -1 ){
+
+			fprintf(stderr, "OSS: FAILED::: mID: %d\n", idx+1);  
+			perror("oss: ERROR: Failed to Send Msg to User msgsnd() "); 
+			exit(EXIT_FAILURE); 
+		}
+
+		//Wait for message from User to simulate end CPU 
+		msgrcv(shmidMsg2, &bufR, sizeof(bufR.mtext), idx+1, IPC_NOWAIT);
+		
+		//kill(lpid, SIGKILL); 
+		//waitpid(lpid, &status, 0); 
+		unsetBitVectorVal(idx); 
+		blockedQ[idx] = 0; 
+	//	--concProc; 
+	//	int status; 
+		
+		pid_t user_id = waitpid(-1, &status, WNOHANG); 
+
+		if(user_id > 0 ){
+ 			
+			//fprintf(stderr,"waitPid user_id: %d\n", user_id); 
+			--concProc;
+		}
+	}
+}
+
+
 
 //Get system Time for Calcs xx.xxx
 static float getTime(){

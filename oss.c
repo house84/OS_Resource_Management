@@ -897,7 +897,7 @@ static void checkBlockedQ(){
 	//Check deadlock
 	if( deadlock(sysTimePtr, concProc) == true){
 
-//		fprintf(stderr, "TERMINATE CheckBLockQ\n"); 
+//		fprintf(stderr, "Deadlock Detected\n"); 
 		terminateProc(); 
 	}
 
@@ -934,11 +934,10 @@ static void terminateProc(){
 	int j; 
 	int status; 
 	
-	fprintf(stderr, "TerminateProc\n"); 
 
 	for(i = 0; i < procMax; ++i){
 		
-		fprintf(stderr, "TerminateProc %d\n", i); 
+		//fprintf(stderr, "Terminate P%d\n", i); 
 		
 		if( deadlock(sysTimePtr, concProc) == false){
 
@@ -949,21 +948,21 @@ static void terminateProc(){
 		
 		if(blockedQ[i] == 1){
 		
-			fprintf(stderr, "TerminateProc P%d\n", i); 
+			//fprintf(stderr, "Terminate P%d\n", i); 
 			
-			for(j = 0; j < maxResources; ++j){
+		//	for(j = 0; j < maxResources; ++j){
 
-				if(sysTimePtr->SysR.sharedResources[j] != 1){
+		//		if(sysTimePtr->SysR.sharedResources[j] != 1){
 
-					sysTimePtr->SysR.availableResources[j] += sysTimePtr->pcbTable[i].allocated[j]; 
-				}
-			}
+		//			sysTimePtr->SysR.availableResources[j] += sysTimePtr->pcbTable[i].allocated[j]; 
+		//		}
+		//	}
 
 			fprintf(stderr,"Killing P%d and freeing Resouces\n", i); 
 
 			printArrHead(); 
-			printArr(sysTimePtr->SysR.availableResources, "Available"); 
-			fmt(sysTimePtr->pcbTable[i].allocated, "P%d", i); 
+			printArr(sysTimePtr->SysR.availableResources, "Sys-Available"); 
+			fmt(sysTimePtr->pcbTable[i].allocated, "(A) P%d", i); 
 			
 			bufS.mtype = i+1; 
 			strcpy(bufS.mtext, "terminate"); 
@@ -1003,16 +1002,16 @@ static void terminateProc(){
 
 		int idx = CPU_Node->fakePID; 
 			
-		for(j = 0; j < maxResources; ++j){
+		//for(j = 0; j < maxResources; ++j){
 
-			sysTimePtr->SysR.availableResources[j] += sysTimePtr->pcbTable[idx].allocated[j]; 
-		}
+		//	sysTimePtr->SysR.availableResources[j] += sysTimePtr->pcbTable[idx].allocated[j]; 
+		//}
 
 		fprintf(stderr,"Killing P%d and freeing Resouces\n", idx); 
 
 		printArrHead(); 
-		printArr(sysTimePtr->SysR.availableResources, "Available"); 
-		fmt(sysTimePtr->pcbTable[idx].allocated, "P%d", idx); 
+		printArr(sysTimePtr->SysR.availableResources, "Sys-Available"); 
+		fmt(sysTimePtr->pcbTable[idx].allocated, "(A) P%d", idx); 
 		
 		bufS.mtype = idx+1; 
 		strcpy(bufS.mtext, "terminate"); 

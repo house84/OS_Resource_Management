@@ -52,7 +52,6 @@ int main(int argc, char * argv[]){
 	strcpy(buf3.mtext, ""); 
 
 	//Messaging needed to allow consistent behavior 
-	//of OSS running on real Hoare Kernel
 	msgsnd(shmidMsg3, &buf3, sizeof(buf3.mtext), 0); 
 
 	while(run == true){
@@ -74,15 +73,6 @@ int main(int argc, char * argv[]){
 			//Display Process Stats	
 			updateGlobal(idx); 
 			
-	//		bufS.mtype = idx;
-	//		strcpy(bufS.mtext, "terminated"); 
-
-	//		if((msgsnd(shmidMsg2, &bufS, sizeof(bufS.mtext), 0)) == -1){
-
-	//			perror("user: ERROR: Failed to msgsnd() ");
-	//			exit(EXIT_FAILURE);
-	//		}
-			
 			fprintf(stderr, "EXITING P%d\n", idx); 
 			
 			break; 
@@ -92,12 +82,8 @@ int main(int argc, char * argv[]){
 		sendMessage(shmidMsg2, mID); 
 	}
 
-	fprintf(stderr, "Post RUN\n"); 
-
 	//Free Memory
 	freeSHM(); 
-	
-	fprintf(stderr, "Post FREESHM\n"); 
 	
 	exit(EXIT_SUCCESS); 
 }
@@ -116,7 +102,7 @@ void initLocalPCB(int idx, pid_t proc_id){
 	for(i = 0; i < maxResources; ++i){
 		
 		r = getRand(0, sysTimePtr->SysR.resources[i]); 
-		fprintf(stderr, "Initialize User r = %d for max[%d]\n", r, i); 
+	//	fprintf(stderr, "Initialize User r = %d for max[%d]\n", r, i); 
 		sysTimePtr->pcbTable[idx].maximum[i] = r; 
 		localMaximum[i] = r; 
 		sysTimePtr->pcbTable[idx].requested[i] = 0; 

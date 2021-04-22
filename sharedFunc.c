@@ -214,12 +214,10 @@ static bool req_lt_avail( struct system_Time *st, const int idx){
 
 		if (st->pcbTable[idx].requested[i] > st->SysR.availableResources[i]){
 
-			fprintf(stderr, "REQ: %d  Avail: %d\n", st->pcbTable[idx].requested[i], st->SysR.availableResources[i]); 
 			break; 
 		}
 	}
 
-	fprintf(stderr, "i:%d\n", i); 
 
 	return (i == maxResources);
 }
@@ -228,7 +226,7 @@ static bool req_lt_avail( struct system_Time *st, const int idx){
 //Number of current processes
 bool deadlock(struct system_Time *st, const int n){
 
-	fprintf(stderr, "Deadlock Algo num Proc: %d\n", n); 
+	fprintf(stderr, "Running Deadlock Detection Algorithm\n"); 
 	
 	int work[maxResources]; 
 	bool finish[n];                   //n = number of processes
@@ -271,8 +269,6 @@ bool deadlock(struct system_Time *st, const int n){
 		}
 	}
 	
-	fprintf(stderr, "P = %d n = %d\n", p, n); 
-
 	return ( p != n );
 }
 

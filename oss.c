@@ -51,11 +51,11 @@ int main(int argc, char * argv[]){
 	//Create Shared Memory
 	createSharedMemory(); 
 	
-	//Set System Time
-//	setSysTime(); 
-
 	//Open logfile
 	openLogfile(); 
+
+	//Set shmidSem
+	setSemID(shmidSem); 
 
 	//Initialize Queue
 	GQue = initQueue(); 
@@ -69,17 +69,10 @@ int main(int argc, char * argv[]){
 	
 	//Testing
 	printArrHead(); 
-	printArr(sysTimePtr->SysR.sharedResources, "Shared"); 
+	printArr(sysTimePtr->SysR.resources, "Sys-Resources"); 
+	printArr(sysTimePtr->SysR.availableResources, "Sys-Available"); 
+	printArr(sysTimePtr->SysR.sharedResources, "Sys-Shared"); 
 	
-//	printArrHead(); 
-	printArr(sysTimePtr->SysR.resources, "System"); 
-	
-//	printArrHead(); 
-	printArr(sysTimePtr->SysR.availableResources, "Available"); 
-	
-	//Testing 
-	sleep(5); 
-
 	//Initialize STAT
 	sysTimePtr->stats.totalProc = 0; 
 	sysTimePtr->stats.cpu_Time = 0; 
@@ -91,7 +84,6 @@ int main(int argc, char * argv[]){
 	CPU_Node = (struct p_Node*)malloc(sizeof(struct p_Node)); 
 
 	//=========== Add Program Logic =============
-	
 
 	int i = 0; 
 	int index; 
@@ -124,11 +116,15 @@ int main(int argc, char * argv[]){
 		}
 
 		
-		//Increment System Time by NanoSeconds
-		iterTime = rand()%10000001 + 1000000000; 
+		//Increment System Time by 1-500 ms
+		iterTime = rand()%500000000 + 1000001; 
+		
+		//critical 
+		semWait(mutex); 
 		incrementSysTime(iterTime); 
+		semSignal(mutex); 
 
-		fprintf(stderr, "Concurrent Processes: %d Total Processes: %d\n", concProc, totalProc); 
+		//Check Blocked Processes
 		checkBlockedQ(); 
 
 
@@ -948,16 +944,6 @@ static void terminateProc(){
 		
 		if(blockedQ[i] == 1){
 		
-			//fprintf(stderr, "Terminate P%d\n", i); 
-			
-		//	for(j = 0; j < maxResources; ++j){
-
-		//		if(sysTimePtr->SysR.sharedResources[j] != 1){
-
-		//			sysTimePtr->SysR.availableResources[j] += sysTimePtr->pcbTable[i].allocated[j]; 
-		//		}
-		//	}
-
 			fprintf(stderr,"Killing P%d and freeing Resouces\n", i); 
 
 			printArrHead(); 
@@ -1002,11 +988,6 @@ static void terminateProc(){
 
 		int idx = CPU_Node->fakePID; 
 			
-		//for(j = 0; j < maxResources; ++j){
-
-		//	sysTimePtr->SysR.availableResources[j] += sysTimePtr->pcbTable[idx].allocated[j]; 
-		//}
-
 		fprintf(stderr,"Killing P%d and freeing Resouces\n", idx); 
 
 		printArrHead(); 

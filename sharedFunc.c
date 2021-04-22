@@ -11,6 +11,11 @@
 //=== Sem Vars ===//
 struct sembuf sops;  
 
+void setSemID(int semID){
+
+	shmidSem = semID; 
+}
+
 void semWait(int sem){
 
 	sops.sem_num = sem; 
@@ -126,43 +131,37 @@ void allocate(int idx, struct system_Time *st){
 
 	rIdx = st->pcbTable[idx].requestIDX; 
 			
-			fprintf(stderr, "Allocating RESOURCE -> P%d:R%d\n", idx, rIdx); 
+	fprintf(stderr, "Allocating RESOURCE -> P%d:R%d\n", idx, rIdx); 
 			
-			//t = st->pcbTable[idx].requested[i];
-			st->pcbTable[idx].allocated[rIdx] += 1; 
+	st->pcbTable[idx].allocated[rIdx] += 1; 
 
-			//Check if resource is shared
-			if(st->SysR.sharedResources[rIdx] == 0){
+	//Check if resource is shared
+	if(st->SysR.sharedResources[rIdx] == 0){
 				
-				fprintf(stderr, "Non - Shared RESOURCE\n"); 
+		fprintf(stderr, "Non - Shared RESOURCE\n"); 
 
-				//Decrement System Resources
-				st->SysR.availableResources[rIdx] = (st->SysR.availableResources[rIdx] - 1); 
-			}
-
-			fprintf(stderr, "Shared RESOURCE\n"); 
+		//Decrement System Resources
+		st->SysR.availableResources[rIdx] = (st->SysR.availableResources[rIdx] - 1); 
+	}
 			
-			//Add Resource to User 
-		//	st->pcbTable[idx].allocated[rIdx] += 1; 
+	//Turn Request Flag false
+	st->pcbTable[idx].requestBool = false; 
+	
+	//Set Allocated Flag True
+	st->pcbTable[idx].allocateBool = true; 
 
-			//Turn Request Flag false
-			st->pcbTable[idx].requestBool = false; 
-			//Set Allocated Flag True
-			st->pcbTable[idx].allocateBool = true; 
-
-			//Set Corresponding Request to 0
-			st->pcbTable[idx].requested[rIdx] = 0; 
-			st->pcbTable[idx].requestIDX = 0; 
+	//Set Corresponding Request to 0
+	st->pcbTable[idx].requested[rIdx] = 0; 
+	st->pcbTable[idx].requestIDX = 0; 
 			
-			printArrHead(); 
-			//printArr(st->SysR.availableResources, "Available"); 
-			fmt(st->SysR.resources, "Sys-Resources"); 
-			fmt(st->SysR.availableResources, "Sys-Available"); 
-			fmt(st->SysR.sharedResources, "Sys-Shared"); 
-			printArrHead(); 
-			//printArr(st->pcbTable[idx].allocated, "P%d",idx); 
-			fmt(st->pcbTable[idx].allocated, "P%d Allocated", idx); 
-			fmt(st->pcbTable[idx].maximum, "P%d Maximum", idx); 
+	printArrHead(); 
+	fmt(st->SysR.resources, "Sys-Resources"); 
+	fmt(st->SysR.availableResources, "Sys-Available"); 
+	fmt(st->SysR.sharedResources, "Sys-Shared"); 
+	
+	printArrHead(); 		
+	fmt(st->pcbTable[idx].allocated, "P%d Allocated", idx); 
+	fmt(st->pcbTable[idx].maximum, "P%d Maximum", idx); 
 
 			
 }

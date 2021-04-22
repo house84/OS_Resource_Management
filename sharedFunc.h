@@ -9,13 +9,13 @@
 
 void semWait();  
 void semSignal();
+void setSemID(); 
 void initResourcArr();
 void allocate(); 
 void printArrHead(); 
 void printArr(); 
 void fmt(int arr[], char*fmt, ...);
-void logPrint(bool printArr, int arr[], char * fmt, ...); 
-int shmidSem; 
+void logPrint(bool printArr, int arr[], char * fmt, ...);  
 
 
 //Deadlock

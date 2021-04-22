@@ -39,6 +39,7 @@ int main(int argc, char * argv[]){
 
 	//Initiate SHM
 	initSysTime();
+	setSemID(shmidSem); 
 
 	//Initialize PCB Values
 	initPCB(idx); 

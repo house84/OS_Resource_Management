@@ -69,6 +69,7 @@ int shmidMsg;               //Msg id for OSS->User
 int shmidMsg2;              //Msg id for User->OSS
 int shmidMsg3;              //Msg id for User initialize
 int shmidSysTime;           //Shared Memory Id
+int shmidSem;               //Shared Memory for Sem
 
 struct SysResources{
 

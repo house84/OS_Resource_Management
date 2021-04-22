@@ -140,7 +140,7 @@ int main(int argc, char * argv[]){
 
 
 		//Spawn Child Process //Set to 20 for testing
-		if( concProc < procMax && totalProc < 40 && stopProdTimer == false && (newUser < getTime())){
+		if( concProc < procMax && totalProc < 40 && stopProdTimer == false ){// && (newUser < getTime())){
 
 			index = getBitVectorPos(); 
 			if(index != -1) { 

@@ -7,16 +7,6 @@
 #include "user.h"
 #include "sharedFunc.h"
 
-
-//Local PCB for User proc
-//struct localPCB{
-
-//	pid_t pid; 
-//	int index;
-
-//	int maximum[maxResources]; 
-//	int allocated[maxResources]; 
-//}pcb; 
 int localMaximum[maxResources]; 
 
 // ============ Main Section of Code ============ //
@@ -96,24 +86,34 @@ void initLocalPCB(int idx, pid_t proc_id){
 
 	int i; 
 	int r; 
+	
+	//Allocate Initial Reources
 	for(i = 0; i < maxResources; ++i){
 		
 		r = getRand(0, sysTimePtr->SysR.resources[i]); 
-	//	fprintf(stderr, "Initialize User r = %d for max[%d]\n", r, i); 
+		
+		//Get Random value for Resources to initialize
 		sysTimePtr->pcbTable[idx].maximum[i] = r; 
 		localMaximum[i] = r; 
+
+		//Clear User Request Array
 		sysTimePtr->pcbTable[idx].requested[i] = 0; 
 
 		if( r > 0 ){
 
+			//If Resource are to be allocated make sure System has available Res
 			if(sysTimePtr->SysR.availableResources[i] > 0){
 
+				//Get 1/2 value of a random int between Sys Avail Resources and 0
 				r = (getRand(0,sysTimePtr->SysR.availableResources[i])/2); 
 				
+				//If r greater than user max set to the user max
 				if( r > localMaximum[i] ) {	r = localMaximum[i]; }
 				
+				//Allocate resource to user 
 				sysTimePtr->pcbTable[idx].allocated[i] = r; 
 			
+				//Check if system resource is shared
 				if(sysTimePtr->SysR.sharedResources[i] == 0){
 
 					sysTimePtr->SysR.availableResources[i] = sysTimePtr->SysR.availableResources[i] - r;
@@ -163,7 +163,12 @@ void sendMessage(int msgid, int mID){
 	releaseBool = false; 
 
 	//Get Type of message
-	int messageT = getMessageType(idx); 
+	int messageT = getMessageType(idx);
+
+	if( getTime() - sysTimePtr->pcbTable[idx].time_Started < 1 ){ 
+		
+		fprintf(stderr, "Under 1 Second\n"); 
+		messageT = request; }
 
 	if(messageT != release){
 		

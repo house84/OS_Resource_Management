@@ -63,30 +63,31 @@ static void createSharedMemory();      //Allocate Shared Memory
 
 time_t t;                              //Hold Time
 int myTimer;                           //Timer Value
-int totalProc; 					       //Number of total procedures
+bool verbose;                          //Indicate verbose logfile
+bool sigFlag;                          //Variable to pause termination
 int concProc;                          //Number of Concurrent Processes
 int logLines;                          //Holds Number of lines in logfile
-int blockedQ[procMax];                 //Hold Index of Blocked Users
-key_t keySysTime;                      //Shm Key
+int totalProc; 					       //Number of total procedures
+int active[18];                        //track active user
+key_t keySem;                          //Shm Key for Sem
 key_t keyMsg;                          //Shm Key for Message 1
 key_t keyMsg2;                         //Shm key for Message 2
 key_t keyMsg3;                         //Shm key for Message 3
-key_t keySem;                          //Shm Key for Sem
-pid_t pidArray[100];                   //Variable for Process PID's
-bool verbose;                          //Indicate verbose logfile
-bool sigFlag;                          //Variable to pause termination
-bool spawnFlag;                        //Varialbe to signal forking process
-bool stopProdTimer;                    //Produce or not Bool
 size_t memSize;                        //memSize for getshm()
-char logfile[100];                     //Logfile Name
-struct Queue *initQueue();             //Create Queue
-struct Queue *GQue;                    //Variable for Queue
-struct itimerval timer;                //Set Timer
-struct system_Time *sysTimePtr;        //System Time Pointer
 struct PCB cpu;                        //PCB 
+bool spawnFlag;                        //Varialbe to signal forking process
+FILE *logfilePtr;                      //Logfile Pointer
+key_t keySysTime;                      //Shm Key
+bool stopProdTimer;                    //Produce or not Bool
+char logfile[100];                     //Logfile Name
+struct Queue *GQue;                    //Variable for Queue
+pid_t pidArray[100];                   //Variable for Process PID's
+int blockedQ[procMax];                 //Hold Index of Blocked Users
+struct itimerval timer;                //Set Timer
 struct p_Node *CPU_Node;               //Node to Hold CPU Process
+struct Queue *initQueue();             //Create Queue
+struct system_Time *sysTimePtr;        //System Time Pointer
+
 typedef unsigned int bv_t;             //Bit Vector
 bv_t bitVector;                        //BV Variable
-FILE *logfilePtr;                      //Logfile Pointer
-
 #endif

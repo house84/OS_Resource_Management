@@ -82,6 +82,7 @@ struct system_Time{
 
 	int seconds;
 	int nanoSeconds;
+//	int active[18]; 
 	struct PCB pcbTable[18]; 
 	struct STAT stats; 
 	struct SysResources SysR; 

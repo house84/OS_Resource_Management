@@ -120,7 +120,6 @@ void initLocalPCB(int idx, pid_t proc_id){
 		sysTimePtr->pcbTable[idx].maximum[i] = r; 
 		localMaximum[i] = r; 
 		sysTimePtr->pcbTable[idx].requested[i] = 0; 
-		//sysTimePtr->pcbTable[idx].allocated[i] = 0; 
 
 		if( r > 0 ){
 
@@ -138,14 +137,14 @@ void initLocalPCB(int idx, pid_t proc_id){
 				}
 			}
 		}
-
 	}
 		
 	printArrHead(); 
-	fmt(sysTimePtr->SysR.availableResources, "Available"); 
-	fmt(sysTimePtr->SysR.sharedResources, "Shared");
-	fmt(sysTimePtr->pcbTable[idx].allocated, "P%d Alloc", idx);
-	fmt(sysTimePtr->pcbTable[idx].maximum, "P%d Max", idx);
+	fmt(sysTimePtr->SysR.resources, "Sys-Resources"); 
+	fmt(sysTimePtr->SysR.availableResources, "Sys-Available"); 
+	fmt(sysTimePtr->SysR.sharedResources, "Sys-Shared");
+	fmt(sysTimePtr->pcbTable[idx].allocated, "P%d Allocated", idx);
+	fmt(sysTimePtr->pcbTable[idx].maximum, "P%d Maximum", idx);
 
 }
 
@@ -180,16 +179,8 @@ void sendMessage(int msgid, int mID){
 	requestBool = false; 
 	releaseBool = false; 
 
-//	if(requestBool == true){
-	
-//		allocate(idx); 
-//	}
-
 	//Get Type of message
 	int messageT = getMessageType(idx); 
-
-	//Testing
-	//int messageT = request; 
 
 	if(messageT != release){
 		
@@ -210,22 +201,12 @@ void sendMessage(int msgid, int mID){
 		
 		if(releaseBool == false){
 			
-			//++checked; 
-			
-		//	if(checked == 2){
-				
 				strcpy(bufS.mtext, "terminated"); 
 				releaseAll(idx); 
 				sysTimePtr->pcbTable[idx].system_Time = getTime()-sysTimePtr->pcbTable[idx].time_Started;
 				run = false; 
 				updateGlobal(idx); 
 			}
-		//	else{
-
-		//		strcpy(bufS.mtext, "request"); 
-		//		requested(idx); 
-		//	}
-	//	}	
 	}
 	else if( messageT == request ){
 
@@ -235,23 +216,12 @@ void sendMessage(int msgid, int mID){
 
 		if( requestBool == false ){
 
-			//++checked; 
-
-		//	if(checked == 2){
-
 				strcpy(bufS.mtext, "terminated");
 				releaseAll(idx); 
 				sysTimePtr->pcbTable[idx].system_Time = getTime()-sysTimePtr->pcbTable[idx].time_Started;
 				run = false; 
 				updateGlobal(idx); 
 			}
-		//	else{
-
-		//		strcpy(bufS.mtext, "release"); 
-		//		releaseRes(idx); 
-		//	}
-	//	}
-
 
 	}
 	else {
@@ -287,27 +257,20 @@ void requested(int idx){
 	float unblocked = timeLocal + bWait; 
 	sysTimePtr->pcbTable[idx].wake_Up = unblocked; 
 
-
-//	int r; 
-//	int locIDX; 
 	int r = getRand(0, 19);
 	int	locIDX = r; 
 	int count = 0; 
 
-	fprintf(stderr, "Max and Avail\n"); 
-
-	fmt(localMaximum, "P%d Max", idx);
-	//fmt(sysTimePtr->pcbTable[idx].maximum, "P%d Max", idx);
-	fmt(sysTimePtr->SysR.availableResources, "Available"); 
-
-	//Check Maximum number and request resource not to exceed maximum allowable
-	//while(sysTimePtr->pcbTable[idx].maximum[locIDX] == 0 || (sysTimePtr->pcbTable[idx].maximum[locIDX] <= sysTimePtr->SysR.availableResources[locIDX])){
-	while(localMaximum[locIDX] == 0 || (localMaximum[locIDX] >= sysTimePtr->SysR.availableResources[locIDX])){
+	fmt(sysTimePtr->SysR.availableResources, "Sys-Available"); 
+	fmt(localMaximum, "P%d Maximum", idx);
+	fprintf(stderr,"\n"); 
+	
+	while(localMaximum[locIDX] == 0 || ( sysTimePtr->pcbTable[idx].allocated[locIDX] == sysTimePtr->SysR.availableResources[locIDX]) || (localMaximum[locIDX] == sysTimePtr->pcbTable[locIDX].allocated[locIDX])){
 
 		++r; 
 		locIDX = (r)%20; //getRand(0,19); 
 		
-		//fprintf(stderr, "P%d locIDX = %d\n", idx, locIDX); 
+		fprintf(stderr, "P%d locIDX = %d Allocated:%d\n", idx, locIDX, sysTimePtr->pcbTable[idx].allocated[locIDX]); 
 
 		//Give adequate attempts to find index for request
 		if(count > 19 ){
@@ -320,7 +283,7 @@ void requested(int idx){
 	}
 	
 	//add request to requested resource array
-	sysTimePtr->pcbTable[idx].requested[r] = 1; //sysTimePtr->pcbTable[idx].maximum[r] - sysTimePtr->pcbTable[idx].allocated[r];
+	sysTimePtr->pcbTable[idx].requested[locIDX] = 1; //sysTimePtr->pcbTable[idx].maximum[r] - sysTimePtr->pcbTable[idx].allocated[r];
 
 	sysTimePtr->pcbTable[idx].requestIDX = locIDX; 
 	

@@ -65,6 +65,7 @@ int main(int argc, char * argv[]){
 
 	//Initialize Resource Array
 	initResourceArr(sysTimePtr); 
+	memset(active, 0, 18); 
 	
 	//Testing
 	printArrHead(); 
@@ -137,7 +138,8 @@ int main(int argc, char * argv[]){
 			index = getBitVectorPos(); 
 			if(index != -1) { 
 				
-				spawn(index); 
+				spawn(index);
+				active[index] = 1; 
 				++totalProc; 
 				++concProc;
 
@@ -193,13 +195,17 @@ int main(int argc, char * argv[]){
 			printArr(sysTimePtr->SysR.availableResources, "Available"); 
 			printArr(sysTimePtr->SysR.sharedResources, "Shared"); 
 			fprintf(stderr, "\n"); 
-			fprintf(stderr, "Process Resources Allocated\n"); 
+			fprintf(stderr, "Process Resources Allocated (A) and Maximum (M)\n"); 
 			printArrHead(); 
 			
 			int j; 
-			for(j=0; j < concProc; ++j){
+			for(j=0; j < 18; ++j){
 
-				fmt(sysTimePtr->pcbTable[j].allocated, "P%d", j); 
+				if(active[j] == 1 ){
+
+					fmt(sysTimePtr->pcbTable[j].allocated, "(A) P%d", j); 
+					fmt(sysTimePtr->pcbTable[j].maximum, "(M) P%d", j); 	
+			 	}
 			}
 			
 			fprintf(stderr, "\n"); 
@@ -217,8 +223,8 @@ int main(int argc, char * argv[]){
 	
 	//TESTING
 	printArrHead();
-	printArr(sysTimePtr->SysR.resources, "Resources"); 
-	printArr(sysTimePtr->SysR.availableResources, "Available"); 
+	printArr(sysTimePtr->SysR.resources, "Sys-Resources"); 
+	printArr(sysTimePtr->SysR.availableResources, "Sys-Available"); 
 	printArr(sysTimePtr->SysR.sharedResources, "Shared"); 
 
 	//Clean up Resources
@@ -807,6 +813,8 @@ static void allocateCPU(){
 		incrementSysTime(sprint); 
 		
 		unsetBitVectorVal(idx); 
+
+		active[idx] = 0; 
 		
 		//Print Update for Ready
 	//	fprintf(stderr, "OSS: Time: %s PID: %d\t|||| Terminated\n", getSysTime(), idx); 
@@ -854,19 +862,6 @@ static void dispatchTime(int idx){
 static void requesting(int idx){
 
 
-	//Check what is requested and if there is available resource to give
-
-	//if No resources add to blocked
-//	bool DL = deadlock(sysTimePtr, concProc); 
-//	fprintf(stderr, "Deadlock %d\n", DL); 
-
-//	if(DL == true){
-
-//		fprintf(stderr, "Deadklocked adding P%d to blocked Queue", idx); 
-//		blockedQ[idx] = 1; 
-//	}
-
-//	else{
 	int rIDX = sysTimePtr->pcbTable[idx].requestIDX; 
 
 	if(sysTimePtr->SysR.availableResources[rIDX] > 0){
@@ -880,9 +875,6 @@ static void requesting(int idx){
 	fprintf(stderr, "P%d Sent to Blocked Queue\n", idx); 
 	blockedQ[idx] = 1; 
 }
-
-
-//	}
 
 
 
@@ -905,9 +897,8 @@ static void checkBlockedQ(){
 	//Check deadlock
 	if( deadlock(sysTimePtr, concProc) == true){
 
-		fprintf(stderr, "TERMINATE CheckBLockQ\n"); 
+//		fprintf(stderr, "TERMINATE CheckBLockQ\n"); 
 		terminateProc(); 
-	//	return;
 	}
 
 	int i;
@@ -918,14 +909,11 @@ static void checkBlockedQ(){
 
 	for(i = 0; i < procMax; ++i){
 		
-
 		rIdx = sysTimePtr->pcbTable[i].requestIDX;
-		//RVar = sysTimePtr->PcbTable[i].reque
 		AvailR = sysTimePtr->SysR.availableResources[rIdx]; 
 		
-		fprintf(stderr, "Checking BlockedQ P%d Blocked: %d Request idx: %d AvailRes: %d\n", i, blockedQ[i], rIdx, AvailR); 
+	//	fprintf(stderr, "Checking BlockedQ P%d Blocked: %d Request idx: %d AvailRes: %d\n", i, blockedQ[i], rIdx, AvailR); 
 		
-		//if( blockedQ[i] == 1 && sysTimePtr->pcbTable[i].wake_Up <= localT ){
 		if(blockedQ[i] == 1 && (sysTimePtr->pcbTable[i].requested[rIdx] <= sysTimePtr->SysR.availableResources[rIdx])){
 		
 			fprintf(stderr, "OSS: Time: %s PID: %d\t|||| Removed From Blocked Queue\n", getSysTime(), i);
@@ -941,15 +929,11 @@ static void checkBlockedQ(){
 
 static void terminateProc(){
 
-	//while(deadlock(sysTimePtr, concProc) == true){
 
 	int i;
 	int j; 
 	int status; 
-//	int mID = CPU_Node->fakePID+1; 
 	
-	pid_t lpid; 
-
 	fprintf(stderr, "TerminateProc\n"); 
 
 	for(i = 0; i < procMax; ++i){
@@ -967,9 +951,6 @@ static void terminateProc(){
 		
 			fprintf(stderr, "TerminateProc P%d\n", i); 
 			
-			//pid_t lpid = getpid(sysTimePtr->pcbTable[i]);
-			lpid = sysTimePtr->pcbTable[i].pid;
-
 			for(j = 0; j < maxResources; ++j){
 
 				if(sysTimePtr->SysR.sharedResources[j] != 1){
@@ -983,12 +964,10 @@ static void terminateProc(){
 			printArrHead(); 
 			printArr(sysTimePtr->SysR.availableResources, "Available"); 
 			fmt(sysTimePtr->pcbTable[i].allocated, "P%d", i); 
-
 			
 			bufS.mtype = i+1; 
 			strcpy(bufS.mtext, "terminate"); 
 		
-			//strcpy(bufS.mtext, "Run"); 
 
 			if((msgsnd(shmidMsg, &bufS, sizeof(bufS.mtext), 0)) == -1 ){
 
@@ -999,25 +978,11 @@ static void terminateProc(){
 
 			fprintf(stderr, "Post EXIT\n"); 
 
-			//Wait for message from User to simulate end CPU 
-		//	msgrcv(shmidMsg2, &bufR, sizeof(bufR.mtext), i+1, 0);
-
-		//	fprintf(stderr, "Post MsgRcv\n"); 
-			
-			//kill(lpid, SIGKILL); 
-			//waitpid(lpid, &status, 0); 
 			blockedQ[i] = 0; 
 			unsetBitVectorVal(i); 
+			active[i] = 0; 
 			wait(NULL); 
 			--concProc; 
-			
-		//	pid_t user_id = waitpid(-1, &status, WNOHANG); 
-
-		//	if(user_id > 0 ){
- 			
-				//fprintf(stderr,"waitPid user_id: %d\n", user_id); 
-		//		--concProc;
-		//	}
 		}
 	}
 	
@@ -1036,12 +1001,8 @@ static void terminateProc(){
 			return; 
 		}
 
-
 		int idx = CPU_Node->fakePID; 
 			
-		//pid_t lpid = getpid(sysTimePtr->pcbTable[i]);
-		lpid = sysTimePtr->pcbTable[idx].pid;
- 	
 		for(j = 0; j < maxResources; ++j){
 
 			sysTimePtr->SysR.availableResources[j] += sysTimePtr->pcbTable[idx].allocated[j]; 
@@ -1056,8 +1017,6 @@ static void terminateProc(){
 		bufS.mtype = idx+1; 
 		strcpy(bufS.mtext, "terminate"); 
 	
-		//strcpy(bufS.mtext, "Run"); 
-
 		if((msgsnd(shmidMsg, &bufS, sizeof(bufS.mtext), IPC_NOWAIT)) == -1 ){
 
 			fprintf(stderr, "OSS: FAILED::: mID: %d\n", idx+1);  
@@ -1068,21 +1027,10 @@ static void terminateProc(){
 		//Wait for message from User to simulate end CPU 
 		msgrcv(shmidMsg2, &bufR, sizeof(bufR.mtext), idx+1, IPC_NOWAIT);
 		
-		//kill(lpid, SIGKILL); 
-		//waitpid(lpid, &status, 0); 
-		unsetBitVectorVal(idx); 
-		//blockedQ[idx] = 0; 
+		unsetBitVectorVal(idx);
+		active[idx] = 0; 
 		wait(NULL);
 		--concProc; 
-	//	int status; 
-		
-	//	pid_t user_id = waitpid(-1, &status, WNOHANG); 
-
-	//	if(user_id > 0 ){
- 			
-			//fprintf(stderr,"waitPid user_id: %d\n", user_id); 
-	//		--concProc;
-	//	}
 	}
 }
 

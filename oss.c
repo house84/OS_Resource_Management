@@ -79,6 +79,12 @@ int main(int argc, char * argv[]){
 	sysTimePtr->stats.waited_Time = 0; 
 	sysTimePtr->stats.blocked_Time = 0; 
 	sysTimePtr->stats.idle_Time = 0; 
+	sysTimePtr->stats.numDL = 0; 
+	sysTimePtr->stats.numReqI = 0; 
+	sysTimePtr->stats.numReqW = 0; 
+	sysTimePtr->stats.terminatedDL = 0; 
+	sysTimePtr->stats.terminatedN = 0; 
+	sysTimePtr->stats.deadlockCond = 0; 
 
 	//Initialize CPU Node
 	CPU_Node = (struct p_Node*)malloc(sizeof(struct p_Node)); 
@@ -630,27 +636,52 @@ static void closeLogfile(){
 //Display Stats/Print Stats
 static void displayStats(){
 	
-	int total  = totalProc; 
+	int total  = totalProc;
+	float avgTermPDL, avgPerDL; 
+	
+	if(sysTimePtr->stats.terminatedDL > 0){
 
+		avgTermPDL = ((float) sysTimePtr->stats.deadlockCond/sysTimePtr->stats.terminatedDL)*100;
+	}
+	else { avgTermPDL = 0.00; }
+
+	if(sysTimePtr->stats.deadlockCond > 0){
+
+		avgPerDL = (float)sysTimePtr->stats.terminatedDL/sysTimePtr->stats.deadlockCond; 
+	}
+	else { avgPerDL = 654; }
+
+	int normalT = sysTimePtr->stats.terminatedN - sysTimePtr->stats.terminatedDL; 
+	
 	//Print to Terminal
-	fprintf(stderr, "\n\n//////////////// PROGRAM REPORT ////////////////\n"); 
+	fprintf(stderr, "\n\n///////////////////// PROGRAM REPORT /////////////////////\n"); 
+	fprintf(stderr, "\n                 ---SCHEDULING STATS---\n"); 
 	fprintf(stderr, "System Time: %f\n", getTime()); 
 	fprintf(stderr, "Average Process CPU Time: %f\n", sysTimePtr->stats.cpu_Time/total); 
 	fprintf(stderr, "Average Process System Time: %f\n", sysTimePtr->stats.system_Time/total); 
-//	fprintf(stderr, "Average Process Wait Time: %f\n", (sysTimePtr->stats.waited_Time/total)); 
 	fprintf(stderr, "Average Process Blocked Time: %f\n", sysTimePtr->stats.blocked_Time/total); 
 	fprintf(stderr, "CPU Idle Time: %f\n", (getTime() - sysTimePtr->stats.cpu_Time)); 
-	fprintf(stderr, "//////////////// |||||||||||||| ////////////////\n"); 
+	fprintf(stderr, "\n                 ---RESOURCE STATS---\n"); 
+	fprintf(stderr, "Requests Granted Immediately: %d\n", sysTimePtr->stats.numReqI); 
+	fprintf(stderr, "Requests Granted After Waiting: %d\n", sysTimePtr->stats.numReqW); 
+	fprintf(stderr, "Number of Normally Terminated Processes: %d\n", sysTimePtr->stats.terminatedN); 
+	fprintf(stderr, "Number of Deadlock Terminated Processes: %d\n", sysTimePtr->stats.terminatedDL); 
+	fprintf(stderr, "Number of time Deadlock Detection Algorithm Ran: %d\n", sysTimePtr->stats.numDL);
+	fprintf(stderr, "Number of Deadlock Conditions Detected: %d\n", sysTimePtr->stats.deadlockCond); 
+	fprintf(stderr, "Average Number of Prcesses Terminiated per Deadlock: %3.0f\n", avgPerDL); 
+	fprintf(stderr, "Percent of Processes Terminated per Deadlock on Avg: %3.2f%\n\n", avgTermPDL); 
+	fprintf(stderr, "///////////////////// |||||||||||||| /////////////////////\n"); 
 	
 	//Print to logs
-	fprintf(logfilePtr, "\n\n//////////////// PROGRAM REPORT ////////////////\n"); 
+	fprintf(logfilePtr, "\n\n///////////////////// PROGRAM REPORT /////////////////////\n"); 
+	fprintf(logfilePtr, "\n                 ---SCHEDULING STATS---\n"); 
 	fprintf(logfilePtr, "System Time: %f\n", getTime()); 
 	fprintf(logfilePtr, "Average Process CPU Time: %f\n", sysTimePtr->stats.cpu_Time/total); 
 	fprintf(logfilePtr, "Average Process System Time: %f\n", sysTimePtr->stats.system_Time/total); 
-//	fprintf(logfilePtr, "Average Process Wait Time: %f\n", (sysTimePtr->stats.waited_Time/total)); 
 	fprintf(logfilePtr, "Average Process Blocked Time: %f\n", sysTimePtr->stats.blocked_Time/total); 
 	fprintf(logfilePtr, "CPU Idle Time: %f\n", (getTime() - sysTimePtr->stats.cpu_Time)); 
-	fprintf(logfilePtr, "//////////////// |||||||||||||| ////////////////\n"); 
+	fprintf(logfilePtr, "\n                 ---RESOURCE STATS---\n"); 
+	fprintf(logfilePtr, "///////////////////// |||||||||||||| /////////////////////\n"); 
 }	
 
 
@@ -823,6 +854,8 @@ static void allocateCPU(){
 		unsetBitVectorVal(idx); 
 
 		active[idx] = 0; 
+
+		++sysTimePtr->stats.terminatedN; 
 		
 		//Print Update for Ready
 	//	fprintf(stderr, "OSS: Time: %s PID: %d\t|||| Terminated\n", getSysTime(), idx); 
@@ -877,11 +910,14 @@ static void requesting(int idx){
 		fprintf(stderr, "Allocating P%d Resource\n"); 
 		allocate(idx, sysTimePtr); 
 		enqueue(idx); 
+		++sysTimePtr->stats.numReqI; 
+		
 		return; 
 	}
 	
 	fprintf(stderr, "P%d Sent to Blocked Queue\n", idx); 
 	blockedQ[idx] = 1; 
+	++sysTimePtr->stats.numReqW; 
 }
 
 
@@ -902,13 +938,14 @@ static void initBlockedQ(){
 //Check for Dead Lock Condition
 static void checkDeadLock(){
 
-	//Add to Log
-	//fprintf(stderr, "Checking for Deadlock Condition\n"); 
-	
+	++sysTimePtr->stats.numDL; 
+
 	if( deadlock(sysTimePtr, concProc) == true){
 
 		//Add to Log
 		fprintf(stderr, "Deadlock Detected\n"); 
+
+		++sysTimePtr->stats.deadlockCond; 
 		
 		terminateProc(); 
 	}
@@ -986,6 +1023,7 @@ static void terminateProc(){
 			active[i] = 0; 
 			wait(NULL); 
 			--concProc; 
+			++sysTimePtr->stats.terminatedDL; 
 		}
 	}
 	
@@ -1029,6 +1067,7 @@ static void terminateProc(){
 		active[idx] = 0; 
 		wait(NULL);
 		--concProc; 
+		++sysTimePtr->stats.terminatedDL; 
 	}
 }
 

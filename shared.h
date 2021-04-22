@@ -45,13 +45,24 @@ struct PCB{
 //Hold Stats 
 struct STAT{
 
+	//Scheduling Stats
 	float totalProc; 
 	float cpu_Time; 
 	float system_Time; 
 	float waited_Time;
 	float blocked_Time; 
 	float idle_Time;
-	float end_Time; 
+	float end_Time;
+
+	//Resource Management Stats
+	int numDL;                  //Number of Deadlock Detections Run
+	int numReqI;                //Number of Requests Approved Immediately
+	int numReqW;                //Number of Requests But on the Wait Q
+	int terminatedDL;         //Number of Processes Terminated from Deadlock
+	int terminatedN;            //Number of Normal terminated Processes 
+	int deadlockCond;         //Number of Deadlock conditions requiring termination
+
+
 }; 
 
 struct msgBuf{

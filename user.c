@@ -105,7 +105,7 @@ void initLocalPCB(int idx, pid_t proc_id){
 			if(sysTimePtr->SysR.availableResources[i] > 0){
 
 				//Get 1/2 value of a random int between Sys Avail Resources and 0
-				r = (getRand(0,sysTimePtr->SysR.availableResources[i])/2); 
+				r = (getRand(0,sysTimePtr->SysR.availableResources[i])); ///2); 
 				
 				//If r greater than user max set to the user max
 				if( r > localMaximum[i] ) {	r = localMaximum[i]; }
@@ -270,8 +270,6 @@ void requested(int idx){
 	}
 	
 	//add request to requested resource array
-	sysTimePtr->pcbTable[idx].requested[locIDX] = 1; //sysTimePtr->pcbTable[idx].maximum[r] - sysTimePtr->pcbTable[idx].allocated[r];
-
 	sysTimePtr->pcbTable[idx].requestIDX = locIDX; 
 	
 	//Print Request
@@ -437,7 +435,6 @@ void printStats(int idx){
 	fprintf(stderr, "Total Start Time (seconds): %f\n", sysTimePtr->pcbTable[idx].time_Started); 
 	fprintf(stderr, "Total System Time (seconds): %f\n", sysTimePtr->pcbTable[idx].system_Time); 
 	fprintf(stderr, "Total CPU Time (seconds): %f\n", sysTimePtr->pcbTable[idx].cpu_Time); 
-//	fprintf(stderr, "Total Waited Time (seconds): %f\n", sysTimePtr->pcbTable[idx].waited_Time); 
 	fprintf(stderr, "Total blocked Time (seconds): %f\n", sysTimePtr->pcbTable[idx].blocked_Time); 
 	fprintf(stderr, "//////////// |||||||||||||||||| ////////////\n\n");
 }

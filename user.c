@@ -81,7 +81,7 @@ int main(int argc, char * argv[]){
 // ============ User Functions Begin ============= //
 
 
-//Initiate local PCB P5
+//Initiate local PCB
 void initLocalPCB(int idx, pid_t proc_id){
 
 	int i; 
@@ -167,7 +167,6 @@ void sendMessage(int msgid, int mID){
 
 	if( getTime() - sysTimePtr->pcbTable[idx].time_Started < 1 ){ 
 		
-		fprintf(stderr, "Under 1 Second\n"); 
 		messageT = request; }
 
 	if(messageT != release){
@@ -415,7 +414,7 @@ void updateGlobal(int idx){
 
 	sysTimePtr->stats.cpu_Time += sysTimePtr->pcbTable[idx].cpu_Time; 
 	sysTimePtr->stats.system_Time += sysTimePtr->pcbTable[idx].system_Time; 
-	sysTimePtr->stats.waited_Time += sysTimePtr->pcbTable[idx].waited_Time; 
+	//sysTimePtr->stats.waited_Time += sysTimePtr->pcbTable[idx].waited_Time; 
 	sysTimePtr->stats.blocked_Time += sysTimePtr->pcbTable[idx].blocked_Time; 
 }
 
@@ -438,7 +437,7 @@ void printStats(int idx){
 	fprintf(stderr, "Total Start Time (seconds): %f\n", sysTimePtr->pcbTable[idx].time_Started); 
 	fprintf(stderr, "Total System Time (seconds): %f\n", sysTimePtr->pcbTable[idx].system_Time); 
 	fprintf(stderr, "Total CPU Time (seconds): %f\n", sysTimePtr->pcbTable[idx].cpu_Time); 
-	fprintf(stderr, "Total Waited Time (seconds): %f\n", sysTimePtr->pcbTable[idx].waited_Time); 
+//	fprintf(stderr, "Total Waited Time (seconds): %f\n", sysTimePtr->pcbTable[idx].waited_Time); 
 	fprintf(stderr, "Total blocked Time (seconds): %f\n", sysTimePtr->pcbTable[idx].blocked_Time); 
 	fprintf(stderr, "//////////// |||||||||||||||||| ////////////\n\n");
 }

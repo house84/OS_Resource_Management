@@ -637,7 +637,7 @@ static void displayStats(){
 	fprintf(stderr, "System Time: %f\n", getTime()); 
 	fprintf(stderr, "Average Process CPU Time: %f\n", sysTimePtr->stats.cpu_Time/total); 
 	fprintf(stderr, "Average Process System Time: %f\n", sysTimePtr->stats.system_Time/total); 
-	fprintf(stderr, "Average Process Wait Time: %f\n", (sysTimePtr->stats.waited_Time/total)); 
+//	fprintf(stderr, "Average Process Wait Time: %f\n", (sysTimePtr->stats.waited_Time/total)); 
 	fprintf(stderr, "Average Process Blocked Time: %f\n", sysTimePtr->stats.blocked_Time/total); 
 	fprintf(stderr, "CPU Idle Time: %f\n", (getTime() - sysTimePtr->stats.cpu_Time)); 
 	fprintf(stderr, "//////////////// |||||||||||||| ////////////////\n"); 
@@ -647,7 +647,7 @@ static void displayStats(){
 	fprintf(logfilePtr, "System Time: %f\n", getTime()); 
 	fprintf(logfilePtr, "Average Process CPU Time: %f\n", sysTimePtr->stats.cpu_Time/total); 
 	fprintf(logfilePtr, "Average Process System Time: %f\n", sysTimePtr->stats.system_Time/total); 
-	fprintf(logfilePtr, "Average Process Wait Time: %f\n", (sysTimePtr->stats.waited_Time/total)); 
+//	fprintf(logfilePtr, "Average Process Wait Time: %f\n", (sysTimePtr->stats.waited_Time/total)); 
 	fprintf(logfilePtr, "Average Process Blocked Time: %f\n", sysTimePtr->stats.blocked_Time/total); 
 	fprintf(logfilePtr, "CPU Idle Time: %f\n", (getTime() - sysTimePtr->stats.cpu_Time)); 
 	fprintf(logfilePtr, "//////////////// |||||||||||||| ////////////////\n"); 

@@ -87,6 +87,7 @@ int main(int argc, char * argv[]){
 
 	int i = 0; 
 	int index; 
+	int deadLockTimer = 0; 
 	int iterTime; 
 	float newUser = getTime() + newUserTime(); 
 	concProc = 0; 
@@ -126,6 +127,16 @@ int main(int argc, char * argv[]){
 
 		//Check Blocked Processes
 		checkBlockedQ(); 
+
+		//Check for Deadlock
+		if( sysTimePtr->seconds > deadLockTimer){ 
+			
+			//Send to Log
+			fprintf(stderr, "Checking for Deadlock\n"); 
+			checkDeadLock();
+			deadLockTimer = sysTimePtr->seconds; 
+		} 
+
 
 
 		//Spawn Child Process //Set to 20 for testing
@@ -178,9 +189,6 @@ int main(int argc, char * argv[]){
 			break; 
 		}
 
-		//Testing
-		if(i == 150){ break; }
-		++i; 
 
 		//Print for verbose
 		verbose = true; 
@@ -191,14 +199,18 @@ int main(int argc, char * argv[]){
 			printArr(sysTimePtr->SysR.availableResources, "Available"); 
 			printArr(sysTimePtr->SysR.sharedResources, "Shared"); 
 			fprintf(stderr, "\n"); 
-			fprintf(stderr, "Process Resources Allocated (A) and Maximum (M)\n"); 
-			printArrHead(); 
 			
 			int j; 
 			for(j=0; j < 18; ++j){
 
 				if(active[j] == 1 ){
 
+					if(j == 0){
+
+						fprintf(stderr, "Process Resources Allocated (A) and Maximum (M)\n"); 
+						printArrHead(); 
+					}
+					
 					fmt(sysTimePtr->pcbTable[j].allocated, "(A) P%d", j); 
 					fmt(sysTimePtr->pcbTable[j].maximum, "(M) P%d", j); 	
 			 	}
@@ -887,15 +899,26 @@ static void initBlockedQ(){
 }
 
 
-//Check Blocked Que for Ready Proc
-static void checkBlockedQ(){
+//Check for Dead Lock Condition
+static void checkDeadLock(){
 
-	//Check deadlock
+	//Add to Log
+	//fprintf(stderr, "Checking for Deadlock Condition\n"); 
+	
 	if( deadlock(sysTimePtr, concProc) == true){
 
-//		fprintf(stderr, "Deadlock Detected\n"); 
+		//Add to Log
+		fprintf(stderr, "Deadlock Detected\n"); 
+		
 		terminateProc(); 
 	}
+}
+
+
+
+
+//Check Blocked Que for Ready Proc
+static void checkBlockedQ(){
 
 	int i;
 	float localT = getTime(); 
@@ -908,7 +931,6 @@ static void checkBlockedQ(){
 		rIdx = sysTimePtr->pcbTable[i].requestIDX;
 		AvailR = sysTimePtr->SysR.availableResources[rIdx]; 
 		
-	//	fprintf(stderr, "Checking BlockedQ P%d Blocked: %d Request idx: %d AvailRes: %d\n", i, blockedQ[i], rIdx, AvailR); 
 		
 		if(blockedQ[i] == 1 && (sysTimePtr->pcbTable[i].requested[rIdx] <= sysTimePtr->SysR.availableResources[rIdx])){
 		
@@ -933,8 +955,6 @@ static void terminateProc(){
 
 	for(i = 0; i < procMax; ++i){
 		
-		//fprintf(stderr, "Terminate P%d\n", i); 
-		
 		if( deadlock(sysTimePtr, concProc) == false){
 
 			fprintf(stderr, "Deadlock Cleared\n"); 
@@ -944,7 +964,7 @@ static void terminateProc(){
 		
 		if(blockedQ[i] == 1){
 		
-			fprintf(stderr,"Killing P%d and freeing Resouces\n", i); 
+			fprintf(stderr,"Killing P%d and Freeing Resouces\n", i); 
 
 			printArrHead(); 
 			printArr(sysTimePtr->SysR.availableResources, "Sys-Available"); 
@@ -960,8 +980,6 @@ static void terminateProc(){
 				perror("oss: ERROR: Failed to Send Msg to User msgsnd() "); 
 					exit(EXIT_FAILURE); 
 			}
-
-			fprintf(stderr, "Post EXIT\n"); 
 
 			blockedQ[i] = 0; 
 			unsetBitVectorVal(i); 

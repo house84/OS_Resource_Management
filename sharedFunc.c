@@ -138,8 +138,6 @@ void allocate(int idx, struct system_Time *st){
 	//Check if resource is shared
 	if(st->SysR.sharedResources[rIdx] == 0){
 				
-		fprintf(stderr, "Non - Shared RESOURCE\n"); 
-
 		//Decrement System Resources
 		st->SysR.availableResources[rIdx] = (st->SysR.availableResources[rIdx] - 1); 
 	}
@@ -204,8 +202,7 @@ void logPrint(bool printBool, int arr[], char* fmt, ...){
 }
 
 
-//void allocate(int idx, struct system_Time *st){
-//bool req_lt_avail( const int * req, const int * avail, const int pnum, const int num_res ){
+//Check if resources are requested are avaiable
 static bool req_lt_avail( struct system_Time *st, const int idx){
 
 	int i; 
@@ -225,8 +222,6 @@ static bool req_lt_avail( struct system_Time *st, const int idx){
 //Number of current processes
 bool deadlock(struct system_Time *st, const int n){
 
-	fprintf(stderr, "Running Deadlock Detection Algorithm\n"); 
-	
 	int work[maxResources]; 
 	bool finish[n];                   //n = number of processes
 
@@ -270,7 +265,3 @@ bool deadlock(struct system_Time *st, const int n){
 	
 	return ( p != n );
 }
-
-
-
-

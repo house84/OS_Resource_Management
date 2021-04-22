@@ -65,16 +65,12 @@ int main(int argc, char * argv[]){
 
 		if( cmp == 0 ){
 		
-			fprintf(stderr, "TERMINATE: Message: %s\n", bufS.mtext); 
-
 			releaseAll(idx); 
 			sysTimePtr->pcbTable[idx].system_Time = getTime()-sysTimePtr->pcbTable[idx].time_Started;
 			run = false; 
 		
 			//Display Process Stats	
 			updateGlobal(idx); 
-			
-			fprintf(stderr, "EXITING P%d\n", idx); 
 			
 			break; 
 		}
@@ -347,48 +343,17 @@ void releaseAll(int idx){
 	}
 	
 	//Print
-	fprintf(stderr, "Releasing All Resources P%d\n", idx); 
+	fprintf(stderr, "All Resources for P%d have been released\n", idx); 
 	
 	printArrHead(); 
-	fmt(sysTimePtr->SysR.availableResources, "Available");
-	fmt(sysTimePtr->SysR.sharedResources, "Shared");
+	fmt(sysTimePtr->SysR.resources, "Sys-Resources");
+	fmt(sysTimePtr->SysR.availableResources, "Sys-Available");
+	fmt(sysTimePtr->SysR.sharedResources, "Sys-Shared");
 	
 	printArrHead(); 
-	fmt(sysTimePtr->pcbTable[idx].allocated, "P%d", idx); 
+	fmt(sysTimePtr->pcbTable[idx].allocated, "P%d Allocated", idx); 
+	fprintf(stderr, "\n"); 
 }
-
-
-
-//Allocate Approved Resources
-//void allocate(int idx){
-
-//	int i; 
-//	int t; 
-//	for(i = 0; i < maxResources; ++i){
-
-//		if(i > 0){
-
-//			t = sysTimePtr->pcbTable[idx].requested[i]; 
-//			sysTimePtr->pcbTable[idx].allocated[i] += t; 
-			
-//			if(sysTimePtr->SysR.sharedResources[i] == 0){
-
-//				sysTimePtr->SysR.availableResources[i] = sysTimePtr->SysR.availableResources[i] - t; 
-//			}
-//			
-//			requestBool = false;
-
-//			printArrHead(); 
-//			printArr(sysTimePtr->SysR.availableResources, "Available"); 
-//
-//			printArrHead(); 
-//			printArr(sysTimePtr->pcbTable[idx].allocated, "P%d", idx); 
-
-//			return; 
-//		}
-//	}
-//}
-
 
 
 //Get time 

@@ -29,6 +29,7 @@ struct PCB{
 	pid_t pid;                 //Process Id
 	int msgID;                 //Message ID
   	int index;                 //Index
+	int requestIDX;            //Requesting Index
 	
 	int maximum[maxResources];  
 	int allocated[maxResources];

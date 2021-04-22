@@ -127,30 +127,32 @@ void allocate(int idx, struct system_Time *st){
 
 	int i; 
 	int t; 
+	int rIdx; 
 
-	for(i = 0; i<maxResources; ++i){
+	//for(i = 0; i<maxResources; ++i){
 
-		if(st->pcbTable[idx].requested[i] > 0){
-
+	//	if(st->pcbTable[idx].requested[i] > 0){
+	
+	rIdx = st->pcbTable[idx].requestIDX; 
 			
-			fprintf(stderr, "Allocating RESOURCE -> P%d:R%d\n", idx, i); 
+			fprintf(stderr, "Allocating RESOURCE -> P%d:R%d\n", idx, rIdx); 
 			
-			t = st->pcbTable[idx].requested[i];
-			st->pcbTable[idx].allocated[i] += t; 
+			//t = st->pcbTable[idx].requested[i];
+			st->pcbTable[idx].allocated[rIdx] += 1; 
 
 			//Check if resource is shared
-			if(st->SysR.sharedResources[i] == 0){
+			if(st->SysR.sharedResources[rIdx] == 0){
 				
 				fprintf(stderr, "Non - Shared RESOURCE\n"); 
 
 				//Decrement System Resources
-				st->SysR.availableResources[i] = st->SysR.availableResources[i]-t; 
+				st->SysR.availableResources[rIdx] = (st->SysR.availableResources[rIdx] - 1); 
 			}
 
 			fprintf(stderr, "Shared RESOURCE\n"); 
 			
 			//Add Resource to User 
-			st->pcbTable[idx].allocated[i] += t; 
+			st->pcbTable[idx].allocated[rIdx] += 1; 
 
 			//Turn Request Flag false
 			st->pcbTable[idx].requestBool = false; 
@@ -158,7 +160,8 @@ void allocate(int idx, struct system_Time *st){
 			st->pcbTable[idx].allocateBool = true; 
 
 			//Set Corresponding Request to 0
-			st->pcbTable[idx].requested[i] = 0; 
+			st->pcbTable[idx].requested[rIdx] = 0; 
+			st->pcbTable[idx].requestIDX = 0; 
 			
 			printArrHead(); 
 			//printArr(st->SysR.availableResources, "Available"); 
@@ -166,12 +169,13 @@ void allocate(int idx, struct system_Time *st){
 			fmt(st->SysR.sharedResources, "Shared"); 
 			printArrHead(); 
 			//printArr(st->pcbTable[idx].allocated, "P%d",idx); 
-			fmt(st->pcbTable[idx].allocated, "P%d", idx); 
+			fmt(st->pcbTable[idx].allocated, "P%d Avail", idx); 
+			fmt(st->pcbTable[idx].maximum, "P%d Max", idx); 
+
+		//	return; 
 			
-			return; 
-			
-		}
-	}
+		//}
+	//}
 }
 
 
@@ -221,9 +225,12 @@ static bool req_lt_avail( struct system_Time *st, const int idx){
 
 		if (st->pcbTable[idx].requested[i] > st->SysR.availableResources[i]){
 
+			fprintf(stderr, "REQ: %d  Avail: %d\n", st->pcbTable[idx].requested[i], st->SysR.availableResources[i]); 
 			break; 
 		}
 	}
+
+	fprintf(stderr, "i:%d\n", i); 
 
 	return (i == maxResources);
 }
@@ -262,7 +269,7 @@ bool deadlock(struct system_Time *st, const int n){
 
 				work[i] += st->pcbTable[p].allocated[i]; 
 			}
-
+			
 			p = -1; 
 		}
 	}
@@ -274,6 +281,8 @@ bool deadlock(struct system_Time *st, const int n){
 			break; 
 		}
 	}
+	
+	fprintf(stderr, "P = %d n = %d\n", p, n); 
 
 	return ( p != n );
 }

@@ -92,7 +92,7 @@ int main(int argc, char * argv[]){
 	//=========== Add Program Logic =============
 	
 
-	int i; 
+	int i = 0; 
 	int index; 
 	int iterTime; 
 	float newUser = getTime() + newUserTime(); 
@@ -127,10 +127,12 @@ int main(int argc, char * argv[]){
 		iterTime = rand()%10000001 + 1000000000; 
 		incrementSysTime(iterTime); 
 
+		fprintf(stderr, "Concurrent Processes: %d Total Processes: %d\n", concProc, totalProc); 
 		checkBlockedQ(); 
-		
+
+
 		//Spawn Child Process //Set to 20 for testing
-		if( concProc < 17 && totalProc < 40 && stopProdTimer == false && (newUser < getTime())){
+		if( concProc < procMax && totalProc < 40 && stopProdTimer == false && (newUser < getTime())){
 
 			index = getBitVectorPos(); 
 			if(index != -1) { 
@@ -172,10 +174,35 @@ int main(int argc, char * argv[]){
 		}
 
 		//Break Loop clean up memory
-		if((totalProc == 40 || stopProdTimer == true) && concProc == 0){
+		if(totalProc == 40 && concProc == 0){
 		
 			sysTimePtr->stats.end_Time = getTime(); 
 			break; 
+		}
+
+		//Testing
+		if(i == 150){ break; }
+		++i; 
+
+		//Print for verbose
+		verbose = true; 
+		if(verbose == true){
+
+			printArrHead(); 
+			printArr(sysTimePtr->SysR.resources, "Resources");
+			printArr(sysTimePtr->SysR.availableResources, "Available"); 
+			printArr(sysTimePtr->SysR.sharedResources, "Shared"); 
+			fprintf(stderr, "\n"); 
+			fprintf(stderr, "Process Resources Allocated\n"); 
+			printArrHead(); 
+			
+			int j; 
+			for(j=0; j < concProc; ++j){
+
+				fmt(sysTimePtr->pcbTable[j].allocated, "P%d", j); 
+			}
+			
+			fprintf(stderr, "\n"); 
 		}
 
 	}
@@ -622,7 +649,8 @@ struct Queue * initQueue(){
 	que->head = NULL; 
 	que->tail = NULL; 
 
-	que->maxSize = procMax; 
+	//que->maxSize = procMax; 
+	que->maxSize = 18; 
 	que->currSize = 0;  
 
 	return que; 
@@ -718,11 +746,18 @@ const char * getSysTime(){
 static void allocateCPU(){
 
 	//TESTING
-//	printArrHead();
-//	printArr(sysTimePtr->SysR.sharedResources, "Shared"); 
+	printArrHead();
+	printArr(sysTimePtr->SysR.sharedResources, "Shared"); 
+	printArr(sysTimePtr->SysR.availableResources, "Available"); 
 
 	//Check for runnable Processes
-	if(GQue->currSize == 0){ return; }
+	if(GQue->currSize == 0){ 
+		
+		fprintf(stderr, "Run Queue Empty\n"); 
+
+		return; 
+		
+	}
 	
 	//Dequeue Process
 	CPU_Node = dequeue(); 
@@ -822,19 +857,33 @@ static void requesting(int idx){
 	//Check what is requested and if there is available resource to give
 
 	//if No resources add to blocked
-	bool DL = deadlock(sysTimePtr, concProc); 
-	fprintf(stderr, "Deadlock %d\n", DL); 
+//	bool DL = deadlock(sysTimePtr, concProc); 
+//	fprintf(stderr, "Deadlock %d\n", DL); 
 
-	if(DL == true){
+//	if(DL == true){
 
-		blockedQ[idx] = 1; 
-	}
+//		fprintf(stderr, "Deadklocked adding P%d to blocked Queue", idx); 
+//		blockedQ[idx] = 1; 
+//	}
 
-	else{
+//	else{
+	int rIDX = sysTimePtr->pcbTable[idx].requestIDX; 
 
+	if(sysTimePtr->SysR.availableResources[rIDX] > 0){
+
+		fprintf(stderr, "Allocating P%d Resource\n"); 
 		allocate(idx, sysTimePtr); 
+		enqueue(idx); 
+		return; 
 	}
+	
+	fprintf(stderr, "P%d Sent to Blocked Queue\n", idx); 
+	blockedQ[idx] = 1; 
 }
+
+
+//	}
+
 
 
 //Initialize BlockedQ
@@ -842,7 +891,7 @@ static void initBlockedQ(){
 
 	int i = 0; 
 
-	for(i = 0; i < 18; ++i){
+	for(i = 0; i < procMax; ++i){
 
 		blockedQ[i] = 0; 
 	}
@@ -858,18 +907,30 @@ static void checkBlockedQ(){
 
 		fprintf(stderr, "TERMINATE CheckBLockQ\n"); 
 		terminateProc(); 
-		return;
+	//	return;
 	}
 
 	int i;
 	float localT = getTime(); 
+	int rIdx; 
+	//int RVar; 
+	int AvailR; 
 
-	for(i = 0; i < 18; ++i){
+	for(i = 0; i < procMax; ++i){
+		
 
-		if( blockedQ[i] == 1 && sysTimePtr->pcbTable[i].wake_Up <= localT ){
-			
-		fprintf(stderr, "OSS: Time: %s PID: %d\t|||| Removed From Blocked Queue\n", getSysTime(), i);
-		fprintf(logfilePtr, "OSS: Time: %s PID: %d\t|||| Removed From Blocked Queue\n", getSysTime(), i);
+		rIdx = sysTimePtr->pcbTable[i].requestIDX;
+		//RVar = sysTimePtr->PcbTable[i].reque
+		AvailR = sysTimePtr->SysR.availableResources[rIdx]; 
+		
+		fprintf(stderr, "Checking BlockedQ P%d Blocked: %d Request idx: %d AvailRes: %d\n", i, blockedQ[i], rIdx, AvailR); 
+		
+		//if( blockedQ[i] == 1 && sysTimePtr->pcbTable[i].wake_Up <= localT ){
+		if(blockedQ[i] == 1 && (sysTimePtr->pcbTable[i].requested[rIdx] <= sysTimePtr->SysR.availableResources[rIdx])){
+		
+			fprintf(stderr, "OSS: Time: %s PID: %d\t|||| Removed From Blocked Queue\n", getSysTime(), i);
+			fprintf(logfilePtr, "OSS: Time: %s PID: %d\t|||| Removed From Blocked Queue\n", getSysTime(), i);			
+			allocate(i, sysTimePtr); 
 			enqueue(i);
 			blockedQ[i] = 0; 
 		}
@@ -891,7 +952,7 @@ static void terminateProc(){
 
 	fprintf(stderr, "TerminateProc\n"); 
 
-	for(i = 0; i < 18; ++i){
+	for(i = 0; i < procMax; ++i){
 		
 		fprintf(stderr, "TerminateProc %d\n", i); 
 		
@@ -939,23 +1000,24 @@ static void terminateProc(){
 			fprintf(stderr, "Post EXIT\n"); 
 
 			//Wait for message from User to simulate end CPU 
-			msgrcv(shmidMsg2, &bufR, sizeof(bufR.mtext), i+1, IPC_NOWAIT);
+		//	msgrcv(shmidMsg2, &bufR, sizeof(bufR.mtext), i+1, 0);
 
-			fprintf(stderr, "Post MsgRcv\n"); 
+		//	fprintf(stderr, "Post MsgRcv\n"); 
 			
 			//kill(lpid, SIGKILL); 
 			//waitpid(lpid, &status, 0); 
 			blockedQ[i] = 0; 
 			unsetBitVectorVal(i); 
-		//	--concProc; 
+			wait(NULL); 
+			--concProc; 
 			
-			pid_t user_id = waitpid(-1, &status, WNOHANG); 
+		//	pid_t user_id = waitpid(-1, &status, WNOHANG); 
 
-			if(user_id > 0 ){
+		//	if(user_id > 0 ){
  			
 				//fprintf(stderr,"waitPid user_id: %d\n", user_id); 
-				--concProc;
-			}
+		//		--concProc;
+		//	}
 		}
 	}
 	
@@ -1009,17 +1071,18 @@ static void terminateProc(){
 		//kill(lpid, SIGKILL); 
 		//waitpid(lpid, &status, 0); 
 		unsetBitVectorVal(idx); 
-		blockedQ[idx] = 0; 
-	//	--concProc; 
+		//blockedQ[idx] = 0; 
+		wait(NULL);
+		--concProc; 
 	//	int status; 
 		
-		pid_t user_id = waitpid(-1, &status, WNOHANG); 
+	//	pid_t user_id = waitpid(-1, &status, WNOHANG); 
 
-		if(user_id > 0 ){
+	//	if(user_id > 0 ){
  			
 			//fprintf(stderr,"waitPid user_id: %d\n", user_id); 
-			--concProc;
-		}
+	//		--concProc;
+	//	}
 	}
 }
 

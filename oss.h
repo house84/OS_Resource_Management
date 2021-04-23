@@ -78,9 +78,11 @@ size_t memSize;                        //memSize for getshm()
 struct PCB cpu;                        //PCB 
 bool spawnFlag;                        //Varialbe to signal forking process
 FILE *logfilePtr;                      //Logfile Pointer
+FILE *ResFilePtr;                      //Logfile for Resource Managment
 key_t keySysTime;                      //Shm Key
 bool stopProdTimer;                    //Produce or not Bool
-char logfile[100];                     //Logfile Name
+char logfile[50];                      //Logfile Name
+char logfile2[50];                     //Scheduling Logfile
 struct Queue *GQue;                    //Variable for Queue
 pid_t pidArray[100];                   //Variable for Process PID's
 int blockedQ[procMax];                 //Hold Index of Blocked Users

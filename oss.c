@@ -21,7 +21,10 @@ int main(int argc, char * argv[]){
 
 	//Set Initial Parameters
 	memset(logfile, '\0', sizeof(logfile)); 
-	strcpy(logfile, "logfile"); 
+	strcpy(logfile, "logfile_Sch"); 
+	memset(logfile2, '\0', sizeof(logfile2)); 
+	strcpy(logfile2, "logfile_P5"); 
+	
 	totalProc = 0;  
 	srand(time(NULL)); 
 
@@ -607,9 +610,18 @@ static void openLogfile(){
 
 	if( logfilePtr == NULL ){
 
-		perror("oss: ERROR: Failed to Open logfile "); 
+		perror("oss: ERROR: Failed to Open Scheduler_Logfile "); 
 		exit(EXIT_FAILURE); 
 	}
+	
+	ResFilePtr = fopen(logfile2, "w"); 
+
+	if( logfilePtr == NULL ){
+
+		perror("oss: ERROR: Failed to Open P5_Logfile "); 
+		exit(EXIT_FAILURE); 
+	}
+
 
 	time(&t); 
 
@@ -617,6 +629,9 @@ static void openLogfile(){
 	fprintf(logfilePtr, "Time: %s", ctime(&t));
 	fprintf(logfilePtr, "//=============================================================//\n"); 
 
+	fprintf(ResFilePtr, "\n//========================= Log Opened ========================//\n"); 
+	fprintf(ResFilePtr, "Time: %s", ctime(&t));
+	fprintf(ResFilePtr, "//=============================================================//\n"); 
 }
 
 
@@ -629,6 +644,10 @@ static void closeLogfile(){
 	fprintf(logfilePtr, "//=============================================================//\n\n"); 
 	fclose(logfilePtr); 
 
+	fprintf(ResFilePtr, "\n//========================= Log Closed ========================//\n"); 
+	fprintf(ResFilePtr, "Time: %s", ctime(&t)); 
+	fprintf(ResFilePtr, "//=============================================================//\n\n"); 
+	fclose(ResFilePtr); 
 
 }
 
@@ -641,15 +660,15 @@ static void displayStats(){
 	
 	if(sysTimePtr->stats.terminatedDL > 0){
 
-		avgTermPDL = ((float) sysTimePtr->stats.deadlockCond/sysTimePtr->stats.terminatedDL)*100;
+		avgTermPDL = ((float)sysTimePtr->stats.terminatedDL/sysTimePtr->stats.deadlockCond);
 	}
 	else { avgTermPDL = 0.00; }
 
 	if(sysTimePtr->stats.deadlockCond > 0){
 
-		avgPerDL = (float)sysTimePtr->stats.terminatedDL/sysTimePtr->stats.deadlockCond; 
+		avgPerDL = (sysTimePtr->stats.avgPercTerm/sysTimePtr->stats.deadlockCond); 
 	}
-	else { avgPerDL = 654; }
+	else { avgPerDL = 0.00; }
 
 	int normalT = sysTimePtr->stats.terminatedN - sysTimePtr->stats.terminatedDL; 
 	
@@ -668,8 +687,8 @@ static void displayStats(){
 	fprintf(stderr, "Number of Deadlock Terminated Processes: %d\n", sysTimePtr->stats.terminatedDL); 
 	fprintf(stderr, "Number of time Deadlock Detection Algorithm Ran: %d\n", sysTimePtr->stats.numDL);
 	fprintf(stderr, "Number of Deadlock Conditions Detected: %d\n", sysTimePtr->stats.deadlockCond); 
-	fprintf(stderr, "Average Number of Prcesses Terminiated per Deadlock: %3.0f\n", avgPerDL); 
-	fprintf(stderr, "Percent of Processes Terminated per Deadlock on Avg: %3.2f%\n\n", avgTermPDL); 
+	fprintf(stderr, "Average Number of Processes Terminated per Deadlock: %3.0f\n", avgTermPDL); 
+	fprintf(stderr, "Percent of Processes Terminated per Deadlock on Avg: %3.2f%\n\n", avgPerDL); 
 	fprintf(stderr, "///////////////////// |||||||||||||| /////////////////////\n"); 
 	
 	//Print to logs
@@ -687,8 +706,8 @@ static void displayStats(){
 	fprintf(logfilePtr, "Number of Deadlock Terminated Processes: %d\n", sysTimePtr->stats.terminatedDL); 
 	fprintf(logfilePtr, "Number of time Deadlock Detection Algorithm Ran: %d\n", sysTimePtr->stats.numDL);
 	fprintf(logfilePtr, "Number of Deadlock Conditions Detected: %d\n", sysTimePtr->stats.deadlockCond); 
-	fprintf(logfilePtr, "Average Number of Prcesses Terminiated per Deadlock: %3.0f\n", avgPerDL); 
-	fprintf(logfilePtr, "Percent of Processes Terminated per Deadlock on Avg: %3.2f%\n\n", avgTermPDL); 
+	fprintf(logfilePtr, "Average Number of Processes Terminated per Deadlock: %3.0f\n", avgTermPDL); 
+	fprintf(logfilePtr, "Percent of Processes Terminated per Deadlock on Avg: %3.2f%\n\n", avgPerDL); 
 	fprintf(logfilePtr, "///////////////////// |||||||||||||| /////////////////////\n"); 
 }	
 
@@ -994,7 +1013,9 @@ static void terminateProc(){
 
 
 	int i;
-	int j; 
+	int j;
+	float localCount = 0; 
+	int tProc = concProc; 
 	int status; 
 	
 
@@ -1004,6 +1025,8 @@ static void terminateProc(){
 
 			fprintf(stderr, "Deadlock Cleared\n"); 
 
+			sysTimePtr->stats.avgPercTerm = (localCount/concProc)*100; 
+			
 			return; 
 		}
 		
@@ -1031,7 +1054,8 @@ static void terminateProc(){
 			active[i] = 0; 
 			wait(NULL); 
 			--concProc; 
-			++sysTimePtr->stats.terminatedDL; 
+			++sysTimePtr->stats.terminatedDL;
+			++localCount; 
 		}
 	}
 	
@@ -1047,7 +1071,7 @@ static void terminateProc(){
 		if(CPU_Node == NULL){
 
 			fprintf(stderr,"Que Head Empty\n"); 
-			return; 
+			break;  
 		}
 
 		int idx = CPU_Node->fakePID; 
@@ -1076,7 +1100,14 @@ static void terminateProc(){
 		wait(NULL);
 		--concProc; 
 		++sysTimePtr->stats.terminatedDL; 
+		++localCount; 
 	}
+		
+	fprintf(stderr, "Deadlock Cleared\n"); 
+
+	sysTimePtr->stats.avgPercTerm = (localCount/concProc)*100; 
+			
+	return; 
 }
 
 

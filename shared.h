@@ -58,9 +58,10 @@ struct STAT{
 	int numDL;                  //Number of Deadlock Detections Run
 	int numReqI;                //Number of Requests Approved Immediately
 	int numReqW;                //Number of Requests But on the Wait Q
-	int terminatedDL;         //Number of Processes Terminated from Deadlock
+	int terminatedDL;           //Number of Processes Terminated from Deadlock
 	int terminatedN;            //Number of Normal terminated Processes 
-	int deadlockCond;         //Number of Deadlock conditions requiring termination
+	int deadlockCond;           //Number of Deadlock conditions requiring termination
+	float avgPercTerm;          //Sum of average termina
 
 
 }; 
@@ -94,7 +95,6 @@ struct system_Time{
 
 	int seconds;
 	int nanoSeconds;
-//	int active[18]; 
 	struct PCB pcbTable[18]; 
 	struct STAT stats; 
 	struct SysResources SysR; 

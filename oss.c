@@ -681,6 +681,14 @@ static void displayStats(){
 	fprintf(logfilePtr, "Average Process Blocked Time: %f\n", sysTimePtr->stats.blocked_Time/total); 
 	fprintf(logfilePtr, "CPU Idle Time: %f\n", (getTime() - sysTimePtr->stats.cpu_Time)); 
 	fprintf(logfilePtr, "\n                 ---RESOURCE STATS---\n"); 
+	fprintf(logfilePtr, "Requests Granted Immediately: %d\n", sysTimePtr->stats.numReqI); 
+	fprintf(logfilePtr, "Requests Granted After Waiting: %d\n", sysTimePtr->stats.numReqW); 
+	fprintf(logfilePtr, "Number of Normally Terminated Processes: %d\n", sysTimePtr->stats.terminatedN); 
+	fprintf(logfilePtr, "Number of Deadlock Terminated Processes: %d\n", sysTimePtr->stats.terminatedDL); 
+	fprintf(logfilePtr, "Number of time Deadlock Detection Algorithm Ran: %d\n", sysTimePtr->stats.numDL);
+	fprintf(logfilePtr, "Number of Deadlock Conditions Detected: %d\n", sysTimePtr->stats.deadlockCond); 
+	fprintf(logfilePtr, "Average Number of Prcesses Terminiated per Deadlock: %3.0f\n", avgPerDL); 
+	fprintf(logfilePtr, "Percent of Processes Terminated per Deadlock on Avg: %3.2f%\n\n", avgTermPDL); 
 	fprintf(logfilePtr, "///////////////////// |||||||||||||| /////////////////////\n"); 
 }	
 

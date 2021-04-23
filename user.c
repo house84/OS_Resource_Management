@@ -221,7 +221,7 @@ void sendMessage(int msgid, int mID){
 
 		//Display Process Stats	
 		updateGlobal(idx); 
-	 //	printStats(idx); 
+	 	//printStats(idx); 
 	}
 
 	if((msgsnd(msgid, &bufS, sizeof(bufS.mtext), 0)) == -1){
@@ -410,9 +410,15 @@ void initPCB(int idx){
 //Update Global Stats
 void updateGlobal(int idx){
 
+	float currTime = getTime(); 
+	float cpu = sysTimePtr->pcbTable[idx].cpu_Time; 
+	float start = sysTimePtr->pcbTable[idx].time_Started; 
+	float blocked = sysTimePtr->pcbTable[idx].blocked_Time; 
+	float wait = (currTime - ( start + cpu + blocked )); 
+	
 	sysTimePtr->stats.cpu_Time += sysTimePtr->pcbTable[idx].cpu_Time; 
 	sysTimePtr->stats.system_Time += sysTimePtr->pcbTable[idx].system_Time; 
-	//sysTimePtr->stats.waited_Time += sysTimePtr->pcbTable[idx].waited_Time; 
+	sysTimePtr->stats.waited_Time += wait; 
 	sysTimePtr->stats.blocked_Time += sysTimePtr->pcbTable[idx].blocked_Time; 
 }
 
@@ -427,7 +433,7 @@ void printStats(int idx){
 	float system = sysTimePtr->pcbTable[idx].system_Time; 
 	float wait = (currTime - ( start + cpu + blocked )); 
 	
-	sysTimePtr->pcbTable[idx].waited_Time += wait; 
+	sysTimePtr->pcbTable[idx].waited_Time += wait;
 
 	fprintf(stderr, "\n//////////// USER PROCESS STATS ////////////\n");
 	fprintf(stderr, "Time: %f\n", getTime()); 

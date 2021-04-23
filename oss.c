@@ -655,13 +655,13 @@ static void displayStats(){
 	
 	//Print to Terminal
 	fprintf(stderr, "\n\n///////////////////// PROGRAM REPORT /////////////////////\n"); 
-	fprintf(stderr, "\n                 ---SCHEDULING STATS---\n"); 
+	fprintf(stderr, "\n---------------------SCHEDULING STATS---------------------\n"); 
 	fprintf(stderr, "System Time: %f\n", getTime()); 
 	fprintf(stderr, "Average Process CPU Time: %f\n", sysTimePtr->stats.cpu_Time/total); 
 	fprintf(stderr, "Average Process System Time: %f\n", sysTimePtr->stats.system_Time/total); 
 	fprintf(stderr, "Average Process Blocked Time: %f\n", sysTimePtr->stats.blocked_Time/total); 
 	fprintf(stderr, "CPU Idle Time: %f\n", (getTime() - sysTimePtr->stats.cpu_Time)); 
-	fprintf(stderr, "\n                 ---RESOURCE STATS---\n"); 
+	fprintf(stderr, "\n----------------------RESOURCE STATS----------------------\n"); 
 	fprintf(stderr, "Requests Granted Immediately: %d\n", sysTimePtr->stats.numReqI); 
 	fprintf(stderr, "Requests Granted After Waiting: %d\n", sysTimePtr->stats.numReqW); 
 	fprintf(stderr, "Number of Normally Terminated Processes: %d\n", sysTimePtr->stats.terminatedN); 
@@ -674,13 +674,13 @@ static void displayStats(){
 	
 	//Print to logs
 	fprintf(logfilePtr, "\n\n///////////////////// PROGRAM REPORT /////////////////////\n"); 
-	fprintf(logfilePtr, "\n                 ---SCHEDULING STATS---\n"); 
+	fprintf(logfilePtr, "\n---------------------SCHEDULING STATS---------------------\n"); 
 	fprintf(logfilePtr, "System Time: %f\n", getTime()); 
 	fprintf(logfilePtr, "Average Process CPU Time: %f\n", sysTimePtr->stats.cpu_Time/total); 
 	fprintf(logfilePtr, "Average Process System Time: %f\n", sysTimePtr->stats.system_Time/total); 
 	fprintf(logfilePtr, "Average Process Blocked Time: %f\n", sysTimePtr->stats.blocked_Time/total); 
 	fprintf(logfilePtr, "CPU Idle Time: %f\n", (getTime() - sysTimePtr->stats.cpu_Time)); 
-	fprintf(logfilePtr, "\n                 ---RESOURCE STATS---\n"); 
+	fprintf(logfilePtr, "\n----------------------RESOURCE STATS----------------------\n"); 
 	fprintf(logfilePtr, "Requests Granted Immediately: %d\n", sysTimePtr->stats.numReqI); 
 	fprintf(logfilePtr, "Requests Granted After Waiting: %d\n", sysTimePtr->stats.numReqW); 
 	fprintf(logfilePtr, "Number of Normally Terminated Processes: %d\n", sysTimePtr->stats.terminatedN); 

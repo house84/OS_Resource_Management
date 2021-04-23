@@ -78,7 +78,7 @@ size_t memSize;                        //memSize for getshm()
 struct PCB cpu;                        //PCB 
 bool spawnFlag;                        //Varialbe to signal forking process
 FILE *logfilePtr;                      //Logfile Pointer
-FILE *ResFilePtr;                      //Logfile for Resource Managment
+FILE *logfilePtr2;                     //Logfile for Resource Managment
 key_t keySysTime;                      //Shm Key
 bool stopProdTimer;                    //Produce or not Bool
 char logfile[50];                      //Logfile Name

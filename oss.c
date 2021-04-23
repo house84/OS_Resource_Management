@@ -610,15 +610,15 @@ static void openLogfile(){
 
 	if( logfilePtr == NULL ){
 
-		perror("oss: ERROR: Failed to Open Scheduler_Logfile "); 
+		perror("oss: ERROR: Failed to Open logfile_sch "); 
 		exit(EXIT_FAILURE); 
 	}
 	
-	ResFilePtr = fopen(logfile2, "w"); 
+	logfilePtr2 = fopen(logfile2, "w"); 
 
-	if( logfilePtr == NULL ){
+	if( logfilePtr2 == NULL ){
 
-		perror("oss: ERROR: Failed to Open P5_Logfile "); 
+		perror("oss: ERROR: Failed to Open logfile_P5 "); 
 		exit(EXIT_FAILURE); 
 	}
 
@@ -629,9 +629,9 @@ static void openLogfile(){
 	fprintf(logfilePtr, "Time: %s", ctime(&t));
 	fprintf(logfilePtr, "//=============================================================//\n"); 
 
-	fprintf(ResFilePtr, "\n//========================= Log Opened ========================//\n"); 
-	fprintf(ResFilePtr, "Time: %s", ctime(&t));
-	fprintf(ResFilePtr, "//=============================================================//\n"); 
+	fprintf(logfilePtr2, "\n//========================= Log Opened ========================//\n"); 
+	fprintf(logfilePtr2, "Time: %s", ctime(&t));
+	fprintf(logfilePtr2, "//=============================================================//\n"); 
 }
 
 
@@ -644,10 +644,10 @@ static void closeLogfile(){
 	fprintf(logfilePtr, "//=============================================================//\n\n"); 
 	fclose(logfilePtr); 
 
-	fprintf(ResFilePtr, "\n//========================= Log Closed ========================//\n"); 
-	fprintf(ResFilePtr, "Time: %s", ctime(&t)); 
-	fprintf(ResFilePtr, "//=============================================================//\n\n"); 
-	fclose(ResFilePtr); 
+	fprintf(logfilePtr2, "\n//========================= Log Closed ========================//\n"); 
+	fprintf(logfilePtr2, "Time: %s", ctime(&t)); 
+	fprintf(logfilePtr2, "//=============================================================//\n\n"); 
+	fclose(logfilePtr2); 
 
 }
 

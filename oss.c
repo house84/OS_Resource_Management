@@ -59,7 +59,8 @@ int main(int argc, char * argv[]){
 
 	//Set shmidSem
 	setSemID(shmidSem); 
-
+	//setLogfile(logfilePtr2); 
+	
 	//Initialize Queue
 	GQue = initQueue(); 
 

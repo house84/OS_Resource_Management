@@ -13,7 +13,8 @@ void setSemID();
 void initResourcArr();
 void allocate(); 
 void printArrHead(); 
-void printArr(); 
+void printArr();
+void setLogfile(); 
 void fmt(int arr[], char*fmt, ...);
 void logPrint(bool printArr, int arr[], char * fmt, ...);  
 

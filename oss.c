@@ -642,8 +642,6 @@ static void displayStats(){
 
 	int normalT = sysTimePtr->stats.terminatedN - sysTimePtr->stats.terminatedDL; 
 	
-//	openfile(); 
-
 	//Print to Terminal
 	fprintf(stderr, "\n\n///////////////////// PROGRAM REPORT /////////////////////\n"); 
 	fprintf(stderr, "\n---------------------SCHEDULING STATS---------------------\n"); 
@@ -686,7 +684,6 @@ static void displayStats(){
 	fprintf(logfilePtr2, "Percent of Processes Terminated per Deadlock on Avg: %3.2f%\n\n", avgPerDL); 
 	fprintf(logfilePtr2, "///////////////////// |||||||||||||| /////////////////////\n"); 
 
-//	fclose(logfilePtr2); 
 }	
 
 
@@ -1117,6 +1114,7 @@ static void terminateProc(){
 			fprintf(stderr,"\n"); 
 			fprintf(logfilePtr2,"\n");
 			sysTimePtr->fileLength++; 
+			incrementSysTime(getRand(1,100000)); 
 			
 			bufS.mtype = i+1; 
 			strcpy(bufS.mtext, "terminate"); 
@@ -1132,7 +1130,7 @@ static void terminateProc(){
 			blockedQ[i] = 0; 
 			unsetBitVectorVal(i); 
 			active[i] = 0; 
-			wait(NULL); 
+			wait(NULL);
 			--concProc; 
 			++sysTimePtr->stats.terminatedDL;
 			++localCount; 
@@ -1168,6 +1166,7 @@ static void terminateProc(){
 		fprintf(stderr,"\n"); 
 		fprintf(logfilePtr2,"\n");
 		sysTimePtr->fileLength++; 
+		incrementSysTime(getRand(1,100000)); 
 
 		bufS.mtype = idx+1; 
 		strcpy(bufS.mtext, "terminate"); 

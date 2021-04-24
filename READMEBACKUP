@@ -1,0 +1,122 @@
+====================================================================================
+====================================================================================
+Author: Nick House
+Project: CS-4760 Operating Systems, Spring 2021
+Directory Name: house.5
+Included Files: oss.c, oss.h, user.c, user.h, sharedFunc.c, sharedFunc.h, headers.h
+                shared.h, Makefile, README
+Created Files: logfile_P5, logfile_Sch
+====================================================================================
+====================================================================================
+
+What this program does: 
+-----------------------
+
+	The purpose of this program it to simulate resource management while using a 
+	an operating system simulator utilizing round-robin scheduling with simulated
+	CPU time. This program tracks statistics of both the resource management as well
+	as scheduling statistics. Only data pertinant to Resource Management will be 
+	printed to the terminal. This program generates 2 seperate logfile. A file titled 
+	logfile_P5 which documents actions taken by the resource management aspect of 
+	this program. The other file is titled logfile_Sch, this file will hold all 
+	all actions of the scheduler and its statistics. This program generates two 
+	executable files, oss and user_proc. oss is the file run, while user_proc is
+	the executables called on by oss as user processes. 
+
+	The behavior of the resource managment is as follows, the OSS, referenced as
+	Master, will generate no more than 18 concurrent User processes at a given time 
+	and continue to generate new processses until 40 processes have been spawned or 5
+	real seconds have passed. Each new User process will be created and allocated a 
+	random initial amount of resources limited the current available system resources. 
+	The processes will then randomly request or release resources for the first 
+	simulated second of their instance then will randomly request, release, or 
+	terminate and release all resources and report its request to Master. 
+
+	Master will perform the task of scheduling User processes in a simulated CPU and
+	will handle resource management. When a given User process is allocated CPU time
+	in the scheduler it will return one of three conditions, request resources, 
+	release resources, or terminate and release resources. In the event program 
+	requestes resources Master will check if system resources are available, if so 
+	those resouces are then allocated to the User process. If the resources are not
+	available the User process will be added to a blocked queue. In the event the 
+	User reports it is releasing resources or terminating Master acknowledges this 
+	action and documents the time, released resources are then reallocated to the 
+	system. 
+
+	Checking the blocked queue, each OSS iteration the blocked queue is checked prior
+	to spawning a new process if an option. When this check happens blocked resource 
+	requests are checked against available system resources. If a required resource 
+	is now available it will be allocated to the blocked processes at that time and 
+	the process will be added back into the run queue. 
+
+	Detecting Deadlocks, every simulated iteration through the scheduling driver loop
+	a random time of 0-500 ms is added to the simulated system time. The deadlock 
+	detection algorithm is called after a period of 1 simulated system time has passed.
+	The deadlock detection algorithm is only used to determine if there is a current 
+	deadlock, if so User processes will be terminated one by one while checking for 
+	deadlock after each termination. The method which User processes are chosen is 
+	first by terminating processes from the blocked queue. Each process is sent a 
+	signal to terminate and release their resources. If the blocked queue has been
+	exhausted and a deadlock still remains processes from the run queue will then 
+	be terminated one by one. 
+
+	Scheduling, this OSS schedules User processes in a round robin fashion. If a 
+	resources can not be granted to a process the scheduler puts that process onto
+	a blocked queue until resources are available. Different behaviors from the OSS 
+	and User processes will increment the system clock by random amounts. Upon 
+	succesful program termination CPU and scheduling statics are analyzed and saved
+	in a file titled logfile_Sch
+
+
+====================================================================================
+====================================================================================
+
+How to use this Program: 
+------------------------
+
+	1) Execute Makefile
+		
+		$make
+
+	2) Execute oss 
+
+		$./oss [-v][-h]
+
+	Usage: 
+
+		-v      Turns on Verbose mode (default Condition OFF)
+		-h      Displays Usage
+
+	
+	Program can be terminated by pressing ctrl+c 
+
+
+====================================================================================
+====================================================================================
+
+Observations about this Program: 
+--------------------------------
+
+	The compexity of this program is daunting to debug. An indexing typo between array
+	indexes and Message IDs caused an intermittent issue which caused interesting 
+	outputs in my stats. Because these values always only differed by 1 this was a huge 
+	headache to locate and debug. The size of this program makes it difficult to work 
+	with in VIM, I have dedicated most of this semester to using VIM against all my
+	instincts...I now have an honest appreciation for IDEs. 
+	
+	I have also discovered an itermittent issue which has caused me headaches in the 
+	past - "failure to allocate resources, resources temporarily unnavailable" This
+	issue has caused me huge headaches and an obsurd amount of time wondering why. I 
+	have now found that this issue is due to ssh timeouts. My user instances in HOARE
+	remain active after the connection is terminated. When I log back in another 
+	instance is started. This reduces my ability to run concurrent processes in my 
+	project. These processes will eventually be terminated or I must terminate them
+	by enumerating using $ps aux | grep house  then killing with kill -9 userID. This 
+	was a timeful and painful lesson to learn...but one I am glad I solved. 
+
+
+====================================================================================
+====================================================================================
+
+Git Log History: 
+----------------

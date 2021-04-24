@@ -120,3 +120,266 @@ Observations about this Program:
 
 Git Log History: 
 ----------------
+commit c39234ad3d0024b3fc80aeba58eec1d5db9a615a
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Sat Apr 24 13:59:27 2021 -0500
+
+    complete
+
+commit 11c5dfd6249f157a9f4a3af637cf1e3caee4091d
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Sat Apr 24 13:26:01 2021 -0500
+
+    Changed Deadlock call frequency
+
+commit bfb950674fc2fdfa46a873862a3c27659e371890
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Sat Apr 24 13:11:35 2021 -0500
+
+    All working, finishing README
+
+commit b199e22f92744b2d51ee259b80b13d0fa50d3861
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Sat Apr 24 11:41:03 2021 -0500
+
+    Formatting Logfiles
+
+commit 73879d8e4b6daf2738c5380ceeccb6d1e3426ed5
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Sat Apr 24 11:23:14 2021 -0500
+
+    Rearranged Print
+
+commit 014ff3d661b042098a2d01099707f0ab0eafc4da
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Fri Apr 23 20:10:21 2021 -0500
+
+    Putting kiddo to bed, working through logging output statements
+
+commit 03bc6df396c1c79b23a407fc893866253fb7ebe7
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Fri Apr 23 19:49:54 2021 -0500
+
+    commit often
+
+commit c3dc1ae593015504be942f08a9242904c45383f1
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Fri Apr 23 17:49:23 2021 -0500
+
+    Added printing for logfile
+
+commit 89448bc8bd8f4e10059a246b002cee9ace7afb37
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Fri Apr 23 16:10:15 2021 -0500
+
+    small add
+
+commit 71af88a9a606eb9e29a8bf0e00a8098a8c324dc1
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Thu Apr 22 22:15:37 2021 -0500
+
+    Cleaned
+
+commit fa38388ec7c0357e16733776ce85636c4041ff0c
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Thu Apr 22 22:14:57 2021 -0500
+
+    fixed bug with Scheduler Stats
+
+commit add4187273c4beeade513e48b00d02a44d8243a1
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Thu Apr 22 21:46:06 2021 -0500
+
+    Everything done except adding verbage to Logfile and Readme
+
+commit b6461dbdd24d6d6f94af14236c7d08e63a081c1e
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Thu Apr 22 20:48:26 2021 -0500
+
+    commit often and then do it again
+
+commit 83fd43d77223b6f34caa4aa08d671b40a93efab8
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Thu Apr 22 20:42:38 2021 -0500
+
+    commit often
+
+commit 48fe577e1e1471d28610d94b163c00ae8e3d3fd8
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Thu Apr 22 17:59:22 2021 -0500
+
+    Stats almost done, need to adjust avg term per deadlock
+
+commit 5481d028a52b59ac4c53d767eacabed60940b2e8
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Thu Apr 22 13:16:13 2021 -0500
+
+    Need to add logfile and printing rules
+
+commit dff266bf00852d785cbab22b60f652cc7492c25b
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Thu Apr 22 12:45:24 2021 -0500
+
+    Commit lots...commit often....added 1 second wait for User termination possibility
+
+commit 13275dbf635deba9513ad4405ea11957fe8b1d85
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Thu Apr 22 11:47:13 2021 -0500
+
+    git commit often
+
+commit 31a44edd23dce5be88c1be55a3e0f5af639818a3
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Thu Apr 22 11:07:12 2021 -0500
+
+    introduced mutex attribute
+
+commit c67171ddb8fc8654daf8954415e21f7d7ed84be9
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Thu Apr 22 00:29:18 2021 -0500
+
+    Wahoogit add -A Algos debugged and running, need to add verbose logs
+
+commit 4158f53c155cbae514f3ae41d17931ef49660dde
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Wed Apr 21 23:43:01 2021 -0500
+
+    Sooooo much debuggggginnnngggg.....uuhhhh
+
+commit e8779d130f47e260f668bcb5a857e48491454e4c
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Wed Apr 21 20:03:04 2021 -0500
+
+    save
+
+commit cd6fb2958e530bf6c1aeb2df200023a30e861fbe
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Wed Apr 21 20:01:39 2021 -0500
+
+    Found indexing error that was causing nightmare.
+
+commit 51a68e20f039cd5d94246cdafe1197a130fd18b6
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Tue Apr 20 16:08:22 2021 -0500
+
+    Having issue terminating
+
+commit dc8aa8f9da5cd2061ccd94b1d5cde9fae716afab
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Tue Apr 20 11:13:46 2021 -0500
+
+    added deadlock algo
+
+commit 75213145ba49fc2fce5528caee69420af235f6c5
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Mon Apr 19 13:13:01 2021 -0500
+
+    Debugged resource handling and added printing
+
+commit ffd2f86fb7c674093d1ee9a8a3d4157a12a3cd67
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Sun Apr 18 20:50:58 2021 -0500
+
+    Resources allocating, and printing arrays...need to add request logic into OSS and handle blocking and removing.
+
+commit c7ad4a2afa2a2a08c6f7932d20847cc9733e18e9
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Sun Apr 18 20:36:44 2021 -0500
+
+    Allocate functions added to library
+
+commit 51df7fe7118b1c95f15d867e39bc949106c8426d
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Sun Apr 18 17:17:24 2021 -0500
+
+    check point
+
+commit 89add468aa0e90c2a5cfc5de80ea43e928579c6f
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Sun Apr 18 12:30:02 2021 -0500
+
+    Added logic for resource managment in user.c, need to add request handling in OSS
+
+commit 69e27e3388b92f0290fe11d2bb12fe641cb6fdb3
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Fri Apr 16 21:25:23 2021 -0500
+
+    Added Requested functions to User
+
+commit f0fa38777011dfdae908c26ad0955c2c5eb1bf22
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Fri Apr 16 18:02:14 2021 -0500
+
+    Added resource arrays to PCB
+
+commit 6ab4e5820604e63946cd2b30a220aa2122540049
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Fri Apr 16 15:51:03 2021 -0500
+
+    Short stopping point
+
+commit 0b9015f6316bf508088057bfccee3bffeb0d16e9
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Fri Apr 16 15:11:39 2021 -0500
+
+    Added Print Format for Resources
+
+commit e972759b0b5dd37a9cce2b781da176d2f0340931
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Fri Apr 16 11:55:59 2021 -0500
+
+    Initial allocation of resources by users and accounting global sums complete
+
+commit c427beb2f5c30f599e0b554bbe04c6c24782f98d
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Fri Apr 16 11:23:39 2021 -0500
+
+    Adding local pcb maximum and allocated values
+
+commit f14da9501a2b8a8616b557fbb638027723fb03ee
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Wed Apr 14 15:12:36 2021 -0500
+
+    Added resource and shared arrays with random variables
+
+commit 5a933c4dbcd5df4e3f0208fed1eefb8af1f9a75b
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Wed Apr 14 13:44:33 2021 -0500
+
+    Added resource pcb Structs
+
+commit 0a94bee5e691cade1389448fe077ea2135edc3d7
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Wed Apr 14 13:04:14 2021 -0500
+
+    Added sem detruction and creation
+
+commit b346c8a2aba9446a25263da696f25f7f840f4e78
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Wed Apr 14 12:44:01 2021 -0500
+
+    added Sems
+
+commit b3d2238dd1dfc3926af08d3cb7d5b867fbe3acc6
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Tue Apr 13 17:44:48 2021 -0500
+
+    Added removal of .a
+
+commit 59e00c2c21b4159c562d08e8d20643349a8b0378
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Tue Apr 13 17:42:46 2021 -0500
+
+    Added shared func library, modified Help and Added Verbose option
+
+commit f621034bfddfe510d0fc2fa92291a82ae8d74c99
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Wed Apr 7 10:43:20 2021 -0500
+
+    Added README template
+
+commit eea9c4cb398e46e6c17be740f22e2e828f5317ca
+Author: Nick House <nh6gy@umsystem.edu>
+Date:   Wed Apr 7 10:33:51 2021 -0500
+
+    Initial Commit, Copy of P4 to start

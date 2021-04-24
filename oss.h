@@ -37,6 +37,7 @@ static void enqueue();                 //Add Child to Queue
 static void setTimer();                //Set initial Timer
 void setBitVectorVal();                //Set BitVector used from idx
 static float getTime();                //Get time with decimal xx.xxx
+static void openfile(); 
 static void setTimer2();               //Set 3 Second Timer
 static void initStats();               //Initiate Stats
 void unsetBitVectorVal();              //Clear Bitvector from idx
@@ -58,9 +59,14 @@ static void checkBlockedQ();           //Search Blocked Que for Freed Proc
 static float  newUserTime();           //Get time to offset new User spawn
 static void stopTimeHandler();         //Stop Producing Timer Handler
 static int  getBitVectorPos();         //Search bit vector for open idx
+static void printArr();                //Print Arr
+static void printArrHead();            //Print Arr Header
 static void freeSharedMemory();        //Release Shared Memory Resources
 static void incrementSysTime();        //Increment System time
 static void createSharedMemory();      //Allocate Shared Memory
+static void fmt(int arr[], char* string, ...); 
+static void logPrint(char* string, ...); 
+static float getTime(); 
 
 time_t t;                              //Hold Time
 int myTimer;                           //Timer Value

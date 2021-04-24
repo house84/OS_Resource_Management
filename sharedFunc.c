@@ -11,8 +11,8 @@
 //=== Sem Vars ===//
 //struct sembuf sops;  
 //FILE *file; 
-void openfile();
-void closefile(); 
+//void openfile();
+//void closefile(); 
 
 void setShmid(struct system_Time * ptr){
 	
@@ -52,21 +52,21 @@ void semSignal(int sem){
 	}
 }
 
-void openfile(){
+//void openfile(){
+//
+//	file = fopen("logfile_P5", "a");
 
-	file = fopen("logfile_P5", "a");
+//	if( file == NULL ){
+//
+//		perror("sharedFunc: ERROR: Failed to Open logfile_P5 "); 
+//		exit(EXIT_FAILURE); 
+//	}
+//}
 
-	if( file == NULL ){
-
-		perror("sharedFunc: ERROR: Failed to Open logfile_P5 "); 
-		exit(EXIT_FAILURE); 
-	}
-}
-
-void closefile(){
-	
-	fclose(file); 
-}
+//void closefile(){
+//	
+//	fclose(file); 
+//}
 
 
 void initResourceArr( struct system_Time * st){
@@ -81,7 +81,7 @@ void initResourceArr( struct system_Time * st){
 
 		r = getRand(1,10); 
 		st->SysR.resources[i] = r; 
-		st->SysR.availableResources[i] = r; 
+		st->SysR.availableResources[i] = r;
 
 	}
 	
@@ -116,44 +116,44 @@ void initResourceArr( struct system_Time * st){
 }
 
 
-void printArrHead(){
+//void printArrHead(){
 	
-	if(st->fileLength > 99950){ return; }
+//	if(st->fileLength > 99950){ return; }
 
-	openfile(); 
+//	openfile(); 
 
-	fprintf(stdout, "\n                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19\n");//, blanks); 
-	fprintf(file, "\n                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19\n");//, blanks); 
-
-	st->fileLength++;
+//	fprintf(stdout, "\n                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19\n");//, blanks); 
+//	fprintf(file, "\n                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19\n");//, blanks); 
+///
+//	st->fileLength++;
 	
-	closefile(); 
-}
+//	closefile(); 
+//}
 
-void printArr(int arr[], char name[]){
-	
-	if(st->fileLength > 99950){ return; }
-
-	openfile(); 
-
-	fprintf(stdout, "%15s:", name); 
-	fprintf(file, "%15s:", name); 
-
-	int i; 
-	for(i = 0; i < maxResources; ++i){
-
-		fprintf(stdout, "%3d ", arr[i]); 
-		fprintf(file, "%3d ", arr[i]); 
-	}
-	
-	fprintf(stdout, "\n"); 
-	fprintf(file, "\n"); 
-
-	st->fileLength += 3; 
-
-	closefile();
-
-}
+//void printArr(int arr[], char name[]){
+//	
+//	if(st->fileLength > 99950){ return; }
+//
+///	openfile(); 
+//
+//	fprintf(stdout, "%15s:", name); 
+//	fprintf(file, "%15s:", name); 
+///
+//	int i; 
+//	for(i = 0; i < maxResources; ++i){
+//
+//		fprintf(stdout, "%3d ", arr[i]); 
+//		fprintf(file, "%3d ", arr[i]); 
+//	}
+//	
+//	fprintf(stdout, "\n"); 
+//	fprintf(file, "\n"); 
+//
+//	st->fileLength += 3; 
+//
+//	closefile();
+//
+//}//
 
 
 int getRand(int l, int u){
@@ -198,50 +198,50 @@ void allocate(int idx, struct system_Time *st){
 	st->pcbTable[idx].requestIDX = 0; 
 			
 	
-	if( st->fileLength < 99950 ){
+//	if( st->fileLength < 99950 ){
 
-		fprintf(stderr, "Master: Allocating P%d Resource R%d at Time: %f\n", idx, rIdx, getTime()); 
-		st->fileLength++; 
-	}
+//		fprintf(stderr, "Master: Allocating P%d Resource R%d at Time: %f\n", idx, rIdx, getTime()); 
+//		st->fileLength++; 
+//	}
 
 			
 }
 
 
 
+////Format string for func calls
+//void fmt(int arr[], char* string, ...){
+//
+//	char buf[100];
+//
+//	va_list vl; 
+//	va_start(vl, string); 
+//
+//	vsnprintf(buf, sizeof(buf), string, vl); 
+//	va_end(vl); 
+//
+//	printArr(arr, buf); 
+//}
+
+
+
 //Format string for func calls
-void fmt(int arr[], char* fmt, ...){
-
-	char buf[100];
-
-	va_list vl; 
-	va_start(vl, fmt); 
-
-	vsnprintf(buf, sizeof(buf), fmt, vl); 
-	va_end(vl); 
-
-	printArr(arr, buf); 
-}
-
-
-
-//Format string for func calls
-void logPrint(char* fmt, ...){
-
-	if( st->fileLength > 99950 ){ return; } 
-	
-	char buf[100];
-
-	va_list vl; 
-	va_start(vl, fmt); 
-
-	vsnprintf(buf, sizeof(buf), fmt, vl); 
-	va_end(vl); 
-
-	fprintf(stderr, "%s at Time: %f", buf, getTime()); 
-	fprintf(file, "%s at Time: %f", buf, getTime()); 
-	st->fileLength++; 
-}
+//void logPrint(char* string, ...){
+//
+//	if( st->fileLength > 99950 ){ return; } 
+//	
+//	char buf[100];
+//
+//	va_list vl; 
+//	va_start(vl, string); 
+//
+//	vsnprintf(buf, sizeof(buf), string, vl); 
+//	va_end(vl); 
+//
+//	fprintf(stderr, "%s at Time: %f", buf, getTime()); 
+//	fprintf(file, "%s at Time: %f", buf, getTime()); 
+///	st->fileLength++; 
+//}
 
 
 //Check if resources are requested are avaiable

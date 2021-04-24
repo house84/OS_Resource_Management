@@ -8,6 +8,7 @@
 #include "oss.h"
 #include "sharedFunc.h"
 
+
 int main(int argc, char * argv[]){
 	
 
@@ -71,12 +72,6 @@ int main(int argc, char * argv[]){
 	//Initialize Resource Array
 	initResourceArr(sysTimePtr); 
 	memset(active, 0, 18); 
-	
-	//Testing
-	printArrHead(); 
-	printArr(sysTimePtr->SysR.resources, "Sys-Resources"); 
-	printArr(sysTimePtr->SysR.availableResources, "Sys-Available"); 
-	printArr(sysTimePtr->SysR.sharedResources, "Sys-Shared"); 
 	
 	//Initialize STAT
 	sysTimePtr->stats.totalProc = 0; 
@@ -142,12 +137,9 @@ int main(int argc, char * argv[]){
 		//Check for Deadlock
 		if( sysTimePtr->seconds > deadLockTimer){ 
 			
-			//Send to Log
-			fprintf(stderr, "Checking for Deadlock\n"); 
 			checkDeadLock();
 			deadLockTimer = sysTimePtr->seconds; 
 		} 
-
 
 
 		//Spawn Child Process //Set to 20 for testing
@@ -169,7 +161,6 @@ int main(int argc, char * argv[]){
 				}
 
 				//Message new Process Created 
-				fprintf(stderr, "OSS: Time: %s PID: %d\t|||| New User Process Created\n", getSysTime(), index);
 				fprintf(logfilePtr, "OSS: Time: %s PID: %d\t|||| New User Process Created\n", getSysTime(), index);
 
 				//Add to RunQ
@@ -200,47 +191,12 @@ int main(int argc, char * argv[]){
 			break; 
 		}
 
-
-		//Print for verbose
-		verbose = true; 
-		if(verbose == true){
-
-			printArrHead(); 
-			printArr(sysTimePtr->SysR.resources, "Resources");
-			printArr(sysTimePtr->SysR.availableResources, "Available"); 
-			printArr(sysTimePtr->SysR.sharedResources, "Shared"); 
-			fprintf(stderr, "\n"); 
-			
-			int j; 
-			for(j=0; j < 18; ++j){
-
-				if(active[j] == 1 ){
-
-					if(j == 0){
-
-						fprintf(stderr, "Process Resources Allocated (A) and Maximum (M)\n"); 
-						printArrHead(); 
-					}
-					
-					fmt(sysTimePtr->pcbTable[j].allocated, "(A) P%d", j); 
-					fmt(sysTimePtr->pcbTable[j].maximum, "(M) P%d", j); 	
-			 	}
-			}
-			
-			fprintf(stderr, "\n"); 
-		}
-
 	}
 
-
-	//==========================================
-	
 
 	//Allow Processes to finish
 	while(wait(NULL) > 0){} 
 
-	
-	//TESTING
 	printArrHead();
 	printArr(sysTimePtr->SysR.resources, "Sys-Resources"); 
 	printArr(sysTimePtr->SysR.availableResources, "Sys-Available"); 
@@ -605,6 +561,12 @@ void unsetBitVectorVal(int idx){
 }
 
 
+static void openfile(){
+
+	logfilePtr2 = fopen(logfile, "a"); 
+
+}
+
 //Open New Logfile
 static void openLogfile(){
 	
@@ -634,18 +596,21 @@ static void openLogfile(){
 	fprintf(logfilePtr2, "\n//========================= Log Opened ========================//\n"); 
 	fprintf(logfilePtr2, "Time: %s", ctime(&t));
 	fprintf(logfilePtr2, "//=============================================================//\n"); 
+
+//	fclose(logfilePtr2); 
 }
 
 
 //Close Logfile
 static void closeLogfile(){
-
+	 
 	
 	fprintf(logfilePtr, "\n//========================= Log Closed ========================//\n"); 
 	fprintf(logfilePtr, "Time: %s", ctime(&t)); 
 	fprintf(logfilePtr, "//=============================================================//\n\n"); 
 	fclose(logfilePtr); 
 
+	openfile(); 
 	fprintf(logfilePtr2, "\n//========================= Log Closed ========================//\n"); 
 	fprintf(logfilePtr2, "Time: %s", ctime(&t)); 
 	fprintf(logfilePtr2, "//=============================================================//\n\n"); 
@@ -674,6 +639,8 @@ static void displayStats(){
 
 	int normalT = sysTimePtr->stats.terminatedN - sysTimePtr->stats.terminatedDL; 
 	
+//	openfile(); 
+
 	//Print to Terminal
 	fprintf(stderr, "\n\n///////////////////// PROGRAM REPORT /////////////////////\n"); 
 	fprintf(stderr, "\n---------------------SCHEDULING STATS---------------------\n"); 
@@ -703,16 +670,20 @@ static void displayStats(){
 	fprintf(logfilePtr, "Average Process Blocked Time: %f\n", sysTimePtr->stats.blocked_Time/total); 
 	fprintf(logfilePtr, "Average Process Wait Time: %f\n", sysTimePtr->stats.waited_Time/total); 
 	fprintf(logfilePtr, "CPU Idle Time: %f\n", (getTime() - sysTimePtr->stats.cpu_Time)); 
-	fprintf(logfilePtr, "\n----------------------RESOURCE STATS----------------------\n"); 
-	fprintf(logfilePtr, "Requests Granted Immediately: %d\n", sysTimePtr->stats.numReqI); 
-	fprintf(logfilePtr, "Requests Granted After Waiting: %d\n", sysTimePtr->stats.numReqW); 
-	fprintf(logfilePtr, "Number of Normally Terminated Processes: %d\n", sysTimePtr->stats.terminatedN); 
-	fprintf(logfilePtr, "Number of Deadlock Terminated Processes: %d\n", sysTimePtr->stats.terminatedDL); 
-	fprintf(logfilePtr, "Number of time Deadlock Detection Algorithm Ran: %d\n", sysTimePtr->stats.numDL);
-	fprintf(logfilePtr, "Number of Deadlock Conditions Detected: %d\n", sysTimePtr->stats.deadlockCond); 
-	fprintf(logfilePtr, "Average Number of Processes Terminated per Deadlock: %3.0f\n", avgTermPDL); 
-	fprintf(logfilePtr, "Percent of Processes Terminated per Deadlock on Avg: %3.2f%\n\n", avgPerDL); 
 	fprintf(logfilePtr, "///////////////////// |||||||||||||| /////////////////////\n"); 
+	fprintf(logfilePtr2, "\n\n///////////////////// PROGRAM REPORT /////////////////////\n"); 
+	fprintf(logfilePtr2, "\n----------------------RESOURCE STATS----------------------\n"); 
+	fprintf(logfilePtr2, "Requests Granted Immediately: %d\n", sysTimePtr->stats.numReqI); 
+	fprintf(logfilePtr2, "Requests Granted After Waiting: %d\n", sysTimePtr->stats.numReqW); 
+	fprintf(logfilePtr2, "Number of Normally Terminated Processes: %d\n", sysTimePtr->stats.terminatedN); 
+	fprintf(logfilePtr2, "Number of Deadlock Terminated Processes: %d\n", sysTimePtr->stats.terminatedDL); 
+	fprintf(logfilePtr2, "Number of time Deadlock Detection Algorithm Ran: %d\n", sysTimePtr->stats.numDL);
+	fprintf(logfilePtr2, "Number of Deadlock Conditions Detected: %d\n", sysTimePtr->stats.deadlockCond); 
+	fprintf(logfilePtr2, "Average Number of Processes Terminated per Deadlock: %3.0f\n", avgTermPDL); 
+	fprintf(logfilePtr2, "Percent of Processes Terminated per Deadlock on Avg: %3.2f%\n\n", avgPerDL); 
+	fprintf(logfilePtr2, "///////////////////// |||||||||||||| /////////////////////\n"); 
+
+//	fclose(logfilePtr2); 
 }	
 
 
@@ -744,7 +715,6 @@ static void enqueue(int idx){
 	++GQue->currSize; 
 
 	//Test Print
-	fprintf(stderr, "OSS: Time: %s PID: %d\t|||| Added to position %d in Run Queue\n", getSysTime(), newNode->fakePID, GQue->currSize); 
 	fprintf(logfilePtr, "OSS: Time: %s PID: %d\t|||| Added to position %d in Run Queue\n", getSysTime(), newNode->fakePID, GQue->currSize); 
 
 	//Check if Empty
@@ -780,7 +750,6 @@ struct p_Node * dequeue(){
 	if( GQue->head == NULL ){ GQue->tail = NULL; }
 
 	//Test Print
-	fprintf(stderr, "OSS: Time: %s PID: %d\t|||| Removed from Run Queue\n", getSysTime(), newNode->fakePID); 
 	fprintf(logfilePtr, "OSS: Time: %s PID: %d\t|||| Removed from Run Queue\n", getSysTime(), newNode->fakePID); 
 
 	return newNode; 
@@ -822,18 +791,41 @@ const char * getSysTime(){
 static void allocateCPU(){
 
 	
-	if((sysTimePtr->grantedReq % 20 == 0) && sysTimePtr->fileLength < 99950 ){
-		
-		printArrHead();
-		printArr(sysTimePtr->SysR.sharedResources, "Shared"); 
-		printArr(sysTimePtr->SysR.availableResources, "Available"); 
-	}
+	//Print for verbose
+ 
+	if(verbose == true){
 
+		if((sysTimePtr->grantedReq % 20 == 0) && sysTimePtr->fileLength < 99950 ){
+		
+			printArrHead();
+			printArr(sysTimePtr->SysR.sharedResources, "Shared"); 
+			printArr(sysTimePtr->SysR.availableResources, "Available"); 
+
+			int j; 
+			for(j=0; j < 18; ++j){
+
+				if(active[j] == 1 ){
+
+					if(j == 0){
+
+			//			openfile(); 
+						fprintf(stderr, "Resources Allocated to Current Processess"); 
+						fprintf(logfilePtr2, "Resources Allocated to Current Processess"); 
+						printArrHead(); 
+						sysTimePtr->fileLength += 2; 
+			//			fclose(logfilePtr2); 
+					}
+					
+					fmt(sysTimePtr->pcbTable[j].allocated, "P%d", j); 
+					sysTimePtr->fileLength += 2; 
+			 	}
+			}
+		}
+	}
+			
 	//Check for runnable Processes
 	if(GQue->currSize == 0){ 
 		
-		fprintf(stderr, "Run Queue Empty\n"); 
-
 		return; 
 		
 	}
@@ -862,7 +854,6 @@ static void allocateCPU(){
 	}
 
 	//Print Update from CPU 
-	fprintf(stderr, "OSS: Time: %s PID: %d\t|||| Sent to CPU\n", getSysTime(), idx); 
 	fprintf(logfilePtr, "OSS: Time: %s PID: %d\t|||| Sent to CPU\n", getSysTime(), idx); 
 
 
@@ -882,6 +873,35 @@ static void allocateCPU(){
 	//Check return
 	if( strcmp(bufR.mtext, "terminated") == 0){
 
+		int i; 
+		
+		if(sysTimePtr->fileLength < 99950 && sysTimePtr->verbose == true ){
+			
+			logPrint("Master: Detected P%d is Terminating", idx); 
+			
+		//	openfile(); 
+			fprintf(stderr, "\tProcess P%d Releasing: ", idx); 
+			fprintf(logfilePtr2, "\tProcess P%d Releasing: ", idx); 
+			sysTimePtr->fileLength++; 
+
+			for( i = 0; i < maxResources; ++i ){
+	
+				if( sysTimePtr->pcbTable[idx].release[i] > 0){
+
+					fprintf(stderr, "R%d:%d  ", i, sysTimePtr->pcbTable[idx].release[i]); 
+					fprintf(logfilePtr2, "R%d:%d  ", i, sysTimePtr->pcbTable[idx].release[i]); 
+					sysTimePtr->pcbTable[idx].release[i] = 0; 
+					sysTimePtr->fileLength++; 
+				}
+			}
+
+			fprintf(stderr, "\n"); 
+			fprintf(logfilePtr2, "\n"); 
+			sysTimePtr->fileLength++; 
+	//		fclose(logfilePtr2); 
+		}
+		
+		//Add Process Back to Queue
 		incrementSysTime(sprint); 
 		
 		unsetBitVectorVal(idx); 
@@ -898,7 +918,7 @@ static void allocateCPU(){
 	}
 
 	if( strcmp(bufR.mtext, "request") == 0){
-		
+	
 	
 		//request resources
 		requesting(idx); 
@@ -911,6 +931,34 @@ static void allocateCPU(){
 
 	if(strcmp(bufR.mtext, "release") == 0){
 
+		int i; 
+		
+		if(sysTimePtr->fileLength < 99950 && sysTimePtr->verbose == true ){
+			
+			logPrint("Master: Detected P%d is releasing resource", idx, getTime()); 
+			
+		//	openfile(); 
+			fprintf(stderr, "\tProcess P%d Releasing: ", idx); 
+			fprintf(logfilePtr2, "\tProcess P%d Releasing: ", idx); 
+			sysTimePtr->fileLength++; 
+
+			for( i = 0; i < maxResources; ++i ){
+	
+				if( sysTimePtr->pcbTable[idx].release[i] > 0){
+
+					fprintf(stderr, "R%d:%d  ", i, sysTimePtr->pcbTable[idx].release[i]); 
+					fprintf(logfilePtr2, "R%d:%d  ", i, sysTimePtr->pcbTable[idx].release[i]); 
+					sysTimePtr->pcbTable[idx].release[i] = 0; 
+					sysTimePtr->fileLength++; 
+				}
+			}
+
+			fprintf(stderr, "\n"); 
+			fprintf(logfilePtr2, "\n"); 
+			sysTimePtr->fileLength++; 
+		//	fclose(logfilePtr2); 
+		}
+		
 		//Add Process Back to Queue
 		enqueue(idx); 
 		
@@ -925,7 +973,6 @@ static void dispatchTime(int idx){
 	int disTime = rand()%9901 + 100; 
 	incrementSysTime(disTime); 
 	
-	fprintf(stderr, "OSS: Time: %s PID: %d\t|||| Time in Dispatch %d nanoseconds\n", getSysTime(), idx, disTime);
 	fprintf(logfilePtr, "OSS: Time: %s PID: %d\t|||| Time in Dispatch %d nanoseconds\n", getSysTime(), idx, disTime);
 
 }
@@ -937,8 +984,15 @@ static void requesting(int idx){
 	int rIDX = sysTimePtr->pcbTable[idx].requestIDX; 
 
 	if(sysTimePtr->SysR.availableResources[rIDX] > 0){
+	
+		if(sysTimePtr->fileLength < 99950){
+		//	openfile(); 
+			fprintf(logfilePtr2, "Master: Allocating P%d Resource R%d:%d at Time: %f\n", idx, rIDX, sysTimePtr->SysR.availableResources[rIDX], getTime()); 
+			fprintf(stderr, "Master: Allocating P%d Resource R%d:%d at Time: %f\n", idx, rIDX, sysTimePtr->SysR.availableResources[rIDX], getTime()); 
+			sysTimePtr->fileLength++; 
+		//	fclose(logfilePtr2); 
+		}
 
-		fprintf(stderr, "Allocating P%d Resource\n"); 
 		allocate(idx, sysTimePtr); 
 		enqueue(idx); 
 		++sysTimePtr->stats.numReqI; 
@@ -946,7 +1000,18 @@ static void requesting(int idx){
 		return; 
 	}
 	
-	fprintf(stderr, "P%d Sent to Blocked Queue\n", idx); 
+	if(sysTimePtr->verbose == true){
+
+		if(sysTimePtr->fileLength < 99950){
+			
+	//		openfile(); 
+			fprintf(logfilePtr2, "Master: Process P%d Sent to Blocked Queue at Time: %f\n", idx, getTime()); 
+			fprintf(stderr, "Master: Process P%d Sent to Blocked Queue at Time: %f\n", idx, getTime()); 
+			sysTimePtr++; 
+		//	fclose(logfilePtr2); 
+		}
+	}
+
 	blockedQ[idx] = 1; 
 	++sysTimePtr->stats.numReqW; 
 }
@@ -974,8 +1039,14 @@ static void checkDeadLock(){
 	if( deadlock(sysTimePtr, concProc) == true){
 
 		//Add to Log
-		fprintf(stderr, "Deadlock Detected\n"); 
-
+		if(sysTimePtr->fileLength < 99950){
+			
+		//	openfile(); 
+			fprintf(logfilePtr2,"Deadlock Detected at Time %f\n", getTime()); 
+			fprintf(stderr,"Deadlock Detected at Time: %f\n"); 
+			sysTimePtr->fileLength++; 
+		//	fclose(logfilePtr2); 
+		}
 		++sysTimePtr->stats.deadlockCond; 
 		
 		terminateProc(); 
@@ -1002,7 +1073,6 @@ static void checkBlockedQ(){
 		
 		if(blockedQ[i] == 1 && (sysTimePtr->pcbTable[i].requested[rIdx] <= sysTimePtr->SysR.availableResources[rIdx])){
 		
-			fprintf(stderr, "OSS: Time: %s PID: %d\t|||| Removed From Blocked Queue\n", getSysTime(), i);
 			fprintf(logfilePtr, "OSS: Time: %s PID: %d\t|||| Removed From Blocked Queue\n", getSysTime(), i);			
 			allocate(i, sysTimePtr); 
 			enqueue(i);
@@ -1027,7 +1097,14 @@ static void terminateProc(){
 		
 		if( deadlock(sysTimePtr, concProc) == false){
 
-			fprintf(stderr, "Deadlock Cleared\n"); 
+			if(sysTimePtr->verbose == true && sysTimePtr->fileLength < 99950){
+				
+		//		openfile(); 
+				fprintf(logfilePtr2, "Deadlock Cleared at Time: %f\n", getTime());
+				fprintf(stderr, "Deadlock Cleared at Time: %f\n", getTime());
+			//	fclose(logfilePtr2); 
+				sysTimePtr->fileLength++; 
+			}
 
 			sysTimePtr->stats.avgPercTerm = (localCount/concProc)*100; 
 			
@@ -1036,11 +1113,17 @@ static void terminateProc(){
 		
 		if(blockedQ[i] == 1){
 		
-			fprintf(stderr,"Killing P%d and Freeing Resouces\n", i); 
+			if(sysTimePtr->verbose == true && sysTimePtr->fileLength < 99950){
+				
+			//	openfile(); 
+				fprintf(logfilePtr2, "Killing Process P%d and Freeing Resources\n", i);
+				fprintf(stderr, "Killing Process P%d and Freeing Resources\n"), i;
+			//	fclose(logfilePtr2); 
+				sysTimePtr->fileLength++; 
+			}	
 
 			printArrHead(); 
-			printArr(sysTimePtr->SysR.availableResources, "Sys-Available"); 
-			fmt(sysTimePtr->pcbTable[i].allocated, "(A) P%d", i); 
+			fmt(sysTimePtr->pcbTable[i].allocated, "Releasing P%d", i); 
 			
 			bufS.mtype = i+1; 
 			strcpy(bufS.mtext, "terminate"); 
@@ -1080,18 +1163,23 @@ static void terminateProc(){
 
 		int idx = CPU_Node->fakePID; 
 			
-		fprintf(stderr,"Killing P%d and freeing Resouces\n", idx); 
-
+		if(sysTimePtr->verbose == true && sysTimePtr->fileLength < 99950){
+				
+		//	openfile(); 
+			fprintf(logfilePtr2, "Killing Process P%d and Freeing Resources\n", i);
+			fprintf(stderr, "Killing Process P%d and Freeing Resources\n", i);
+		//	fclose(logfilePtr2); 
+			sysTimePtr->fileLength++; 
+		}	
+			
 		printArrHead(); 
-		printArr(sysTimePtr->SysR.availableResources, "Sys-Available"); 
-		fmt(sysTimePtr->pcbTable[idx].allocated, "(A) P%d", idx); 
-		
+		fmt(sysTimePtr->pcbTable[idx].allocated, "Releasing P%d", idx); 
+
 		bufS.mtype = idx+1; 
 		strcpy(bufS.mtext, "terminate"); 
 	
 		if((msgsnd(shmidMsg, &bufS, sizeof(bufS.mtext), IPC_NOWAIT)) == -1 ){
 
-			fprintf(stderr, "OSS: FAILED::: mID: %d\n", idx+1);  
 			perror("oss: ERROR: Failed to Send Msg to User msgsnd() "); 
 			exit(EXIT_FAILURE); 
 		}
@@ -1107,7 +1195,14 @@ static void terminateProc(){
 		++localCount; 
 	}
 		
-	fprintf(stderr, "Deadlock Cleared\n"); 
+	if(sysTimePtr->verbose == true && sysTimePtr->fileLength < 99950){
+			
+		//openfile(); 
+		fprintf(logfilePtr2, "Deadlock Cleared at Time: %f", getTime());
+		fprintf(stderr, "Deadlock Cleared at Time: %f", getTime());
+	//	fclose(logfilePtr2); 
+		sysTimePtr->fileLength++; 
+	}
 
 	sysTimePtr->stats.avgPercTerm = (localCount/concProc)*100; 
 			
@@ -1138,3 +1233,84 @@ static float newUserTime(){
 
 	return localT; 
 }
+
+
+//Print ArrHead
+static void printArrHead(){
+	
+	if(st->fileLength > 99950){ return; }
+
+//	openfile(); 
+
+	fprintf(stdout, "\n                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19\n");//, blanks); 
+	fprintf(logfilePtr2, "\n                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19\n");//, blanks); 
+
+	st->fileLength++;
+	
+//	closefile(); 
+}
+
+
+//Print Arr
+static void printArr(int arr[], char name[]){
+	
+	if(st->fileLength > 99950){ return; }
+
+	//openfile(); 
+
+	fprintf(stdout, "%15s:", name); 
+	fprintf(logfilePtr2, "%15s:", name); 
+
+	int i; 
+	for(i = 0; i < maxResources; ++i){
+
+		fprintf(stdout, "%3d ", arr[i]); 
+		fprintf(logfilePtr2, "%3d ", arr[i]); 
+	}
+	
+	fprintf(stdout, "\n"); 
+	fprintf(logfilePtr2, "\n"); 
+
+	st->fileLength += 3; 
+
+//	closefile();
+
+}
+
+
+
+//Format string for func calls
+static void fmt(int arr[], char* string, ...){
+
+	char buf[100];
+
+	va_list vl; 
+	va_start(vl, string); 
+
+	vsnprintf(buf, sizeof(buf), string, vl); 
+	va_end(vl); 
+
+	printArr(arr, buf); 
+}
+
+
+
+//Format string for func calls
+static void logPrint(char* string, ...){
+
+	if( st->fileLength > 99950 ){ return; } 
+	
+	char buf[100];
+
+	va_list vl; 
+	va_start(vl, string); 
+
+	vsnprintf(buf, sizeof(buf), string, vl); 
+	va_end(vl); 
+
+	fprintf(stderr, "%s at Time: %f", buf, getTime()); 
+	fprintf(logfilePtr2, "%s at Time: %f", buf, getTime()); 
+	st->fileLength++; 
+}
+
+

@@ -12,15 +12,15 @@ void semSignal();
 void setSemID(); 
 void initResourcArr();
 void allocate(); 
-void printArrHead(); 
-void printArr();
-void setLogfile(); 
-void fmt(int arr[], char*fmt, ...);
-void logPrint(char * fmt, ...);  
+//void printArrHead(); 
+//void printArr();
+//void setLogfile(); 
+//void fmt(int arr[], char*string, ...);
+//void logPrint(char * string, ...);  
 void setShmid(); 
 float getTime(); 
 
-FILE * file; 
+//FILE * file; 
 struct sembuf sops; 
 struct system_Time * st; 
 

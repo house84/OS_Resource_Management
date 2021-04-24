@@ -122,14 +122,6 @@ void initLocalPCB(int idx, pid_t proc_id){
 			}
 		}
 	}
-		
-	printArrHead(); 
-	fmt(sysTimePtr->SysR.resources, "Sys-Resources"); 
-	fmt(sysTimePtr->SysR.availableResources, "Sys-Available"); 
-	fmt(sysTimePtr->SysR.sharedResources, "Sys-Shared");
-	fmt(sysTimePtr->pcbTable[idx].allocated, "P%d Allocated", idx);
-	fmt(sysTimePtr->pcbTable[idx].maximum, "P%d Maximum", idx);
-
 }
 
 
@@ -154,8 +146,6 @@ void sendMessage(int msgid, int mID){
 
 	int idx = mID -1; 
 
-	fprintf(stderr, "INDEX %d\n", idx);
-	
 	bufS.mtype = mID; 
 	
 	//Error checking
@@ -198,10 +188,9 @@ void sendMessage(int msgid, int mID){
 	}
 	else if( messageT == request ){
 
-		fprintf(stderr, "P%d requesting\n", idx);  
 		strcpy(bufS.mtext, "request"); 
 		requested(idx); 
-
+		
 		if( requestBool == false ){
 
 				strcpy(bufS.mtext, "terminated");
@@ -219,10 +208,7 @@ void sendMessage(int msgid, int mID){
 		sysTimePtr->pcbTable[idx].system_Time = getTime()-sysTimePtr->pcbTable[idx].time_Started;
 		run = false; 
 		
-
-		//Display Process Stats	
 		updateGlobal(idx); 
-	 	//printStats(idx); 
 	}
 
 	if((msgsnd(msgid, &bufS, sizeof(bufS.mtext), 0)) == -1){
@@ -249,10 +235,6 @@ void requested(int idx){
 	int	locIDX = r; 
 	int count = 0; 
 
-	fmt(sysTimePtr->SysR.availableResources, "Sys-Available"); 
-	fmt(localMaximum, "P%d Maximum", idx);
-	fprintf(stderr,"\n"); 
-	
 	while(localMaximum[locIDX] == 0 || ( sysTimePtr->pcbTable[idx].allocated[locIDX] == sysTimePtr->SysR.availableResources[locIDX]) || (localMaximum[locIDX] == sysTimePtr->pcbTable[locIDX].allocated[locIDX])){
 
 		++r; 
@@ -273,11 +255,8 @@ void requested(int idx){
 	//add request to requested resource array
 	sysTimePtr->pcbTable[idx].requestIDX = locIDX; 
 	
-	//Print Request
-	fprintf(stderr, "P%d requesting resource R%d\n", idx, r);
-	fmt(sysTimePtr->pcbTable[idx].requested, "P%d Req", idx); 
-
 	requestBool = true; 
+
 }
 
 
@@ -305,6 +284,7 @@ void releaseRes(int idx){
 	int temp; 
 	temp  = sysTimePtr->pcbTable[idx].allocated[locIDX]; 
 	sysTimePtr->pcbTable[idx].allocated[locIDX] = 0; 
+	sysTimePtr->pcbTable[idx].release[locIDX] = temp; 
 	
 	if(sysTimePtr->SysR.sharedResources[locIDX] == 0){
 
@@ -312,18 +292,6 @@ void releaseRes(int idx){
 	}
 
 	releaseBool = true; 
-	
-	//Print
-	fprintf(stderr, "Releasing Resources P%d -> R%d\n", idx, locIDX); 
-	
-	printArrHead(); 
-	fmt(sysTimePtr->SysR.availableResources, "Available");
-	fmt(sysTimePtr->SysR.sharedResources, "Shared");
-	
-	printArrHead(); 
-	fmt(sysTimePtr->pcbTable[idx].allocated, "P%d Allo", idx);
-
-
 }
 
 
@@ -334,43 +302,19 @@ void releaseAll(int idx){
 	int i;
 	int temp = 0; 
 
+	
 	for(i = 0; i < maxResources; ++i){
 
 		temp = sysTimePtr->pcbTable[idx].allocated[i]; 
-		sysTimePtr->pcbTable[idx].allocated[i] = 0; 
+		sysTimePtr->pcbTable[idx].allocated[i] = 0;
+		sysTimePtr->pcbTable[idx].release[i] = temp; 
 		
 		if(sysTimePtr->SysR.sharedResources[i] == 0){
 
 			sysTimePtr->SysR.availableResources[i] += temp; 
 		}
 	}
-	
-	//Print
-	fprintf(stderr, "All Resources for P%d have been released\n", idx); 
-	
-	printArrHead(); 
-	fmt(sysTimePtr->SysR.resources, "Sys-Resources");
-	fmt(sysTimePtr->SysR.availableResources, "Sys-Available");
-	fmt(sysTimePtr->SysR.sharedResources, "Sys-Shared");
-	
-	printArrHead(); 
-	fmt(sysTimePtr->pcbTable[idx].allocated, "P%d Allocated", idx); 
-	fprintf(stderr, "\n"); 
 }
-
-
-//Get time 
-//float getTime(){
-	
-//	float decimal = sysTimePtr->nanoSeconds;
-//	decimal = decimal/1000000000;
-//	float second = sysTimePtr->seconds; 
-	
-//	float localT = second+decimal; 
-
-//	return localT; 
-
-//}
 
 
 //Initialize Shared Memory for System Time
@@ -423,25 +367,3 @@ void updateGlobal(int idx){
 	sysTimePtr->stats.blocked_Time += sysTimePtr->pcbTable[idx].blocked_Time; 
 }
 
-
-//Display stats upon Termination
-void printStats(int idx){
-
-	float currTime = getTime(); 
-	float cpu = sysTimePtr->pcbTable[idx].cpu_Time; 
-	float start = sysTimePtr->pcbTable[idx].time_Started; 
-	float blocked = sysTimePtr->pcbTable[idx].blocked_Time; 
-	float system = sysTimePtr->pcbTable[idx].system_Time; 
-	float wait = (currTime - ( start + cpu + blocked )); 
-	
-	sysTimePtr->pcbTable[idx].waited_Time += wait;
-
-	fprintf(stderr, "\n//////////// USER PROCESS STATS ////////////\n");
-	fprintf(stderr, "Time: %f\n", getTime()); 
-	fprintf(stderr, "User ID: %d\n", idx-1); 
-	fprintf(stderr, "Total Start Time (seconds): %f\n", sysTimePtr->pcbTable[idx].time_Started); 
-	fprintf(stderr, "Total System Time (seconds): %f\n", sysTimePtr->pcbTable[idx].system_Time); 
-	fprintf(stderr, "Total CPU Time (seconds): %f\n", sysTimePtr->pcbTable[idx].cpu_Time); 
-	fprintf(stderr, "Total blocked Time (seconds): %f\n", sysTimePtr->pcbTable[idx].blocked_Time); 
-	fprintf(stderr, "//////////// |||||||||||||||||| ////////////\n\n");
-}

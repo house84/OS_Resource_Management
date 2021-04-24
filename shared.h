@@ -33,7 +33,8 @@ struct PCB{
 	
 	int maximum[maxResources];  
 	int allocated[maxResources];
-	int requested[maxResources]; 
+	int requested[maxResources];
+	int release[maxResources]; 
 
   	int sprint_Time;           //Recent Run time in CPU
 	float wake_Up;             //Time to wake up

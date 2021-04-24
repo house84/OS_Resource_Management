@@ -16,7 +16,7 @@ void printArrHead();
 void printArr();
 void setLogfile(); 
 void fmt(int arr[], char*fmt, ...);
-void logPrint(bool printArr, int arr[], char * fmt, ...);  
+void logPrint(char * fmt, ...);  
 void setShmid(); 
 float getTime(); 
 

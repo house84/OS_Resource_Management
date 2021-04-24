@@ -73,6 +73,8 @@ void initResourceArr( struct system_Time * st){
 
 	int i; 
 	int r; 
+
+	st->grantedReq = 0; 
 	
 	//initialize System Resources
 	for( i = 0; i < maxResources; ++i ){
@@ -189,6 +191,7 @@ void allocate(int idx, struct system_Time *st){
 	
 	//Set Allocated Flag True
 	st->pcbTable[idx].allocateBool = true; 
+	st->grantedReq++; 
 
 	//Set Corresponding Request to 0
 	st->pcbTable[idx].requested[rIdx] = 0; 
@@ -198,15 +201,7 @@ void allocate(int idx, struct system_Time *st){
 	if( st->fileLength < 99950 ){
 
 		fprintf(stderr, "Master: Allocating P%d Resource R%d at Time: %f\n", idx, rIdx, getTime()); 
-	
-		printArrHead(); 
-		fmt(st->SysR.resources, "Sys-Resources"); 
-		fmt(st->SysR.availableResources, "Sys-Available"); 
-		fmt(st->SysR.sharedResources, "Sys-Shared"); 
-	
-		printArrHead(); 		
-		fmt(st->pcbTable[idx].allocated, "P%d Allocated", idx); 
-		fmt(st->pcbTable[idx].maximum, "P%d Maximum", idx); 
+		st->fileLength++; 
 	}
 
 			
@@ -231,8 +226,10 @@ void fmt(int arr[], char* fmt, ...){
 
 
 //Format string for func calls
-void logPrint(bool printBool, int arr[], char* fmt, ...){
+void logPrint(char* fmt, ...){
 
+	if( st->fileLength > 99950 ){ return; } 
+	
 	char buf[100];
 
 	va_list vl; 
@@ -241,12 +238,9 @@ void logPrint(bool printBool, int arr[], char* fmt, ...){
 	vsnprintf(buf, sizeof(buf), fmt, vl); 
 	va_end(vl); 
 
-	fprintf(stderr, "%s", buf); 
-
-	if(printBool == true){
-
-		printArr(arr, buf); 
-	}
+	fprintf(stderr, "%s at Time: %f", buf, getTime()); 
+	fprintf(file, "%s at Time: %f", buf, getTime()); 
+	st->fileLength++; 
 }
 
 

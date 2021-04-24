@@ -821,10 +821,13 @@ const char * getSysTime(){
 //Put Ready Process into CPU
 static void allocateCPU(){
 
-	//TESTING
-	printArrHead();
-	printArr(sysTimePtr->SysR.sharedResources, "Shared"); 
-	printArr(sysTimePtr->SysR.availableResources, "Available"); 
+	
+	if((sysTimePtr->grantedReq % 20 == 0) && sysTimePtr->fileLength < 99950 ){
+		
+		printArrHead();
+		printArr(sysTimePtr->SysR.sharedResources, "Shared"); 
+		printArr(sysTimePtr->SysR.availableResources, "Available"); 
+	}
 
 	//Check for runnable Processes
 	if(GQue->currSize == 0){ 
@@ -873,8 +876,7 @@ static void allocateCPU(){
 	int sprint  = sysTimePtr->pcbTable[idx].sprint_Time; 
 	sprint = sprint; 
 	
-	//Show Time Run
-	fprintf(stderr, "OSS: Time: %s PID: %d\t|||| Spent %d nanoseconds in CPU\n", getSysTime(), idx, sprint); 
+	//Show Time Run Scheduler
 	fprintf(logfilePtr, "OSS: Time: %s PID: %d\t|||| Spent %d nanoseconds in CPU\n", getSysTime(), idx, sprint); 
 	
 	//Check return
@@ -888,9 +890,8 @@ static void allocateCPU(){
 
 		++sysTimePtr->stats.terminatedN; 
 		
-		//Print Update for Ready
-	//	fprintf(stderr, "OSS: Time: %s PID: %d\t|||| Terminated\n", getSysTime(), idx); 
-	//	fprintf(logfilePtr, "OSS: Time: %s PID: %d\t|||| Terminated\n", getSysTime(), idx); 
+		//Print Update for Ready Scheduler
+		fprintf(logfilePtr, "OSS: Time: %s PID: %d\t|||| Terminated\n", getSysTime(), idx); 
 
 		
 		return; 
@@ -898,14 +899,12 @@ static void allocateCPU(){
 
 	if( strcmp(bufR.mtext, "request") == 0){
 		
-	//	blockedQ[idx] = 1; 
 	
-	//request resources
-	requesting(idx); 
+		//request resources
+		requesting(idx); 
 
 		//Print Update
-	//	fprintf(stderr, "OSS: Time: %s PID: %d\t|||| Added to Blocked Queue\n", getSysTime(), idx);
-	//	fprintf(logfilePtr, "OSS: Time: %s PID: %d\t|||| Added to Blocked Queue\n", getSysTime(), idx);
+		fprintf(logfilePtr, "OSS: Time: %s PID: %d\t|||| Added to Blocked Queue\n", getSysTime(), idx);
 
 		return; 
 	}
@@ -914,6 +913,7 @@ static void allocateCPU(){
 
 		//Add Process Back to Queue
 		enqueue(idx); 
+		
 		//Add Full Quantum to Systime
 		incrementSysTime(1000000); 
 	}

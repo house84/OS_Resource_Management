@@ -819,6 +819,10 @@ static void allocateCPU(){
 					fmt(sysTimePtr->pcbTable[j].allocated, "P%d", j); 
 					sysTimePtr->fileLength += 2; 
 			 	}
+
+				fprintf(stderr, "\n\n"); 
+				fprintf(logfilePtr2, "\n\n"); 
+				sysTimePtr->fileLength++; 
 			}
 		}
 	}
@@ -953,8 +957,8 @@ static void allocateCPU(){
 				}
 			}
 
-			fprintf(stderr, "\n"); 
-			fprintf(logfilePtr2, "\n"); 
+			fprintf(stderr, "\n\n"); 
+			fprintf(logfilePtr2, "\n\n"); 
 			sysTimePtr->fileLength++; 
 		//	fclose(logfilePtr2); 
 		}
@@ -1090,7 +1094,8 @@ static void terminateProc(){
 	int j;
 	float localCount = 0; 
 	int tProc = concProc; 
-	int status; 
+	int status;
+	bool freed = false; 
 	
 
 	for(i = 0; i < procMax; ++i){
@@ -1124,6 +1129,9 @@ static void terminateProc(){
 
 			printArrHead(); 
 			fmt(sysTimePtr->pcbTable[i].allocated, "Releasing P%d", i); 
+			fprintf(stderr,"\n"); 
+			fprintf(logfilePtr2,"\n");
+			sysTimePtr->fileLength++; 
 			
 			bufS.mtype = i+1; 
 			strcpy(bufS.mtext, "terminate"); 
@@ -1165,15 +1173,16 @@ static void terminateProc(){
 			
 		if(sysTimePtr->verbose == true && sysTimePtr->fileLength < 99950){
 				
-		//	openfile(); 
 			fprintf(logfilePtr2, "Killing Process P%d and Freeing Resources\n", i);
 			fprintf(stderr, "Killing Process P%d and Freeing Resources\n", i);
-		//	fclose(logfilePtr2); 
 			sysTimePtr->fileLength++; 
 		}	
 			
 		printArrHead(); 
 		fmt(sysTimePtr->pcbTable[idx].allocated, "Releasing P%d", idx); 
+		fprintf(stderr,"\n"); 
+		fprintf(logfilePtr2,"\n");
+		sysTimePtr->fileLength++; 
 
 		bufS.mtype = idx+1; 
 		strcpy(bufS.mtext, "terminate"); 

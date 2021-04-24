@@ -240,8 +240,6 @@ void requested(int idx){
 		++r; 
 		locIDX = (r)%20; //getRand(0,19); 
 		
-		fprintf(stderr, "P%d locIDX = %d Allocated:%d\n", idx, locIDX, sysTimePtr->pcbTable[idx].allocated[locIDX]); 
-
 		//Give adequate attempts to find index for request
 		if(count > 19 ){
 

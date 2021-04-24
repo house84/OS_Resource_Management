@@ -138,7 +138,8 @@ int main(int argc, char * argv[]){
 		if( sysTimePtr->seconds > deadLockTimer){ 
 			
 			checkDeadLock();
-			deadLockTimer = sysTimePtr->seconds; 
+			//deadLockTimer = sysTimePtr->seconds; 
+			deadLockTimer = sysTimePtr->seconds + 1; 
 		} 
 
 

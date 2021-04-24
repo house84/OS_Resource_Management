@@ -1,0 +1,363 @@
+
+//========================= Log Opened ========================//
+Time: Sat Apr 24 12:42:39 2021
+//=============================================================//
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+         Shared:  1   1   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 
+      Available:  3   4  10   3   1   2   4   5   3   4   0   6   3   5   1   1   1   1   7   6 
+
+Allocated Resources
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+             P0:  0   1   1   5   1   2   1   2   1   0   1   0   1   2   1   1   0   0   3   1 
+
+
+
+Master: Allocating P0 Resource R13:5 at Time: 0.336711
+
+Master: Process P0 Sent to Blocked Queue at Time: 0.412389
+
+Master: Allocating P1 Resource R11:1 at Time: 0.837334
+
+Master: Allocating P0 Resource R0:3 at Time: 0.839531
+
+Master: Deadlock Detected at Time 1.252722
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+   Releasing P2:  0   1   1   0   0   0   0   1   1   2   0   2   1   1   0   1   0   0   2   0 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+   Releasing P1:  0   1   1   2   0   2   2   0   0   1   0   4   0   3   0   0   1   0   1   5 
+
+
+Master: Deadlock Cleared at Time: 1.252722
+
+Master: Allocating P3 Resource R7:3 at Time: 1.252728
+
+Master: Detected P0 is Terminating at Time: 1.572783
+	Process P0 Releasing: R0:1  R1:1  R2:1  R3:5  R4:1  R5:3  R6:1  R7:2  R8:1  R10:1  R12:1  R13:3  R14:1  R15:1  R18:3  R19:1  
+
+Master: Allocating P1 Resource R16:1 at Time: 1.671529
+
+Master: Allocating P3 Resource R7:4 at Time: 2.130468
+
+Master: Allocating P2 Resource R7:3 at Time: 2.180598
+
+Master: Allocating P0 Resource R0:3 at Time: 2.246975
+
+Master: Process P1 Sent to Blocked Queue at Time: 2.603429
+
+Master: Deadlock Detected at Time 3.047073
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+   Releasing P4:  2   0   2   0   0   1   0   0   0   1   0   0   0   0   0   0   0   0   0   1 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+   Releasing P3:  0   1   4   1   0   0   0   3   0   1   0   0   1   0   1   0   0   0   1   0 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+   Releasing P5:  1   0   2   2   0   0   1   0   1   0   0   0   0   0   0   1   0   1   3   2 
+
+
+Master: Deadlock Cleared at Time: 3.047073
+
+Master: Detected P2 is Terminating at Time: 3.047077
+	Process P2 Releasing: R0:2  R1:1  R2:6  R3:1  R4:1  R5:1  R6:1  R7:1  R8:1  R11:1  R13:1  R19:1  
+
+Master: Detected P6 is Terminating at Time: 3.516212
+	Process P6 Releasing: R0:2  R1:1  R7:2  R13:2  
+
+Master: Detected P0 is releasing resource at Time: 3.646206
+	Process P0 Releasing: R3:3  
+
+Master: Allocating P7 Resource R19:2 at Time: 3.923384
+
+Master: Detected P1 is Terminating at Time: 4.148267
+	Process P1 Releasing: R0:1  R1:2  R2:1  R3:1  R6:4  R7:1  R11:4  R12:1  R13:1  R15:1  R16:1  R18:4  R19:1  
+
+Master: Detected P3 is Terminating at Time: 4.452517
+	Process P3 Releasing: R0:1  R1:2  R5:1  R7:2  R9:2  R12:1  R18:1  R19:2  
+
+Master: Process P2 Sent to Blocked Queue at Time: 4.468983
+
+Master: Detected P4 is Terminating at Time: 4.677691
+	Process P4 Releasing: R1:1  R2:3  R3:2  R7:2  R13:2  R14:1  R17:1  
+
+Master: Process P0 Sent to Blocked Queue at Time: 4.756919
+
+Master: Deadlock Detected at Time 5.121951
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+   Releasing P5:  0   1   3   2   0   0   0   0   0   0   0   0   0   0   0   0   0   0   2   1 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+   Releasing P7:  0   0   1   0   0   0   0   0   0   0   0   1   0   1   0   0   0   0   1   2 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+   Releasing P6:  0   1   1   0   0   0   1   0   0   0   0   1   0   0   0   0   0   0   0   1 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+   Releasing P1:  0   2   0   0   0   0   2   1   1   0   0   0   1   0   0   0   0   0   3   0 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+   Releasing P3:  0   3   2   0   1   1   1   0   1   1   0   0   0   1   0   1   0   0   2   2 
+
+
+Master: Deadlock Cleared at Time: 5.121951
+
+Master: Allocating P2 Resource R7:3 at Time: 5.121960
+
+Master: Allocating P8 Resource R16:1 at Time: 5.546535
+
+Master: Allocating P4 Resource R11:1 at Time: 5.615216
+
+Master: Detected P0 is releasing resource at Time: 6.036173
+	Process P0 Releasing: R4:2  
+
+Master: Detected P1 is Terminating at Time: 6.514003
+	Process P1 Releasing: R0:1  R2:7  R3:4  R6:3  R7:1  R9:1  R13:1  R14:1  R18:1  R19:3  
+
+Master: Allocating P2 Resource R13:2 at Time: 6.901344
+
+Master: Detected P3 is releasing resource at Time: 7.181419
+	Process P3 Releasing: R1:3  R2:2  R4:1  R5:1  R6:1  R8:1  R9:1  R13:1  R15:1  R18:2  R19:2  
+
+Master: Allocating P8 Resource R2:10 at Time: 7.222906
+
+Master: Detected P5 is Terminating at Time: 7.602194
+	Process P5 Releasing: R0:2  R1:3  R6:2  R7:1  R8:1  R12:1  R13:1  R18:4  
+
+Master: Detected P4 is releasing resource at Time: 7.704674
+	Process P4 Releasing: R11:3  
+
+Master: Detected P6 is releasing resource at Time: 8.024721
+	Process P6 Releasing: R1:1  R2:5  R6:1  R11:1  R19:1  
+
+Master: Detected P0 is releasing resource at Time: 8.237871
+	Process P0 Releasing: R14:1  
+
+Master: Detected P7 is releasing resource at Time: 8.281297
+	Process P7 Releasing: R0:1  R2:1  R11:1  R13:1  R18:1  R19:2  
+
+Master: Detected P1 is Terminating at Time: 8.373503
+	Process P1 Releasing: R1:1  R2:4  R3:4  R4:1  R6:2  R7:1  R9:2  R18:1  R19:2  
+
+Master: Detected P2 is Terminating at Time: 8.744652
+	Process P2 Releasing: R0:1  R2:3  R3:1  R5:2  R7:3  R13:1  R15:1  R18:1  
+
+Master: Allocating P9 Resource R14:1 at Time: 9.210477
+
+Master: Detected P3 is releasing resource at Time: 9.410658
+	Process P3 Releasing: R11:2  
+
+Master: Process P10 Sent to Blocked Queue at Time: 9.430113
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+         Shared:  1   1   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 
+      Available:  3   4  10   1   1   0   0   1   0   0   0   0   0  -1   0   2   0   0   0   0 
+
+Allocated Resources
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+             P0:  1   2   4   0   0   2   0   0   2   2   1   0   2   2   0   0   0   0   1   0 
+             P1:  0   1   2   0   0   0   0   1   0   1   0   0   0   0   0   0   0   0   0   0 
+             P2:  2   2   1   2   0   2   0   1   0   1   0   0   0   1   0   0   0   0   0   0 
+             P3:  0   1   1   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   2   2 
+             P4:  0   2   1   0   0   0   0   1   0   0   0   0   0   0   0   0   0   1   0   0 
+             P5:  0   1   0   0   1   0   1   0   0   0   0   0   1   0   0   0   0   0   0   0 
+             P6:  1   1   0   0   0   0   0   0   1   0   0   0   0   2   0   0   0   0   1   0 
+             P7:  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1 
+             P8:  1   0   2   2   0   0   0   0   0   0   0   1   0   0   0   0   1   0   0   1 
+             P9:  1   1   0   1   0   0   1   1   0   0   0   0   0   0   1   0   0   0   0   1 
+            P10:  0   0   4   0   0   0   0   0   0   0   0   0   0   2   1   0   0   0   0   0 
+            P11:  1   1   6   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 
+            P12:  1   2   2   0   0   0   1   0   0   0   0   2   0   1   0   0   0   0   2   0 
+            P13:  1   0   0   0   0   0   0   1   1   0   0   1   0   0   0   0   0   0   1   0 
+            P14:  1   0   2   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0 
+            P15:  1   0   7   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 
+            P16:  1   1   2   0   0   0   2   1   0   0   0   0   0   0   0   0   0   0   2   2 
+            P17:  0   0   4   2   0   0   0   0   0   0   0   2   0   0   0   0   0   0   0   0 
+
+
+
+Master: Process P8 Sent to Blocked Queue at Time: 9.679240
+
+Master: Deadlock Detected at Time 10.106252
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+  Releasing P11:  1   1   6   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+   Releasing P5:  0   1   0   0   1   0   1   0   0   0   0   0   1   0   0   0   0   0   0   0 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+   Releasing P4:  0   2   1   0   0   0   0   1   0   0   0   0   0   0   0   0   0   1   0   0 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+  Releasing P12:  1   2   2   0   0   0   1   0   0   0   0   2   0   1   0   0   0   0   2   0 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+   Releasing P6:  1   1   0   0   0   0   0   0   1   0   0   0   0   2   0   0   0   0   1   0 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+  Releasing P13:  1   0   0   0   0   0   0   1   1   0   0   1   0   0   0   0   0   0   1   0 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+   Releasing P0:  1   2   4   0   0   2   0   0   2   2   1   0   2   2   0   0   0   0   1   0 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+  Releasing P14:  1   0   2   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+   Releasing P7:  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+  Releasing P15:  1   0   7   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+   Releasing P1:  0   1   2   0   0   0   0   1   0   1   0   0   0   0   0   0   0   0   0   0 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+   Releasing P2:  2   2   1   2   0   2   0   1   0   1   0   0   0   1   0   0   0   0   0   0 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+   Releasing P9:  1   1   0   1   0   0   1   1   0   0   0   0   0   0   1   0   0   0   0   1 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+  Releasing P16:  1   1   2   0   0   0   2   1   0   0   0   0   0   0   0   0   0   0   2   2 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+   Releasing P3:  0   1   1   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   2   2 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+  Releasing P17:  0   0   4   2   0   0   0   0   0   0   0   2   0   0   0   0   0   0   0   0 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+  Releasing P10:  0   0   4   0   0   0   0   0   0   0   0   0   0   2   1   0   0   0   0   0 
+
+
+Master: Killing Process P18 and Freeing Resources
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+   Releasing P8:  1   0   2   2   0   0   0   0   0   0   0   1   0   0   0   0   2   0   0   1 
+
+
+Master: Deadlock Cleared at Time: 10.106252
+
+Master: Allocating P0 Resource R11:2 at Time: 10.106259
+
+Master: Allocating P0 Resource R0:3 at Time: 10.458528
+
+Master: Allocating P1 Resource R18:4 at Time: 10.778252
+
+Master: Detected P0 is Terminating at Time: 11.240277
+	Process P0 Releasing: R0:2  R1:2  R2:9  R3:1  R4:2  R5:2  R6:1  R7:3  R8:2  R11:5  R13:1  R14:1  R17:1  R18:4  R19:1  
+
+Master: Allocating P1 Resource R15:2 at Time: 11.535220
+
+Master: Detected P1 is Terminating at Time: 11.879204
+	Process P1 Releasing: R0:2  R1:2  R2:1  R3:4  R6:2  R7:2  R8:1  R11:1  R12:1  R13:2  R15:1  R16:1  R18:3  R19:2  
+
+                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19
+  Sys-Resources:  3   4  10   8   2   4   5   7   4   4   1   6   4   7   2   2   1   1  10   7 
+  Sys-Available:  3   4  10   8   2   4   5   7   4   4   1   6   4   7   2   2   1   1  10   7 
+         Shared:  1   1   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 
+
+|||==> All Processes Have Completed <===|||
+|||==>   Freeing System Resources   <===|||
+
+
+///////////////////// PROGRAM REPORT /////////////////////
+
+----------------------RESOURCE STATS----------------------
+Requests Granted Immediately: 19
+Requests Granted After Waiting: 6
+Number of Normally Terminated Processes: 12
+Number of Deadlock Terminated Processes: 28
+Number of time Deadlock Detection Algorithm Ran: 11
+Number of Deadlock Conditions Detected: 4
+Average Number of Processes Terminated per Deadlock:   7
+Percent of Processes Terminated per Deadlock on Avg: inf%
+
+///////////////////// |||||||||||||| /////////////////////
+
+//========================= Log Closed ========================//
+Time: Sat Apr 24 12:42:39 2021
+//=============================================================//
+

@@ -106,7 +106,8 @@ void initLocalPCB(int idx, pid_t proc_id){
 			if(sysTimePtr->SysR.availableResources[i] > 0){
 
 				//Get 1/2 value of a random int between Sys Avail Resources and 0
-				r = (getRand(0,sysTimePtr->SysR.availableResources[i])); ///2); 
+				r = (getRand(0,sysTimePtr->SysR.availableResources[i]));
+				if(r > 2 ){ r = r - 1; }
 				
 				//If r greater than user max set to the user max
 				if( r > localMaximum[i] ) {	r = localMaximum[i]; }

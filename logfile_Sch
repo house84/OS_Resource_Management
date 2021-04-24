@@ -1,0 +1,689 @@
+
+//========================= Log Opened ========================//
+Time: Sat Apr 24 14:14:43 2021
+//=============================================================//
+OSS: Time: 0000:294466292 PID: 0	|||| New User Process Created
+OSS: Time: 0000:294466292 PID: 0	|||| Added to position 1 in Run Queue
+OSS: Time: 0000:294466292 PID: 0	|||| Removed from Run Queue
+OSS: Time: 0000:294466292 PID: 0	|||| Sent to CPU
+OSS: Time: 0000:294473776 PID: 0	|||| Time in Dispatch 7484 nanoseconds
+OSS: Time: 0000:294473776 PID: 0	|||| Spent 1442581 nanoseconds in CPU
+OSS: Time: 0000:294473776 PID: 0	|||| Added to position 1 in Run Queue
+OSS: Time: 0000:294473776 PID: 0	|||| Added to Blocked Queue
+OSS: Time: 0000:666104016 PID: 1	|||| New User Process Created
+OSS: Time: 0000:666104016 PID: 1	|||| Added to position 2 in Run Queue
+OSS: Time: 0000:666104016 PID: 0	|||| Removed from Run Queue
+OSS: Time: 0000:666104016 PID: 0	|||| Sent to CPU
+OSS: Time: 0000:666104346 PID: 0	|||| Time in Dispatch 330 nanoseconds
+OSS: Time: 0000:666104346 PID: 0	|||| Spent 5398167 nanoseconds in CPU
+OSS: Time: 0000:666104346 PID: 0	|||| Added to position 2 in Run Queue
+OSS: Time: 0000:666104346 PID: 0	|||| Added to Blocked Queue
+OSS: Time: 0001:014761769 PID: 2	|||| New User Process Created
+OSS: Time: 0001:014761769 PID: 2	|||| Added to position 3 in Run Queue
+OSS: Time: 0001:014761769 PID: 1	|||| Removed from Run Queue
+OSS: Time: 0001:014761769 PID: 1	|||| Sent to CPU
+OSS: Time: 0001:014763333 PID: 1	|||| Time in Dispatch 1564 nanoseconds
+OSS: Time: 0001:014763333 PID: 1	|||| Spent 7116879 nanoseconds in CPU
+OSS: Time: 0001:014763333 PID: 1	|||| Added to position 3 in Run Queue
+OSS: Time: 0001:014763333 PID: 1	|||| Added to Blocked Queue
+OSS: Time: 0001:160540878 PID: 3	|||| New User Process Created
+OSS: Time: 0001:160540878 PID: 3	|||| Added to position 4 in Run Queue
+OSS: Time: 0001:160540878 PID: 0	|||| Removed from Run Queue
+OSS: Time: 0001:160540878 PID: 0	|||| Sent to CPU
+OSS: Time: 0001:160548312 PID: 0	|||| Time in Dispatch 7434 nanoseconds
+OSS: Time: 0001:160548312 PID: 0	|||| Spent 3127448 nanoseconds in CPU
+OSS: Time: 0001:160548312 PID: 0	|||| Added to position 4 in Run Queue
+OSS: Time: 0001:160548312 PID: 0	|||| Added to Blocked Queue
+OSS: Time: 0001:613249117 PID: 4	|||| New User Process Created
+OSS: Time: 0001:613249117 PID: 4	|||| Added to position 5 in Run Queue
+OSS: Time: 0001:613249117 PID: 2	|||| Removed from Run Queue
+OSS: Time: 0001:613249117 PID: 2	|||| Sent to CPU
+OSS: Time: 0001:613256783 PID: 2	|||| Time in Dispatch 7666 nanoseconds
+OSS: Time: 0001:613256783 PID: 2	|||| Spent 2433480 nanoseconds in CPU
+OSS: Time: 0001:613256783 PID: 2	|||| Added to position 5 in Run Queue
+OSS: Time: 0001:613256783 PID: 2	|||| Added to Blocked Queue
+OSS: Time: 0002:050494336 PID: 5	|||| New User Process Created
+OSS: Time: 0002:050494336 PID: 5	|||| Added to position 6 in Run Queue
+OSS: Time: 0002:050494336 PID: 1	|||| Removed from Run Queue
+OSS: Time: 0002:050494336 PID: 1	|||| Sent to CPU
+OSS: Time: 0002:050502269 PID: 1	|||| Time in Dispatch 7933 nanoseconds
+OSS: Time: 0002:050502269 PID: 1	|||| Spent 4137773 nanoseconds in CPU
+OSS: Time: 0002:050502269 PID: 1	|||| Added to position 6 in Run Queue
+OSS: Time: 0002:050502269 PID: 1	|||| Added to Blocked Queue
+OSS: Time: 0002:532809922 PID: 6	|||| New User Process Created
+OSS: Time: 0002:532809922 PID: 6	|||| Added to position 7 in Run Queue
+OSS: Time: 0002:532809922 PID: 3	|||| Removed from Run Queue
+OSS: Time: 0002:532809922 PID: 3	|||| Sent to CPU
+OSS: Time: 0002:532817040 PID: 3	|||| Time in Dispatch 7118 nanoseconds
+OSS: Time: 0002:532817040 PID: 3	|||| Spent 3918749 nanoseconds in CPU
+OSS: Time: 0002:532817040 PID: 3	|||| Added to Blocked Queue
+OSS: Time: 0002:678686089 PID: 3	|||| Removed From Blocked Queue
+OSS: Time: 0002:678686089 PID: 3	|||| Added to position 7 in Run Queue
+OSS: Time: 0002:678686089 PID: 7	|||| New User Process Created
+OSS: Time: 0002:678686089 PID: 7	|||| Added to position 8 in Run Queue
+OSS: Time: 0002:678686089 PID: 0	|||| Removed from Run Queue
+OSS: Time: 0002:678686089 PID: 0	|||| Sent to CPU
+OSS: Time: 0002:678693858 PID: 0	|||| Time in Dispatch 7769 nanoseconds
+OSS: Time: 0002:678693858 PID: 0	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0002:678693858 PID: 0	|||| Added to position 8 in Run Queue
+OSS: Time: 0002:948669248 PID: 8	|||| New User Process Created
+OSS: Time: 0002:948669248 PID: 8	|||| Added to position 9 in Run Queue
+OSS: Time: 0002:948669248 PID: 4	|||| Removed from Run Queue
+OSS: Time: 0002:948669248 PID: 4	|||| Sent to CPU
+OSS: Time: 0002:948669378 PID: 4	|||| Time in Dispatch 130 nanoseconds
+OSS: Time: 0002:948669378 PID: 4	|||| Spent 4949415 nanoseconds in CPU
+OSS: Time: 0002:948669378 PID: 4	|||| Added to Blocked Queue
+OSS: Time: 0002:956295830 PID: 4	|||| Removed From Blocked Queue
+OSS: Time: 0002:956295830 PID: 4	|||| Added to position 9 in Run Queue
+OSS: Time: 0002:956295830 PID: 9	|||| New User Process Created
+OSS: Time: 0002:956295830 PID: 9	|||| Added to position 10 in Run Queue
+OSS: Time: 0002:956295830 PID: 2	|||| Removed from Run Queue
+OSS: Time: 0002:956295830 PID: 2	|||| Sent to CPU
+OSS: Time: 0002:956300721 PID: 2	|||| Time in Dispatch 4891 nanoseconds
+OSS: Time: 0002:956300721 PID: 2	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0002:956300721 PID: 2	|||| Added to position 10 in Run Queue
+OSS: Time: 0003:243291159 PID: 5	|||| Removed from Run Queue
+OSS: Time: 0003:243309125 PID: 1	|||| Removed from Run Queue
+OSS: Time: 0003:243343114 PID: 1	|||| New User Process Created
+OSS: Time: 0003:243343114 PID: 1	|||| Added to position 9 in Run Queue
+OSS: Time: 0003:243343114 PID: 6	|||| Removed from Run Queue
+OSS: Time: 0003:243343114 PID: 6	|||| Sent to CPU
+OSS: Time: 0003:243350376 PID: 6	|||| Time in Dispatch 7262 nanoseconds
+OSS: Time: 0003:243350376 PID: 6	|||| Spent 8190162 nanoseconds in CPU
+OSS: Time: 0003:243350376 PID: 6	|||| Added to position 9 in Run Queue
+OSS: Time: 0003:243350376 PID: 6	|||| Added to Blocked Queue
+OSS: Time: 0003:610831748 PID: 5	|||| New User Process Created
+OSS: Time: 0003:610831748 PID: 5	|||| Added to position 10 in Run Queue
+OSS: Time: 0003:610831748 PID: 3	|||| Removed from Run Queue
+OSS: Time: 0003:610831748 PID: 3	|||| Sent to CPU
+OSS: Time: 0003:610837663 PID: 3	|||| Time in Dispatch 5915 nanoseconds
+OSS: Time: 0003:610837663 PID: 3	|||| Spent 3994996 nanoseconds in CPU
+OSS: Time: 0003:610837663 PID: 3	|||| Added to Blocked Queue
+OSS: Time: 0003:930783868 PID: 3	|||| Removed From Blocked Queue
+OSS: Time: 0003:930783868 PID: 3	|||| Added to position 10 in Run Queue
+OSS: Time: 0003:930783868 PID: 10	|||| New User Process Created
+OSS: Time: 0003:930783868 PID: 10	|||| Added to position 11 in Run Queue
+OSS: Time: 0003:930783868 PID: 7	|||| Removed from Run Queue
+OSS: Time: 0003:930783868 PID: 7	|||| Sent to CPU
+OSS: Time: 0003:930789527 PID: 7	|||| Time in Dispatch 5659 nanoseconds
+OSS: Time: 0003:930789527 PID: 7	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0003:930789527 PID: 7	|||| Added to position 11 in Run Queue
+OSS: Time: 0004:037435753 PID: 11	|||| New User Process Created
+OSS: Time: 0004:037435753 PID: 11	|||| Added to position 12 in Run Queue
+OSS: Time: 0004:037435753 PID: 0	|||| Removed from Run Queue
+OSS: Time: 0004:037435753 PID: 0	|||| Sent to CPU
+OSS: Time: 0004:037445418 PID: 0	|||| Time in Dispatch 9665 nanoseconds
+OSS: Time: 0004:037445418 PID: 0	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0004:037445418 PID: 0	|||| Added to position 12 in Run Queue
+OSS: Time: 0004:188143537 PID: 12	|||| New User Process Created
+OSS: Time: 0004:188143537 PID: 12	|||| Added to position 13 in Run Queue
+OSS: Time: 0004:188143537 PID: 8	|||| Removed from Run Queue
+OSS: Time: 0004:188143537 PID: 8	|||| Sent to CPU
+OSS: Time: 0004:188148323 PID: 8	|||| Time in Dispatch 4786 nanoseconds
+OSS: Time: 0004:188148323 PID: 8	|||| Spent 6562474 nanoseconds in CPU
+OSS: Time: 0004:188148323 PID: 8	|||| Added to Blocked Queue
+OSS: Time: 0004:338151541 PID: 13	|||| New User Process Created
+OSS: Time: 0004:338151541 PID: 13	|||| Added to position 13 in Run Queue
+OSS: Time: 0004:338151541 PID: 4	|||| Removed from Run Queue
+OSS: Time: 0004:338151541 PID: 4	|||| Sent to CPU
+OSS: Time: 0004:338155757 PID: 4	|||| Time in Dispatch 4216 nanoseconds
+OSS: Time: 0004:338155757 PID: 4	|||| Spent 8295916 nanoseconds in CPU
+OSS: Time: 0004:346451673 PID: 4	|||| Terminated
+OSS: Time: 0004:400595796 PID: 8	|||| Removed From Blocked Queue
+OSS: Time: 0004:400595796 PID: 8	|||| Added to position 13 in Run Queue
+OSS: Time: 0004:400595796 PID: 4	|||| New User Process Created
+OSS: Time: 0004:400595796 PID: 4	|||| Added to position 14 in Run Queue
+OSS: Time: 0004:400595796 PID: 9	|||| Removed from Run Queue
+OSS: Time: 0004:400595796 PID: 9	|||| Sent to CPU
+OSS: Time: 0004:400603760 PID: 9	|||| Time in Dispatch 7964 nanoseconds
+OSS: Time: 0004:400603760 PID: 9	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0004:400603760 PID: 9	|||| Added to position 14 in Run Queue
+OSS: Time: 0004:721680501 PID: 14	|||| New User Process Created
+OSS: Time: 0004:721680501 PID: 14	|||| Added to position 15 in Run Queue
+OSS: Time: 0004:721680501 PID: 2	|||| Removed from Run Queue
+OSS: Time: 0004:721680501 PID: 2	|||| Sent to CPU
+OSS: Time: 0004:721686717 PID: 2	|||| Time in Dispatch 6216 nanoseconds
+OSS: Time: 0004:721686717 PID: 2	|||| Spent 5356649 nanoseconds in CPU
+OSS: Time: 0004:721686717 PID: 2	|||| Added to position 15 in Run Queue
+OSS: Time: 0004:721686717 PID: 2	|||| Added to Blocked Queue
+OSS: Time: 0004:783235973 PID: 15	|||| New User Process Created
+OSS: Time: 0004:783235973 PID: 15	|||| Added to position 16 in Run Queue
+OSS: Time: 0004:783235973 PID: 1	|||| Removed from Run Queue
+OSS: Time: 0004:783235973 PID: 1	|||| Sent to CPU
+OSS: Time: 0004:783237218 PID: 1	|||| Time in Dispatch 1245 nanoseconds
+OSS: Time: 0004:783237218 PID: 1	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0004:783237218 PID: 1	|||| Added to position 16 in Run Queue
+OSS: Time: 0004:901135556 PID: 16	|||| New User Process Created
+OSS: Time: 0004:901135556 PID: 16	|||| Added to position 17 in Run Queue
+OSS: Time: 0004:901135556 PID: 6	|||| Removed from Run Queue
+OSS: Time: 0004:901135556 PID: 6	|||| Sent to CPU
+OSS: Time: 0004:901137178 PID: 6	|||| Time in Dispatch 1622 nanoseconds
+OSS: Time: 0004:901137178 PID: 6	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0004:901137178 PID: 6	|||| Added to position 17 in Run Queue
+OSS: Time: 0004:936633846 PID: 17	|||| New User Process Created
+OSS: Time: 0004:936633846 PID: 17	|||| Added to position 18 in Run Queue
+OSS: Time: 0004:936633846 PID: 5	|||| Removed from Run Queue
+OSS: Time: 0004:936633846 PID: 5	|||| Sent to CPU
+OSS: Time: 0004:936637586 PID: 5	|||| Time in Dispatch 3740 nanoseconds
+OSS: Time: 0004:936637586 PID: 5	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0004:936637586 PID: 5	|||| Added to position 18 in Run Queue
+OSS: Time: 0005:087451100 PID: 3	|||| Removed from Run Queue
+OSS: Time: 0005:087532047 PID: 3	|||| New User Process Created
+OSS: Time: 0005:087532047 PID: 3	|||| Added to position 18 in Run Queue
+OSS: Time: 0005:087532047 PID: 10	|||| Removed from Run Queue
+OSS: Time: 0005:087532047 PID: 10	|||| Sent to CPU
+OSS: Time: 0005:087536707 PID: 10	|||| Time in Dispatch 4660 nanoseconds
+OSS: Time: 0005:087536707 PID: 10	|||| Spent 3817949 nanoseconds in CPU
+OSS: Time: 0005:087536707 PID: 10	|||| Added to position 18 in Run Queue
+OSS: Time: 0005:087536707 PID: 10	|||| Added to Blocked Queue
+OSS: Time: 0005:181253077 PID: 7	|||| Removed from Run Queue
+OSS: Time: 0005:181253077 PID: 7	|||| Sent to CPU
+OSS: Time: 0005:181255994 PID: 7	|||| Time in Dispatch 2917 nanoseconds
+OSS: Time: 0005:181255994 PID: 7	|||| Spent 3593664 nanoseconds in CPU
+OSS: Time: 0005:184849658 PID: 7	|||| Terminated
+OSS: Time: 0005:553818052 PID: 7	|||| New User Process Created
+OSS: Time: 0005:553818052 PID: 7	|||| Added to position 18 in Run Queue
+OSS: Time: 0005:553818052 PID: 11	|||| Removed from Run Queue
+OSS: Time: 0005:553818052 PID: 11	|||| Sent to CPU
+OSS: Time: 0005:553822144 PID: 11	|||| Time in Dispatch 4092 nanoseconds
+OSS: Time: 0005:553822144 PID: 11	|||| Spent 7126693 nanoseconds in CPU
+OSS: Time: 0005:560948837 PID: 11	|||| Terminated
+OSS: Time: 0005:622347823 PID: 0	|||| Removed from Run Queue
+OSS: Time: 0005:622347823 PID: 0	|||| Sent to CPU
+OSS: Time: 0005:622348556 PID: 0	|||| Time in Dispatch 733 nanoseconds
+OSS: Time: 0005:622348556 PID: 0	|||| Spent 3133076 nanoseconds in CPU
+OSS: Time: 0005:622348556 PID: 0	|||| Added to position 17 in Run Queue
+OSS: Time: 0005:622348556 PID: 0	|||| Added to Blocked Queue
+OSS: Time: 0005:674914220 PID: 11	|||| New User Process Created
+OSS: Time: 0005:674914220 PID: 11	|||| Added to position 18 in Run Queue
+OSS: Time: 0005:674914220 PID: 12	|||| Removed from Run Queue
+OSS: Time: 0005:674914220 PID: 12	|||| Sent to CPU
+OSS: Time: 0005:674923440 PID: 12	|||| Time in Dispatch 9220 nanoseconds
+OSS: Time: 0005:674923440 PID: 12	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0005:674923440 PID: 12	|||| Added to position 18 in Run Queue
+OSS: Time: 0005:861250561 PID: 13	|||| Removed from Run Queue
+OSS: Time: 0005:861250561 PID: 13	|||| Sent to CPU
+OSS: Time: 0005:861257271 PID: 13	|||| Time in Dispatch 6710 nanoseconds
+OSS: Time: 0005:861257271 PID: 13	|||| Spent 8019288 nanoseconds in CPU
+OSS: Time: 0005:869276559 PID: 13	|||| Terminated
+OSS: Time: 0005:965689104 PID: 8	|||| Removed from Run Queue
+OSS: Time: 0005:965689104 PID: 8	|||| Sent to CPU
+OSS: Time: 0005:965691562 PID: 8	|||| Time in Dispatch 2458 nanoseconds
+OSS: Time: 0005:965691562 PID: 8	|||| Spent 5170454 nanoseconds in CPU
+OSS: Time: 0005:970862016 PID: 8	|||| Terminated
+OSS: Time: 0006:139906523 PID: 8	|||| New User Process Created
+OSS: Time: 0006:139906523 PID: 8	|||| Added to position 17 in Run Queue
+OSS: Time: 0006:139906523 PID: 4	|||| Removed from Run Queue
+OSS: Time: 0006:139906523 PID: 4	|||| Sent to CPU
+OSS: Time: 0006:139910465 PID: 4	|||| Time in Dispatch 3942 nanoseconds
+OSS: Time: 0006:139910465 PID: 4	|||| Spent 7540531 nanoseconds in CPU
+OSS: Time: 0006:147450996 PID: 4	|||| Terminated
+OSS: Time: 0006:263162942 PID: 4	|||| New User Process Created
+OSS: Time: 0006:263162942 PID: 4	|||| Added to position 17 in Run Queue
+OSS: Time: 0006:263162942 PID: 9	|||| Removed from Run Queue
+OSS: Time: 0006:263162942 PID: 9	|||| Sent to CPU
+OSS: Time: 0006:263167750 PID: 9	|||| Time in Dispatch 4808 nanoseconds
+OSS: Time: 0006:263167750 PID: 9	|||| Spent 5464859 nanoseconds in CPU
+OSS: Time: 0006:263167750 PID: 9	|||| Added to position 17 in Run Queue
+OSS: Time: 0006:263167750 PID: 9	|||| Added to Blocked Queue
+OSS: Time: 0006:650263335 PID: 13	|||| New User Process Created
+OSS: Time: 0006:650263335 PID: 13	|||| Added to position 18 in Run Queue
+OSS: Time: 0006:650263335 PID: 14	|||| Removed from Run Queue
+OSS: Time: 0006:650263335 PID: 14	|||| Sent to CPU
+OSS: Time: 0006:650268784 PID: 14	|||| Time in Dispatch 5449 nanoseconds
+OSS: Time: 0006:650268784 PID: 14	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0006:650268784 PID: 14	|||| Added to position 18 in Run Queue
+OSS: Time: 0007:037423802 PID: 2	|||| Removed from Run Queue
+OSS: Time: 0007:037423802 PID: 2	|||| Sent to CPU
+OSS: Time: 0007:037427224 PID: 2	|||| Time in Dispatch 3422 nanoseconds
+OSS: Time: 0007:037427224 PID: 2	|||| Spent 360913 nanoseconds in CPU
+OSS: Time: 0007:037427224 PID: 2	|||| Added to position 18 in Run Queue
+OSS: Time: 0007:037427224 PID: 2	|||| Added to Blocked Queue
+OSS: Time: 0007:151785283 PID: 15	|||| Removed from Run Queue
+OSS: Time: 0007:151785283 PID: 15	|||| Sent to CPU
+OSS: Time: 0007:151793905 PID: 15	|||| Time in Dispatch 8622 nanoseconds
+OSS: Time: 0007:151793905 PID: 15	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0007:151793905 PID: 15	|||| Added to position 18 in Run Queue
+OSS: Time: 0007:167388865 PID: 1	|||| Removed from Run Queue
+OSS: Time: 0007:167388865 PID: 1	|||| Sent to CPU
+OSS: Time: 0007:167398751 PID: 1	|||| Time in Dispatch 9886 nanoseconds
+OSS: Time: 0007:167398751 PID: 1	|||| Spent 4060963 nanoseconds in CPU
+OSS: Time: 0007:167398751 PID: 1	|||| Added to Blocked Queue
+OSS: Time: 0007:653525000 PID: 1	|||| Removed From Blocked Queue
+OSS: Time: 0007:653525000 PID: 1	|||| Added to position 18 in Run Queue
+OSS: Time: 0007:653525000 PID: 16	|||| Removed from Run Queue
+OSS: Time: 0007:653525000 PID: 16	|||| Sent to CPU
+OSS: Time: 0007:653527944 PID: 16	|||| Time in Dispatch 2944 nanoseconds
+OSS: Time: 0007:653527944 PID: 16	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0007:653527944 PID: 16	|||| Added to position 18 in Run Queue
+OSS: Time: 0008:047661927 PID: 6	|||| Removed from Run Queue
+OSS: Time: 0008:047661927 PID: 6	|||| Sent to CPU
+OSS: Time: 0008:047662110 PID: 6	|||| Time in Dispatch 183 nanoseconds
+OSS: Time: 0008:047662110 PID: 6	|||| Spent 995204 nanoseconds in CPU
+OSS: Time: 0008:047662110 PID: 6	|||| Added to Blocked Queue
+OSS: Time: 0008:326142113 PID: 17	|||| Removed from Run Queue
+OSS: Time: 0008:326142113 PID: 17	|||| Sent to CPU
+OSS: Time: 0008:326149993 PID: 17	|||| Time in Dispatch 7880 nanoseconds
+OSS: Time: 0008:326149993 PID: 17	|||| Spent 2512828 nanoseconds in CPU
+OSS: Time: 0008:328662821 PID: 17	|||| Terminated
+OSS: Time: 0008:659174829 PID: 5	|||| Removed from Run Queue
+OSS: Time: 0008:659174829 PID: 5	|||| Sent to CPU
+OSS: Time: 0008:659178900 PID: 5	|||| Time in Dispatch 4071 nanoseconds
+OSS: Time: 0008:659178900 PID: 5	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0008:659178900 PID: 5	|||| Added to position 16 in Run Queue
+OSS: Time: 0009:139780963 PID: 3	|||| Removed from Run Queue
+OSS: Time: 0009:139852140 PID: 10	|||| Removed from Run Queue
+OSS: Time: 0009:139943970 PID: 7	|||| Removed from Run Queue
+OSS: Time: 0009:140037335 PID: 0	|||| Removed from Run Queue
+OSS: Time: 0009:140053018 PID: 0	|||| New User Process Created
+OSS: Time: 0009:140053018 PID: 0	|||| Added to position 13 in Run Queue
+OSS: Time: 0009:140053018 PID: 11	|||| Removed from Run Queue
+OSS: Time: 0009:140053018 PID: 11	|||| Sent to CPU
+OSS: Time: 0009:140055121 PID: 11	|||| Time in Dispatch 2103 nanoseconds
+OSS: Time: 0009:140055121 PID: 11	|||| Spent 5574455 nanoseconds in CPU
+OSS: Time: 0009:145629576 PID: 11	|||| Terminated
+OSS: Time: 0009:267825578 PID: 3	|||| New User Process Created
+OSS: Time: 0009:267825578 PID: 3	|||| Added to position 13 in Run Queue
+OSS: Time: 0009:267825578 PID: 12	|||| Removed from Run Queue
+OSS: Time: 0009:267825578 PID: 12	|||| Sent to CPU
+OSS: Time: 0009:267828247 PID: 12	|||| Time in Dispatch 2669 nanoseconds
+OSS: Time: 0009:267828247 PID: 12	|||| Spent 8062217 nanoseconds in CPU
+OSS: Time: 0009:275890464 PID: 12	|||| Terminated
+OSS: Time: 0009:579578159 PID: 6	|||| New User Process Created
+OSS: Time: 0009:579578159 PID: 6	|||| Added to position 13 in Run Queue
+OSS: Time: 0009:579578159 PID: 8	|||| Removed from Run Queue
+OSS: Time: 0009:579578159 PID: 8	|||| Sent to CPU
+OSS: Time: 0009:579580579 PID: 8	|||| Time in Dispatch 2420 nanoseconds
+OSS: Time: 0009:579580579 PID: 8	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0009:579580579 PID: 8	|||| Added to position 13 in Run Queue
+OSS: Time: 0009:800857732 PID: 7	|||| New User Process Created
+OSS: Time: 0009:800857732 PID: 7	|||| Added to position 14 in Run Queue
+OSS: Time: 0009:800857732 PID: 4	|||| Removed from Run Queue
+OSS: Time: 0009:800857732 PID: 4	|||| Sent to CPU
+OSS: Time: 0009:800858806 PID: 4	|||| Time in Dispatch 1074 nanoseconds
+OSS: Time: 0009:800858806 PID: 4	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0009:800858806 PID: 4	|||| Added to position 14 in Run Queue
+OSS: Time: 0010:074135270 PID: 10	|||| New User Process Created
+OSS: Time: 0010:074135270 PID: 10	|||| Added to position 15 in Run Queue
+OSS: Time: 0010:074135270 PID: 9	|||| Removed from Run Queue
+OSS: Time: 0010:074135270 PID: 9	|||| Sent to CPU
+OSS: Time: 0010:074136678 PID: 9	|||| Time in Dispatch 1408 nanoseconds
+OSS: Time: 0010:074136678 PID: 9	|||| Spent 7410543 nanoseconds in CPU
+OSS: Time: 0010:081547221 PID: 9	|||| Terminated
+OSS: Time: 0010:176511698 PID: 9	|||| New User Process Created
+OSS: Time: 0010:176511698 PID: 9	|||| Added to position 15 in Run Queue
+OSS: Time: 0010:176511698 PID: 13	|||| Removed from Run Queue
+OSS: Time: 0010:176511698 PID: 13	|||| Sent to CPU
+OSS: Time: 0010:176513163 PID: 13	|||| Time in Dispatch 1465 nanoseconds
+OSS: Time: 0010:176513163 PID: 13	|||| Spent 4516539 nanoseconds in CPU
+OSS: Time: 0010:176513163 PID: 13	|||| Added to position 15 in Run Queue
+OSS: Time: 0010:176513163 PID: 13	|||| Added to Blocked Queue
+OSS: Time: 0010:644890600 PID: 11	|||| New User Process Created
+OSS: Time: 0010:644890600 PID: 11	|||| Added to position 16 in Run Queue
+OSS: Time: 0010:644890600 PID: 14	|||| Removed from Run Queue
+OSS: Time: 0010:644890600 PID: 14	|||| Sent to CPU
+OSS: Time: 0010:644897362 PID: 14	|||| Time in Dispatch 6762 nanoseconds
+OSS: Time: 0010:644897362 PID: 14	|||| Spent 7128298 nanoseconds in CPU
+OSS: Time: 0010:652025660 PID: 14	|||| Terminated
+OSS: Time: 0010:792222752 PID: 12	|||| New User Process Created
+OSS: Time: 0010:792222752 PID: 12	|||| Added to position 16 in Run Queue
+OSS: Time: 0010:792222752 PID: 2	|||| Removed from Run Queue
+OSS: Time: 0010:792222752 PID: 2	|||| Sent to CPU
+OSS: Time: 0010:792231494 PID: 2	|||| Time in Dispatch 8742 nanoseconds
+OSS: Time: 0010:792231494 PID: 2	|||| Spent 7577218 nanoseconds in CPU
+OSS: Time: 0010:792231494 PID: 2	|||| Added to position 16 in Run Queue
+OSS: Time: 0010:792231494 PID: 2	|||| Added to Blocked Queue
+OSS: Time: 0011:094950787 PID: 14	|||| New User Process Created
+OSS: Time: 0011:094950787 PID: 14	|||| Added to position 17 in Run Queue
+OSS: Time: 0011:094950787 PID: 15	|||| Removed from Run Queue
+OSS: Time: 0011:094950787 PID: 15	|||| Sent to CPU
+OSS: Time: 0011:094953867 PID: 15	|||| Time in Dispatch 3080 nanoseconds
+OSS: Time: 0011:094953867 PID: 15	|||| Spent 3515577 nanoseconds in CPU
+OSS: Time: 0011:098469444 PID: 15	|||| Terminated
+OSS: Time: 0011:524450126 PID: 15	|||| New User Process Created
+OSS: Time: 0011:524450126 PID: 15	|||| Added to position 17 in Run Queue
+OSS: Time: 0011:524450126 PID: 1	|||| Removed from Run Queue
+OSS: Time: 0011:524450126 PID: 1	|||| Sent to CPU
+OSS: Time: 0011:524456155 PID: 1	|||| Time in Dispatch 6029 nanoseconds
+OSS: Time: 0011:524456155 PID: 1	|||| Spent 2554753 nanoseconds in CPU
+OSS: Time: 0011:524456155 PID: 1	|||| Added to position 17 in Run Queue
+OSS: Time: 0011:524456155 PID: 1	|||| Added to Blocked Queue
+OSS: Time: 0011:725122028 PID: 17	|||| New User Process Created
+OSS: Time: 0011:725122028 PID: 17	|||| Added to position 18 in Run Queue
+OSS: Time: 0011:725122028 PID: 16	|||| Removed from Run Queue
+OSS: Time: 0011:725122028 PID: 16	|||| Sent to CPU
+OSS: Time: 0011:725122639 PID: 16	|||| Time in Dispatch 611 nanoseconds
+OSS: Time: 0011:725122639 PID: 16	|||| Spent 1735526 nanoseconds in CPU
+OSS: Time: 0011:726858165 PID: 16	|||| Terminated
+OSS: Time: 0012:135974619 PID: 5	|||| Removed from Run Queue
+OSS: Time: 0012:135974619 PID: 5	|||| Sent to CPU
+OSS: Time: 0012:135979044 PID: 5	|||| Time in Dispatch 4425 nanoseconds
+OSS: Time: 0012:135979044 PID: 5	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0012:135979044 PID: 5	|||| Added to position 17 in Run Queue
+OSS: Time: 0012:459103312 PID: 16	|||| New User Process Created
+OSS: Time: 0012:459103312 PID: 16	|||| Added to position 18 in Run Queue
+OSS: Time: 0012:459103312 PID: 0	|||| Removed from Run Queue
+OSS: Time: 0012:459103312 PID: 0	|||| Sent to CPU
+OSS: Time: 0012:459108719 PID: 0	|||| Time in Dispatch 5407 nanoseconds
+OSS: Time: 0012:459108719 PID: 0	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0012:459108719 PID: 0	|||| Added to position 18 in Run Queue
+OSS: Time: 0012:603693675 PID: 3	|||| Removed from Run Queue
+OSS: Time: 0012:603693675 PID: 3	|||| Sent to CPU
+OSS: Time: 0012:603701195 PID: 3	|||| Time in Dispatch 7520 nanoseconds
+OSS: Time: 0012:603701195 PID: 3	|||| Spent 509914 nanoseconds in CPU
+OSS: Time: 0012:604211109 PID: 3	|||| Terminated
+OSS: Time: 0012:951508296 PID: 3	|||| New User Process Created
+OSS: Time: 0012:951508296 PID: 3	|||| Added to position 18 in Run Queue
+OSS: Time: 0012:951508296 PID: 6	|||| Removed from Run Queue
+OSS: Time: 0012:951508296 PID: 6	|||| Sent to CPU
+OSS: Time: 0012:951517838 PID: 6	|||| Time in Dispatch 9542 nanoseconds
+OSS: Time: 0012:951517838 PID: 6	|||| Spent 6722762 nanoseconds in CPU
+OSS: Time: 0012:951517838 PID: 6	|||| Added to Blocked Queue
+OSS: Time: 0013:316117101 PID: 6	|||| Removed From Blocked Queue
+OSS: Time: 0013:316117101 PID: 6	|||| Added to position 18 in Run Queue
+OSS: Time: 0013:316117101 PID: 8	|||| Removed from Run Queue
+OSS: Time: 0013:316205299 PID: 7	|||| Removed from Run Queue
+OSS: Time: 0013:316212838 PID: 4	|||| Removed from Run Queue
+OSS: Time: 0013:316212838 PID: 4	|||| Sent to CPU
+OSS: Time: 0013:316217357 PID: 4	|||| Time in Dispatch 4519 nanoseconds
+OSS: Time: 0013:316217357 PID: 4	|||| Spent 5003484 nanoseconds in CPU
+OSS: Time: 0013:316217357 PID: 4	|||| Added to position 16 in Run Queue
+OSS: Time: 0013:316217357 PID: 4	|||| Added to Blocked Queue
+OSS: Time: 0013:369973495 PID: 10	|||| Removed from Run Queue
+OSS: Time: 0013:369973495 PID: 10	|||| Sent to CPU
+OSS: Time: 0013:369976491 PID: 10	|||| Time in Dispatch 2996 nanoseconds
+OSS: Time: 0013:369976491 PID: 10	|||| Spent 8855530 nanoseconds in CPU
+OSS: Time: 0013:378832021 PID: 10	|||| Terminated
+OSS: Time: 0013:758790205 PID: 9	|||| Removed from Run Queue
+OSS: Time: 0013:758790205 PID: 9	|||| Sent to CPU
+OSS: Time: 0013:758798533 PID: 9	|||| Time in Dispatch 8328 nanoseconds
+OSS: Time: 0013:758798533 PID: 9	|||| Spent 8163048 nanoseconds in CPU
+OSS: Time: 0013:758798533 PID: 9	|||| Added to position 15 in Run Queue
+OSS: Time: 0013:758798533 PID: 9	|||| Added to Blocked Queue
+OSS: Time: 0013:861053628 PID: 13	|||| Removed from Run Queue
+OSS: Time: 0013:861053628 PID: 13	|||| Sent to CPU
+OSS: Time: 0013:861058677 PID: 13	|||| Time in Dispatch 5049 nanoseconds
+OSS: Time: 0013:861058677 PID: 13	|||| Spent 2140355 nanoseconds in CPU
+OSS: Time: 0013:863199032 PID: 13	|||| Terminated
+OSS: Time: 0013:994106108 PID: 11	|||| Removed from Run Queue
+OSS: Time: 0013:994106108 PID: 11	|||| Sent to CPU
+OSS: Time: 0013:994112234 PID: 11	|||| Time in Dispatch 6126 nanoseconds
+OSS: Time: 0013:994112234 PID: 11	|||| Spent 606142 nanoseconds in CPU
+OSS: Time: 0013:994112234 PID: 11	|||| Added to position 14 in Run Queue
+OSS: Time: 0013:994112234 PID: 11	|||| Added to Blocked Queue
+OSS: Time: 0014:210037507 PID: 12	|||| Removed from Run Queue
+OSS: Time: 0014:210037507 PID: 12	|||| Sent to CPU
+OSS: Time: 0014:210041858 PID: 12	|||| Time in Dispatch 4351 nanoseconds
+OSS: Time: 0014:210041858 PID: 12	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0014:210041858 PID: 12	|||| Added to position 14 in Run Queue
+OSS: Time: 0014:670978713 PID: 2	|||| Removed from Run Queue
+OSS: Time: 0014:670978713 PID: 2	|||| Sent to CPU
+OSS: Time: 0014:670984384 PID: 2	|||| Time in Dispatch 5671 nanoseconds
+OSS: Time: 0014:670984384 PID: 2	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0014:670984384 PID: 2	|||| Added to position 14 in Run Queue
+OSS: Time: 0014:697069672 PID: 14	|||| Removed from Run Queue
+OSS: Time: 0014:697069672 PID: 14	|||| Sent to CPU
+OSS: Time: 0014:697073823 PID: 14	|||| Time in Dispatch 4151 nanoseconds
+OSS: Time: 0014:697073823 PID: 14	|||| Spent 8070850 nanoseconds in CPU
+OSS: Time: 0014:705144673 PID: 14	|||| Terminated
+OSS: Time: 0014:892195195 PID: 15	|||| Removed from Run Queue
+OSS: Time: 0014:892195195 PID: 15	|||| Sent to CPU
+OSS: Time: 0014:892199732 PID: 15	|||| Time in Dispatch 4537 nanoseconds
+OSS: Time: 0014:892199732 PID: 15	|||| Spent 6123639 nanoseconds in CPU
+OSS: Time: 0014:892199732 PID: 15	|||| Added to position 13 in Run Queue
+OSS: Time: 0014:892199732 PID: 15	|||| Added to Blocked Queue
+OSS: Time: 0014:979687591 PID: 1	|||| Removed from Run Queue
+OSS: Time: 0014:979687591 PID: 1	|||| Sent to CPU
+OSS: Time: 0014:979692655 PID: 1	|||| Time in Dispatch 5064 nanoseconds
+OSS: Time: 0014:979692655 PID: 1	|||| Spent 4901362 nanoseconds in CPU
+OSS: Time: 0014:979692655 PID: 1	|||| Added to position 13 in Run Queue
+OSS: Time: 0014:979692655 PID: 1	|||| Added to Blocked Queue
+OSS: Time: 0015:297320017 PID: 17	|||| Removed from Run Queue
+OSS: Time: 0015:297320017 PID: 17	|||| Sent to CPU
+OSS: Time: 0015:297326175 PID: 17	|||| Time in Dispatch 6158 nanoseconds
+OSS: Time: 0015:297326175 PID: 17	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0015:297326175 PID: 17	|||| Added to position 13 in Run Queue
+OSS: Time: 0015:367449074 PID: 5	|||| Removed from Run Queue
+OSS: Time: 0015:367449074 PID: 5	|||| Sent to CPU
+OSS: Time: 0015:367454258 PID: 5	|||| Time in Dispatch 5184 nanoseconds
+OSS: Time: 0015:367454258 PID: 5	|||| Spent 5676196 nanoseconds in CPU
+OSS: Time: 0015:367454258 PID: 5	|||| Added to position 13 in Run Queue
+OSS: Time: 0015:367454258 PID: 5	|||| Added to Blocked Queue
+OSS: Time: 0015:743073572 PID: 16	|||| Removed from Run Queue
+OSS: Time: 0015:743073572 PID: 16	|||| Sent to CPU
+OSS: Time: 0015:743077000 PID: 16	|||| Time in Dispatch 3428 nanoseconds
+OSS: Time: 0015:743077000 PID: 16	|||| Spent 1411832 nanoseconds in CPU
+OSS: Time: 0015:743077000 PID: 16	|||| Added to position 13 in Run Queue
+OSS: Time: 0015:743077000 PID: 16	|||| Added to Blocked Queue
+OSS: Time: 0015:791579017 PID: 0	|||| Removed from Run Queue
+OSS: Time: 0015:791579017 PID: 0	|||| Sent to CPU
+OSS: Time: 0015:791585227 PID: 0	|||| Time in Dispatch 6210 nanoseconds
+OSS: Time: 0015:791585227 PID: 0	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0015:791585227 PID: 0	|||| Added to position 13 in Run Queue
+OSS: Time: 0015:874196287 PID: 3	|||| Removed from Run Queue
+OSS: Time: 0015:874196287 PID: 3	|||| Sent to CPU
+OSS: Time: 0015:874196745 PID: 3	|||| Time in Dispatch 458 nanoseconds
+OSS: Time: 0015:874196745 PID: 3	|||| Spent 5774363 nanoseconds in CPU
+OSS: Time: 0015:879971108 PID: 3	|||| Terminated
+OSS: Time: 0016:344339762 PID: 6	|||| Removed from Run Queue
+OSS: Time: 0016:344339762 PID: 6	|||| Sent to CPU
+OSS: Time: 0016:344340077 PID: 6	|||| Time in Dispatch 315 nanoseconds
+OSS: Time: 0016:344340077 PID: 6	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0016:344340077 PID: 6	|||| Added to position 12 in Run Queue
+OSS: Time: 0016:465270414 PID: 4	|||| Removed from Run Queue
+OSS: Time: 0016:465270414 PID: 4	|||| Sent to CPU
+OSS: Time: 0016:465274476 PID: 4	|||| Time in Dispatch 4062 nanoseconds
+OSS: Time: 0016:465274476 PID: 4	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0016:465274476 PID: 4	|||| Added to position 12 in Run Queue
+OSS: Time: 0016:788159597 PID: 9	|||| Removed from Run Queue
+OSS: Time: 0016:788159597 PID: 9	|||| Sent to CPU
+OSS: Time: 0016:788165030 PID: 9	|||| Time in Dispatch 5433 nanoseconds
+OSS: Time: 0016:788165030 PID: 9	|||| Spent 8246636 nanoseconds in CPU
+OSS: Time: 0016:796411666 PID: 9	|||| Terminated
+OSS: Time: 0017:020528238 PID: 11	|||| Removed from Run Queue
+OSS: Time: 0017:020528238 PID: 11	|||| Sent to CPU
+OSS: Time: 0017:020528516 PID: 11	|||| Time in Dispatch 278 nanoseconds
+OSS: Time: 0017:020528516 PID: 11	|||| Spent 2247190 nanoseconds in CPU
+OSS: Time: 0017:022775706 PID: 11	|||| Terminated
+OSS: Time: 0017:223562114 PID: 12	|||| Removed from Run Queue
+OSS: Time: 0017:223562114 PID: 12	|||| Sent to CPU
+OSS: Time: 0017:223566854 PID: 12	|||| Time in Dispatch 4740 nanoseconds
+OSS: Time: 0017:223566854 PID: 12	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0017:223566854 PID: 12	|||| Added to position 10 in Run Queue
+OSS: Time: 0017:526459196 PID: 2	|||| Removed from Run Queue
+OSS: Time: 0017:526459196 PID: 2	|||| Sent to CPU
+OSS: Time: 0017:526467091 PID: 2	|||| Time in Dispatch 7895 nanoseconds
+OSS: Time: 0017:526467091 PID: 2	|||| Spent 4903485 nanoseconds in CPU
+OSS: Time: 0017:526467091 PID: 2	|||| Added to position 10 in Run Queue
+OSS: Time: 0017:526467091 PID: 2	|||| Added to Blocked Queue
+OSS: Time: 0017:754141076 PID: 15	|||| Removed from Run Queue
+OSS: Time: 0017:754141076 PID: 15	|||| Sent to CPU
+OSS: Time: 0017:754146830 PID: 15	|||| Time in Dispatch 5754 nanoseconds
+OSS: Time: 0017:754146830 PID: 15	|||| Spent 2574814 nanoseconds in CPU
+OSS: Time: 0017:754146830 PID: 15	|||| Added to position 10 in Run Queue
+OSS: Time: 0017:754146830 PID: 15	|||| Added to Blocked Queue
+OSS: Time: 0017:936966007 PID: 1	|||| Removed from Run Queue
+OSS: Time: 0017:936966007 PID: 1	|||| Sent to CPU
+OSS: Time: 0017:936973801 PID: 1	|||| Time in Dispatch 7794 nanoseconds
+OSS: Time: 0017:936973801 PID: 1	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0017:936973801 PID: 1	|||| Added to position 10 in Run Queue
+OSS: Time: 0018:140037861 PID: 17	|||| Removed from Run Queue
+OSS: Time: 0018:140037861 PID: 17	|||| Sent to CPU
+OSS: Time: 0018:140044904 PID: 17	|||| Time in Dispatch 7043 nanoseconds
+OSS: Time: 0018:140044904 PID: 17	|||| Spent 3883145 nanoseconds in CPU
+OSS: Time: 0018:143928049 PID: 17	|||| Terminated
+OSS: Time: 0018:532921767 PID: 5	|||| Removed from Run Queue
+OSS: Time: 0018:532921767 PID: 5	|||| Sent to CPU
+OSS: Time: 0018:532927442 PID: 5	|||| Time in Dispatch 5675 nanoseconds
+OSS: Time: 0018:532927442 PID: 5	|||| Spent 4581333 nanoseconds in CPU
+OSS: Time: 0018:537508775 PID: 5	|||| Terminated
+OSS: Time: 0018:766069613 PID: 16	|||| Removed from Run Queue
+OSS: Time: 0018:766069613 PID: 16	|||| Sent to CPU
+OSS: Time: 0018:766077873 PID: 16	|||| Time in Dispatch 8260 nanoseconds
+OSS: Time: 0018:766077873 PID: 16	|||| Spent 4954717 nanoseconds in CPU
+OSS: Time: 0018:766077873 PID: 16	|||| Added to position 8 in Run Queue
+OSS: Time: 0018:766077873 PID: 16	|||| Added to Blocked Queue
+OSS: Time: 0018:840717491 PID: 0	|||| Removed from Run Queue
+OSS: Time: 0018:840717491 PID: 0	|||| Sent to CPU
+OSS: Time: 0018:840727263 PID: 0	|||| Time in Dispatch 9772 nanoseconds
+OSS: Time: 0018:840727263 PID: 0	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0018:840727263 PID: 0	|||| Added to position 8 in Run Queue
+OSS: Time: 0019:211593363 PID: 6	|||| Removed from Run Queue
+OSS: Time: 0019:211593363 PID: 6	|||| Sent to CPU
+OSS: Time: 0019:211596168 PID: 6	|||| Time in Dispatch 2805 nanoseconds
+OSS: Time: 0019:211596168 PID: 6	|||| Spent 5039665 nanoseconds in CPU
+OSS: Time: 0019:211596168 PID: 6	|||| Added to position 8 in Run Queue
+OSS: Time: 0019:211596168 PID: 6	|||| Added to Blocked Queue
+OSS: Time: 0019:422699989 PID: 4	|||| Removed from Run Queue
+OSS: Time: 0019:422699989 PID: 4	|||| Sent to CPU
+OSS: Time: 0019:422709852 PID: 4	|||| Time in Dispatch 9863 nanoseconds
+OSS: Time: 0019:422709852 PID: 4	|||| Spent 1606307 nanoseconds in CPU
+OSS: Time: 0019:424316159 PID: 4	|||| Terminated
+OSS: Time: 0019:784455547 PID: 12	|||| Removed from Run Queue
+OSS: Time: 0019:784455547 PID: 12	|||| Sent to CPU
+OSS: Time: 0019:784459012 PID: 12	|||| Time in Dispatch 3465 nanoseconds
+OSS: Time: 0019:784459012 PID: 12	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0019:784459012 PID: 12	|||| Added to position 7 in Run Queue
+OSS: Time: 0019:966444759 PID: 2	|||| Removed from Run Queue
+OSS: Time: 0019:966444759 PID: 2	|||| Sent to CPU
+OSS: Time: 0019:966448274 PID: 2	|||| Time in Dispatch 3515 nanoseconds
+OSS: Time: 0019:966448274 PID: 2	|||| Spent 4604037 nanoseconds in CPU
+OSS: Time: 0019:971052311 PID: 2	|||| Terminated
+OSS: Time: 0020:195818492 PID: 15	|||| Removed from Run Queue
+OSS: Time: 0020:195818492 PID: 15	|||| Sent to CPU
+OSS: Time: 0020:195824633 PID: 15	|||| Time in Dispatch 6141 nanoseconds
+OSS: Time: 0020:195824633 PID: 15	|||| Spent 458621 nanoseconds in CPU
+OSS: Time: 0020:196283254 PID: 15	|||| Terminated
+OSS: Time: 0020:240948789 PID: 1	|||| Removed from Run Queue
+OSS: Time: 0020:240948789 PID: 1	|||| Sent to CPU
+OSS: Time: 0020:240955581 PID: 1	|||| Time in Dispatch 6792 nanoseconds
+OSS: Time: 0020:240955581 PID: 1	|||| Spent 4484054 nanoseconds in CPU
+OSS: Time: 0020:240955581 PID: 1	|||| Added to position 5 in Run Queue
+OSS: Time: 0020:240955581 PID: 1	|||| Added to Blocked Queue
+OSS: Time: 0020:243792888 PID: 16	|||| Removed from Run Queue
+OSS: Time: 0020:243792888 PID: 16	|||| Sent to CPU
+OSS: Time: 0020:243793796 PID: 16	|||| Time in Dispatch 908 nanoseconds
+OSS: Time: 0020:243793796 PID: 16	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0020:243793796 PID: 16	|||| Added to position 5 in Run Queue
+OSS: Time: 0020:565101664 PID: 0	|||| Removed from Run Queue
+OSS: Time: 0020:565101664 PID: 0	|||| Sent to CPU
+OSS: Time: 0020:565110915 PID: 0	|||| Time in Dispatch 9251 nanoseconds
+OSS: Time: 0020:565110915 PID: 0	|||| Spent 2403295 nanoseconds in CPU
+OSS: Time: 0020:565110915 PID: 0	|||| Added to position 5 in Run Queue
+OSS: Time: 0020:565110915 PID: 0	|||| Added to Blocked Queue
+OSS: Time: 0020:890949372 PID: 6	|||| Removed from Run Queue
+OSS: Time: 0020:890949372 PID: 6	|||| Sent to CPU
+OSS: Time: 0020:890950041 PID: 6	|||| Time in Dispatch 669 nanoseconds
+OSS: Time: 0020:890950041 PID: 6	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0020:890950041 PID: 6	|||| Added to position 5 in Run Queue
+OSS: Time: 0021:009285436 PID: 12	|||| Removed from Run Queue
+OSS: Time: 0021:009285436 PID: 12	|||| Sent to CPU
+OSS: Time: 0021:009293623 PID: 12	|||| Time in Dispatch 8187 nanoseconds
+OSS: Time: 0021:009293623 PID: 12	|||| Spent 4565517 nanoseconds in CPU
+OSS: Time: 0021:013859140 PID: 12	|||| Terminated
+OSS: Time: 0021:247404898 PID: 1	|||| Removed from Run Queue
+OSS: Time: 0021:247404898 PID: 1	|||| Sent to CPU
+OSS: Time: 0021:247409255 PID: 1	|||| Time in Dispatch 4357 nanoseconds
+OSS: Time: 0021:247409255 PID: 1	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0021:247409255 PID: 1	|||| Added to position 4 in Run Queue
+OSS: Time: 0021:256713673 PID: 16	|||| Removed from Run Queue
+OSS: Time: 0021:256713673 PID: 16	|||| Sent to CPU
+OSS: Time: 0021:256720843 PID: 16	|||| Time in Dispatch 7170 nanoseconds
+OSS: Time: 0021:256720843 PID: 16	|||| Spent 7023689 nanoseconds in CPU
+OSS: Time: 0021:263744532 PID: 16	|||| Terminated
+OSS: Time: 0021:283285153 PID: 0	|||| Removed from Run Queue
+OSS: Time: 0021:283285153 PID: 0	|||| Sent to CPU
+OSS: Time: 0021:283287110 PID: 0	|||| Time in Dispatch 1957 nanoseconds
+OSS: Time: 0021:283287110 PID: 0	|||| Spent 2839038 nanoseconds in CPU
+OSS: Time: 0021:286126148 PID: 0	|||| Terminated
+OSS: Time: 0021:360804234 PID: 6	|||| Removed from Run Queue
+OSS: Time: 0021:360804234 PID: 6	|||| Sent to CPU
+OSS: Time: 0021:360805035 PID: 6	|||| Time in Dispatch 801 nanoseconds
+OSS: Time: 0021:360805035 PID: 6	|||| Spent 5136822 nanoseconds in CPU
+OSS: Time: 0021:360805035 PID: 6	|||| Added to position 2 in Run Queue
+OSS: Time: 0021:360805035 PID: 6	|||| Added to Blocked Queue
+OSS: Time: 0021:666756952 PID: 1	|||| Removed from Run Queue
+OSS: Time: 0021:666756952 PID: 1	|||| Sent to CPU
+OSS: Time: 0021:666758924 PID: 1	|||| Time in Dispatch 1972 nanoseconds
+OSS: Time: 0021:666758924 PID: 1	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0021:666758924 PID: 1	|||| Added to position 2 in Run Queue
+OSS: Time: 0022:063060470 PID: 6	|||| Removed from Run Queue
+OSS: Time: 0022:063060470 PID: 6	|||| Sent to CPU
+OSS: Time: 0022:063067678 PID: 6	|||| Time in Dispatch 7208 nanoseconds
+OSS: Time: 0022:063067678 PID: 6	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0022:063067678 PID: 6	|||| Added to position 2 in Run Queue
+OSS: Time: 0022:365677017 PID: 1	|||| Removed from Run Queue
+OSS: Time: 0022:365677017 PID: 1	|||| Sent to CPU
+OSS: Time: 0022:365684338 PID: 1	|||| Time in Dispatch 7321 nanoseconds
+OSS: Time: 0022:365684338 PID: 1	|||| Spent 8559849 nanoseconds in CPU
+OSS: Time: 0022:365684338 PID: 1	|||| Added to position 2 in Run Queue
+OSS: Time: 0022:365684338 PID: 1	|||| Added to Blocked Queue
+OSS: Time: 0022:661903174 PID: 6	|||| Removed from Run Queue
+OSS: Time: 0022:661903174 PID: 6	|||| Sent to CPU
+OSS: Time: 0022:661910413 PID: 6	|||| Time in Dispatch 7239 nanoseconds
+OSS: Time: 0022:661910413 PID: 6	|||| Spent 5375540 nanoseconds in CPU
+OSS: Time: 0022:661910413 PID: 6	|||| Added to position 2 in Run Queue
+OSS: Time: 0022:661910413 PID: 6	|||| Added to Blocked Queue
+OSS: Time: 0022:763063362 PID: 1	|||| Removed from Run Queue
+OSS: Time: 0022:763063362 PID: 1	|||| Sent to CPU
+OSS: Time: 0022:763068048 PID: 1	|||| Time in Dispatch 4686 nanoseconds
+OSS: Time: 0022:763068048 PID: 1	|||| Spent 4887915 nanoseconds in CPU
+OSS: Time: 0022:767955963 PID: 1	|||| Terminated
+OSS: Time: 0022:956245433 PID: 6	|||| Removed from Run Queue
+OSS: Time: 0022:956245433 PID: 6	|||| Sent to CPU
+OSS: Time: 0022:956253446 PID: 6	|||| Time in Dispatch 8013 nanoseconds
+OSS: Time: 0022:956253446 PID: 6	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0022:956253446 PID: 6	|||| Added to position 1 in Run Queue
+OSS: Time: 0023:437406815 PID: 6	|||| Removed from Run Queue
+OSS: Time: 0023:437406815 PID: 6	|||| Sent to CPU
+OSS: Time: 0023:437412340 PID: 6	|||| Time in Dispatch 5525 nanoseconds
+OSS: Time: 0023:437412340 PID: 6	|||| Spent 2723200 nanoseconds in CPU
+OSS: Time: 0023:437412340 PID: 6	|||| Added to position 1 in Run Queue
+OSS: Time: 0023:437412340 PID: 6	|||| Added to Blocked Queue
+OSS: Time: 0023:806982770 PID: 6	|||| Removed from Run Queue
+OSS: Time: 0023:806982770 PID: 6	|||| Sent to CPU
+OSS: Time: 0023:806992366 PID: 6	|||| Time in Dispatch 9596 nanoseconds
+OSS: Time: 0023:806992366 PID: 6	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0023:806992366 PID: 6	|||| Added to position 1 in Run Queue
+OSS: Time: 0024:011762179 PID: 6	|||| Removed from Run Queue
+OSS: Time: 0024:011762179 PID: 6	|||| Sent to CPU
+OSS: Time: 0024:011767601 PID: 6	|||| Time in Dispatch 5422 nanoseconds
+OSS: Time: 0024:011767601 PID: 6	|||| Spent 5805644 nanoseconds in CPU
+OSS: Time: 0024:011767601 PID: 6	|||| Added to position 1 in Run Queue
+OSS: Time: 0024:011767601 PID: 6	|||| Added to Blocked Queue
+OSS: Time: 0024:195381991 PID: 6	|||| Removed from Run Queue
+OSS: Time: 0024:195381991 PID: 6	|||| Sent to CPU
+OSS: Time: 0024:195387520 PID: 6	|||| Time in Dispatch 5529 nanoseconds
+OSS: Time: 0024:195387520 PID: 6	|||| Spent 10000000 nanoseconds in CPU
+OSS: Time: 0024:195387520 PID: 6	|||| Added to position 1 in Run Queue
+OSS: Time: 0024:357982379 PID: 6	|||| Removed from Run Queue
+OSS: Time: 0024:357982379 PID: 6	|||| Sent to CPU
+OSS: Time: 0024:357992017 PID: 6	|||| Time in Dispatch 9638 nanoseconds
+OSS: Time: 0024:357992017 PID: 6	|||| Spent 650297 nanoseconds in CPU
+OSS: Time: 0024:357992017 PID: 6	|||| Added to position 1 in Run Queue
+OSS: Time: 0024:357992017 PID: 6	|||| Added to Blocked Queue
+OSS: Time: 0024:643145432 PID: 6	|||| Removed from Run Queue
+OSS: Time: 0024:643145432 PID: 6	|||| Sent to CPU
+OSS: Time: 0024:643148788 PID: 6	|||| Time in Dispatch 3356 nanoseconds
+OSS: Time: 0024:643148788 PID: 6	|||| Spent 523292 nanoseconds in CPU
+OSS: Time: 0024:643672080 PID: 6	|||| Terminated
+
+Time: Sat Apr 24 14:14:43 2021
+All Processes have finished
+
+
+///////////////////// PROGRAM REPORT /////////////////////
+
+---------------------SCHEDULING STATS---------------------
+System Time: 24.643673
+Average Process CPU Time: 0.016921
+Average Process System Time: 6.475967
+Average Process Blocked Time: 2.967733
+Average Process Wait Time: 3.491313
+CPU Idle Time: 23.966839
+///////////////////// |||||||||||||| /////////////////////
+
+//========================= Log Closed ========================//
+Time: Sat Apr 24 14:14:43 2021
+//=============================================================//
+

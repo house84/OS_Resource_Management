@@ -9,10 +9,16 @@
 #include "sharedFunc.h"
 
 //=== Sem Vars ===//
-struct sembuf sops;  
-FILE *file; 
+//struct sembuf sops;  
+//FILE *file; 
 void openfile();
 void closefile(); 
+
+void setShmid(struct system_Time * ptr){
+	
+	st = ptr; 
+}
+
 
 void setSemID(int semID){
 
@@ -109,26 +115,41 @@ void initResourceArr( struct system_Time * st){
 
 
 void printArrHead(){
+	
+	if(st->fileLength > 99950){ return; }
+
 	openfile(); 
 
 	fprintf(stdout, "\n                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19\n");//, blanks); 
 	fprintf(file, "\n                  R0  R1  R2  R3  R4  R5  R6  R7  R8  R9 R10 R11 R12 R13 R14 R15 R16 R17 R18 R19\n");//, blanks); 
 
+	st->fileLength++;
+	
 	closefile(); 
 }
 
 void printArr(int arr[], char name[]){
 	
+	if(st->fileLength > 99950){ return; }
+
+	openfile(); 
 
 	fprintf(stdout, "%15s:", name); 
+	fprintf(file, "%15s:", name); 
 
 	int i; 
 	for(i = 0; i < maxResources; ++i){
 
 		fprintf(stdout, "%3d ", arr[i]); 
+		fprintf(file, "%3d ", arr[i]); 
 	}
 	
 	fprintf(stdout, "\n"); 
+	fprintf(file, "\n"); 
+
+	st->fileLength += 3; 
+
+	closefile();
 
 }
 
@@ -154,8 +175,6 @@ void allocate(int idx, struct system_Time *st){
 
 	rIdx = st->pcbTable[idx].requestIDX; 
 			
-	fprintf(stderr, "Allocating RESOURCE -> P%d:R%d\n", idx, rIdx); 
-			
 	st->pcbTable[idx].allocated[rIdx] += 1; 
 
 	//Check if resource is shared
@@ -175,14 +194,20 @@ void allocate(int idx, struct system_Time *st){
 	st->pcbTable[idx].requested[rIdx] = 0; 
 	st->pcbTable[idx].requestIDX = 0; 
 			
-	printArrHead(); 
-	fmt(st->SysR.resources, "Sys-Resources"); 
-	fmt(st->SysR.availableResources, "Sys-Available"); 
-	fmt(st->SysR.sharedResources, "Sys-Shared"); 
 	
-	printArrHead(); 		
-	fmt(st->pcbTable[idx].allocated, "P%d Allocated", idx); 
-	fmt(st->pcbTable[idx].maximum, "P%d Maximum", idx); 
+	if( st->fileLength < 99950 ){
+
+		fprintf(stderr, "Master: Allocating P%d Resource R%d at Time: %f\n", idx, rIdx, getTime()); 
+	
+		printArrHead(); 
+		fmt(st->SysR.resources, "Sys-Resources"); 
+		fmt(st->SysR.availableResources, "Sys-Available"); 
+		fmt(st->SysR.sharedResources, "Sys-Shared"); 
+	
+		printArrHead(); 		
+		fmt(st->pcbTable[idx].allocated, "P%d Allocated", idx); 
+		fmt(st->pcbTable[idx].maximum, "P%d Maximum", idx); 
+	}
 
 			
 }
@@ -287,4 +312,18 @@ bool deadlock(struct system_Time *st, const int n){
 	}
 	
 	return ( p != n );
+}
+
+
+
+float getTime(){
+
+	float decimal = st->nanoSeconds; 
+	decimal = decimal/1000000000;
+
+	float second = st->seconds; 
+
+	float localT = second+decimal; 
+
+	return localT; 
 }

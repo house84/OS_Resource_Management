@@ -95,6 +95,8 @@ struct system_Time{
 
 	int seconds;
 	int nanoSeconds;
+	int fileLength; 
+	bool verbose; 
 	struct PCB pcbTable[18]; 
 	struct STAT stats; 
 	struct SysResources SysR; 

@@ -30,6 +30,7 @@ int main(int argc, char * argv[]){
 	//Initiate SHM
 	initSysTime();
 	setSemID(shmidSem); 
+	setShmid(sysTimePtr); 
 
 	//Initialize PCB Values
 	initPCB(idx); 
@@ -359,17 +360,17 @@ void releaseAll(int idx){
 
 
 //Get time 
-float getTime(){
+//float getTime(){
 	
-	float decimal = sysTimePtr->nanoSeconds;
-	decimal = decimal/1000000000;
-	float second = sysTimePtr->seconds; 
+//	float decimal = sysTimePtr->nanoSeconds;
+//	decimal = decimal/1000000000;
+//	float second = sysTimePtr->seconds; 
 	
-	float localT = second+decimal; 
+//	float localT = second+decimal; 
 
-	return localT; 
+//	return localT; 
 
-}
+//}
 
 
 //Initialize Shared Memory for System Time

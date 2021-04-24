@@ -17,7 +17,12 @@ void printArr();
 void setLogfile(); 
 void fmt(int arr[], char*fmt, ...);
 void logPrint(bool printArr, int arr[], char * fmt, ...);  
+void setShmid(); 
+float getTime(); 
 
+FILE * file; 
+struct sembuf sops; 
+struct system_Time * st; 
 
 //Deadlock
 static bool req_lt_avail(); 								
